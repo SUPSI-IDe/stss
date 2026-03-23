@@ -1,0 +1,45 @@
+Flow id	A	B	C	D	E	F	G	H	group flow	cluster
+1	waste phenomena	interpretation	collective	thinking	cigarette butts	urban context	data plotting 	Urban Pixel	1	1
+2	waste phenomena	interpretation	collective	thinking	position of bins	urban context	data plotting 	Urban Pixel	1	5
+3	waste phenomena	interpretation	collective	thinking	ecopoint temperature	urban context	data plotting 	Urban Pixel	1	1
+4	waste phenomena	interpretation	collective	thinking	position of ecopoints	urban context	data plotting 	Urban Pixel	1	5
+5	waste phenomena	interpretation	collective	thinking	waste overflow	urban context	data plotting 	Urban Pixel	1	1
+6	waste phenomena	interpretation	collective	thinking	cigarette butts	urban context	data discussion	Urban Pixel	1	1
+7	waste phenomena	interpretation	collective	thinking	position of bins	urban context	data discussion	Urban Pixel	1	5
+8	waste phenomena	interpretation	collective	thinking	ecopoint temperature	urban context	data discussion	Urban Pixel	1	1
+9	waste phenomena	interpretation	collective	thinking	position of ecopoints	urban context	data discussion	Urban Pixel	1	5
+10	waste phenomena	interpretation	collective	thinking	waste overflow	urban context	data discussion	Urban Pixel	1	1
+11	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	cigarette butts	urban context	data walk	Urban Pixel	2	1
+12	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	position of bins	urban context	data walk	Urban Pixel	2	5
+13	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	ecopoint temperature	urban context	data walk	Urban Pixel	2	1
+14	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	position of ecopoints	urban context	data walk	Urban Pixel	2	5
+15	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	waste overflow	urban context	data walk	Urban Pixel	2	1
+16	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	cigarette butts	urban context	data prototyping	DIY Urban Scraping	2	1
+17	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	position of bins	urban context	data prototyping	DIY Urban Scraping	2	5
+18	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	ecopoint temperature	urban context	data prototyping	DIY Urban Scraping	2	1
+19	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	position of ecopoints	urban context	data prototyping	DIY Urban Scraping	2	5
+20	interplay with urban infrastructure and citizen's behaviour	situated access	individual	seeing	waste overflow	urban context	data prototyping	DIY Urban Scraping	2	1
+21	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	comments	social media	data scraping	Kit for Digital Methods	3	2
+22	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	review	social media	data scraping	Kit for Digital Methods	3	2
+23	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	post	social media	data scraping	Kit for Digital Methods	3	2
+24	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	comments	online platform	data scraping	Kit for Digital Methods	3	2
+25	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	review	online platform	data scraping	Kit for Digital Methods	3	2
+26	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	seeing	post	online platform	data scraping	Kit for Digital Methods	3	2
+21	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	comments	social media	data scraping	Kit for Digital Methods	3	2
+22	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	review	social media	data scraping	Kit for Digital Methods	3	2
+23	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	post	social media	data scraping	Kit for Digital Methods	3	2
+24	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	comments	online platform	data scraping	Kit for Digital Methods	3	2
+25	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	review	online platform	data scraping	Kit for Digital Methods	3	2
+26	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	seeing	post	online platform	data scraping	Kit for Digital Methods	3	2
+27	waste disposal	dialogue co-creation	collective	sharing	routes	individual experience	data mapping	Urban Pixel	4	4
+28	waste disposal	dialogue co-creation	collective	sharing	time	individual experience	data mapping	Urban Pixel	4	4
+29	waste disposal	dialogue co-creation	collective	sharing	recycling habits	individual experience	data mapping	Urban Pixel	4	3
+30	waste disposal	dialogue co-creation	collective	sharing	means of transport	individual experience	data mapping	Urban Pixel	4	4
+31	waste disposal	dialogue co-creation	collective	sharing	type and amount of waste	individual experience	data mapping	Urban Pixel	4	3
+32	waste disposal	dialogue co-creation	collective	sharing	location of collection points	individual experience	data mapping	Urban Pixel	4	5
+33	waste disposal	dialogue co-creation	collective	sharing	personal annotations	individual experience	data mapping	Urban Pixel	4	6
+34	waste disposal	dialogue co-creation	collective	sharing	households	individual experience	data mapping	Urban Pixel	4	3
+35	physical movement for waste disposal in urban ecocenter and ecopoints	embodied experience	individual	sensing	body posture	individual experience	gesture tracking	Wasted Gestures	5	6
+36	physical movement for waste disposal in urban ecocenter and ecopoints	embodied experience	individual	sensing	gesture	individual experience	gesture tracking	Wasted Gestures	5	6
+37	physical movement for waste disposal in urban ecocenter and ecopoints	embodied experience	individual	sensing	body posture	individual experience	annotation	Wasted Gestures	5	6
+38	physical movement for waste disposal in urban ecocenter and ecopoints	embodied experience	individual	sensing	gesture	individual experience	annotation	Wasted Gestures	5	6
