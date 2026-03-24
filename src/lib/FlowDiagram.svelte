@@ -48,9 +48,28 @@
 
         document.fonts.ready.then(() => {
             const measureText = createTextMeasurer('14px "Helvetica Neue", sans-serif');
+            const letterSpacing = 0.1;
+            const measureWidth = (str: string) =>
+                measureText(str) + letterSpacing * Math.max(str.length - 1, 0);
+            const measureLine = (segments: import('./types').SegmentedLine) =>
+                segments.reduce((sum, seg) => {
+                    let w = measureWidth(seg.text);
+                    if (seg.tooltip) w += BADGE_PAD * 2 + BADGE_SIZE;
+                    return sum + w;
+                }, 0);
 
             measureNodes(allNodes, svg as any, LINE_H, PAD_X, PAD_Y);
             adjustBadgeWidths(allNodes, BADGE_PAD, BADGE_SIZE);
+
+            // Recompute widths based on actual rendered segments to avoid trailing gaps
+            allNodes.forEach((d) => {
+                if (d.segmentedLines && d.segmentedLines.length) {
+                    const maxW = Math.max(...d.segmentedLines.map(measureLine));
+                    d.bbox.width = maxW;
+                    d.rectW = maxW + PAD_X * 2;
+                }
+            });
+
             computeLayout(allNodes, COLS.length, width, height, GAP);
 
             const isClusterNodeFn = (colIdx: number, label: string) =>
@@ -111,7 +130,7 @@
                             .attr('y', ly)
                             .attr('dy', '0.35em');
 
-                        cx += measureText(seg.text);
+                        cx += measureWidth(seg.text);
 
                         if (seg.tooltip) {
                             cx += BADGE_PAD;

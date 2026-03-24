@@ -63,13 +63,12 @@
 		background: none;
 		border: none;
 		color: white;
-		font-size: 14px;
+		font-size: 13.38px;
 		cursor: pointer;
 		line-height: 1;
 	}
 
 	.tooltip-title {
-		font-family: 'OTMontreal', sans-serif;
 		font-size: 18px;
 		text-transform: uppercase;
 		margin-bottom: 8px;
@@ -78,7 +77,7 @@
 
 	.tooltip-body {
 		font-family: 'Helvetica Neue', sans-serif;
-		font-size: 13px;
-		line-height: 1.4;
+		font-size: 12px;
+		line-height: 1.11;
 	}
 </style>

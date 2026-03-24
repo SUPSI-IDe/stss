@@ -9,10 +9,10 @@ export const CLUSTER_COLS = new Map([
 	[6, 'cluster_g']
 ]);
 export const BADGE_SIZE = 14;
-export const BADGE_PAD = 8;
+export const BADGE_PAD = 4;
 export const LINE_H = 13.5;
 export const CORNER_R = 6;
 export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
-export const PAD_X = 2;
+export const PAD_X = 0;
 export const PAD_Y = 1;

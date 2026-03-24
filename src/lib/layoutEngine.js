@@ -35,9 +35,9 @@ export function computeLayout(allNodes, numCols, width, height, gap) {
 		const rowNodes = allNodes.filter((d) => d.row === row);
 		const totalNodeW = rowNodes.reduce((s, d) => s + d.bbox.width, 0);
 		const PAD = 8;
-		const usable = width - 2 * PAD - totalNodeW;
+		const available = width - 2 * PAD;
 		const spacing =
-			rowNodes.length > 1 ? Math.max(usable / (rowNodes.length - 1), 0) : 0;
+			rowNodes.length > 1 ? (available - totalNodeW) / (rowNodes.length - 1) : 0;
 		let cursor = PAD;
 		for (const d of rowNodes) {
 			d.x = cursor + d.bbox.width / 2;
