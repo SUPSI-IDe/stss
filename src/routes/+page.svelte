@@ -14,15 +14,15 @@
 
     function updateTimestamp() {
         const now = new Date();
-        timestamp = new Intl.DateTimeFormat('en-CH', {
+        timestamp = new Intl.DateTimeFormat('sv-SE', {
             timeZone: 'Europe/Zurich',
             year: 'numeric',
-            month: 'short',
+            month: '2-digit',
             day: '2-digit',
             hour: '2-digit',
             minute: '2-digit',
-            hour12: false,
-            timeZoneName: 'short'
+            second: '2-digit',
+            hour12: false
         }).format(now);
     }
 
@@ -67,6 +67,8 @@
         </span>
     </div>
 </nav>
+
+<div class="nav-content-gap" aria-hidden="true"></div>
 
 <main class="content">
     <FlowDiagram
@@ -185,17 +187,22 @@
         grid-row: 2;
         color: var(--text-gray);
         font-size: 12px;
-        line-height: 1.4;
         display: grid;
         gap: 2px;
         align-self: start;
+    }
+
+    .nav-content-gap {
+        height: 55px;
+        width: 100%;
+        pointer-events: none;
     }
 
     .content {
         flex: 1;
         width: 100%;
         overflow: hidden;
-        padding: 16px 8px 24px 8px;
+        padding: 0 8px 24px 8px;
         box-sizing: border-box;
     }
 </style>

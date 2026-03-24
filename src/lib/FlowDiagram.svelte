@@ -98,16 +98,10 @@
 
                 const textBlockH = (d.lines.length - 1) * LINE_H;
                 const startY = -textBlockH / 2;
-                const multiLine = d.lines.length > 1;
+                const startX = -d.rectW / 2 + PAD_X;
 
                 d.segmentedLines.forEach((segments: import('./types').SegmentedLine, i: number) => {
-                    let lineW = 0;
-                    segments.forEach((seg: import('./types').Segment) => {
-                        lineW += measureText(seg.text);
-                        if (seg.tooltip) lineW += BADGE_PAD * 2 + BADGE_SIZE;
-                    });
-
-                    let cx = multiLine ? -d.bbox.width / 2 : -lineW / 2;
+                    let cx = startX;
                     const ly = startY + i * LINE_H;
 
                     segments.forEach((seg: import('./types').Segment) => {
@@ -216,16 +210,17 @@
 
 	:global(svg text) {
 		font-family: 'Helvetica Neue', sans-serif;
-		font-size: 14px;
+		font-size: 13.38px;
 		letter-spacing: 0.1px;
-		line-height: 110%;
+		line-height: 111%;
+        text-transform: uppercase;
 		pointer-events: none;
 		user-select: none;
 	}
 
 	:global(svg .badge-label) {
-		font-size: 12px !important;
-		letter-spacing: 0 !important;
+		font-size: 13.38px !important;
+		letter-spacing: 0.1px !important;
 	}
 
 	:global(circle) {

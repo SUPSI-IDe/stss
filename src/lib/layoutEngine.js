@@ -33,11 +33,15 @@ export function computeLayout(allNodes, numCols, width, height, gap) {
 	const yScale = buildYScale(allNodes, numCols, height);
 	for (const row of range(numCols)) {
 		const rowNodes = allNodes.filter((d) => d.row === row);
-		const totalW = rowNodes.reduce((s, d) => s + d.bbox.width, 0) + gap * (rowNodes.length - 1);
-		let cursor = width / 2 - totalW / 2;
+		const totalNodeW = rowNodes.reduce((s, d) => s + d.bbox.width, 0);
+		const PAD = 8;
+		const usable = width - 2 * PAD - totalNodeW;
+		const spacing =
+			rowNodes.length > 1 ? Math.max(usable / (rowNodes.length - 1), 0) : 0;
+		let cursor = PAD;
 		for (const d of rowNodes) {
 			d.x = cursor + d.bbox.width / 2;
-			cursor += d.bbox.width + gap;
+			cursor += d.bbox.width + spacing;
 		}
 		const rowTop = yScale(row) - maxRowHeight(allNodes, row) / 2;
 		for (const d of rowNodes) {
