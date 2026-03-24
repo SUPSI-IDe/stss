@@ -1,3 +1,8 @@
+/**
+ * @param {import('./types').RawRow[]} raw
+ * @param {string[]} cols
+ * @param {Map<number, string>} clusterColsMap
+ */
 export function buildClusterData(raw, cols, clusterColsMap) {
 	const clusterMaps = new Map();
 	const clusterLabels = new Map();
@@ -9,10 +14,12 @@ export function buildClusterData(raw, cols, clusterColsMap) {
 		const colName = cols[colIdx];
 		const cmap = new Map();
 		raw.forEach((r) => {
-			const cid = r[tsvCol] ? r[tsvCol].trim() : '';
+			const rawCid = r[tsvCol];
+			const cid = typeof rawCid === 'string' ? rawCid.trim() : '';
 			if (!cid) return;
 			if (!cmap.has(cid)) cmap.set(cid, new Set());
-			cmap.get(cid).add(r[colName].trim());
+			const val = (r[colName] ?? '').trim();
+			cmap.get(cid)?.add(val);
 		});
 		clusterMaps.set(colIdx, cmap);
 
@@ -33,9 +40,11 @@ export function buildClusterData(raw, cols, clusterColsMap) {
 
 		const vmap = new Map();
 		raw.forEach((r) => {
-			const cid = r[tsvCol] ? r[tsvCol].trim() : '';
+			const rawCid = r[tsvCol];
+			const cid = typeof rawCid === 'string' ? rawCid.trim() : '';
 			if (cid && real.has(cid)) {
-				vmap.set(r[colName].trim(), labels.get(cid));
+				const val = (r[colName] ?? '').trim();
+				vmap.set(val, labels.get(cid));
 			}
 		});
 		valToCluster.set(colIdx, vmap);
@@ -44,6 +53,13 @@ export function buildClusterData(raw, cols, clusterColsMap) {
 	return { clusterMaps, clusterLabels, realClusters, realClusterLabelSet, valToCluster };
 }
 
+/**
+ * @param {number} colIdx
+ * @param {string} label
+ * @param {Map<number, string>} clusterColsMap
+ * @param {Map<number, Set<string>>} realClusterLabelSet
+ */
 export function isClusterNode(colIdx, label, clusterColsMap, realClusterLabelSet) {
-	return clusterColsMap.has(colIdx) && realClusterLabelSet.get(colIdx).has(label);
+	const set = realClusterLabelSet.get(colIdx);
+	return clusterColsMap.has(colIdx) && !!set && set.has(label);
 }

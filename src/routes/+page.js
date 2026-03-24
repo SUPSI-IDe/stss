@@ -6,15 +6,21 @@ import { buildAllNodes } from '$lib/nodeBuilder.js';
 import { createSegmenter } from '$lib/textUtils.js';
 import { base } from '$app/paths';
 
+/** @typedef {import('$lib/types').RawRow} RawRow */
+/** @typedef {import('$lib/types').Flow} Flow */
+/** @typedef {import('$lib/types').NodeData} NodeData */
+/** @typedef {import('$lib/types').TooltipData} TooltipData */
+
 export async function load({ fetch }) {
 	const [tsvText, csvText] = await Promise.all([
 		fetch(`${base}/sourcedata.tsv`).then((r) => r.text()),
 		fetch(`${base}/TooltipTable.csv`).then((r) => r.text())
 	]);
 
-	const raw = tsvParse(tsvText);
-	const tooltipRaw = csvParse(csvText);
+	const raw = /** @type {RawRow[]} */ (tsvParse(tsvText));
+	const tooltipRaw = /** @type {TooltipData[]} */ (csvParse(csvText));
 
+	/** @type {Map<string, TooltipData>} */
 	const tooltipMap = new Map();
 	tooltipRaw.forEach((t) => {
 		tooltipMap.set(t.label.toLowerCase().trim(), {
@@ -30,6 +36,7 @@ export async function load({ fetch }) {
 		CLUSTER_COLS
 	);
 
+	/** @type {(colIdx: number, label: string) => boolean} */
 	const isClusterNodeFn = (colIdx, label) =>
 		isClusterNode(colIdx, label, CLUSTER_COLS, realClusterLabelSet);
 

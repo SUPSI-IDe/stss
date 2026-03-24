@@ -1,9 +1,18 @@
 import { scalePoint, range } from 'd3';
 
+/**
+ * @param {import('./types').NodeData[]} allNodes
+ * @param {number} row
+ */
 export function maxRowHeight(allNodes, row) {
 	return Math.max(...allNodes.filter((d) => d.row === row).map((d) => d.rectH));
 }
 
+/**
+ * @param {import('./types').NodeData[]} allNodes
+ * @param {number} numCols
+ * @param {number} height
+ */
 export function buildYScale(allNodes, numCols, height) {
 	const lastRowH = maxRowHeight(allNodes, numCols - 1);
 	const firstRowH = maxRowHeight(allNodes, 0);
@@ -13,6 +22,13 @@ export function buildYScale(allNodes, numCols, height) {
 		.padding(0);
 }
 
+/**
+ * @param {import('./types').NodeData[]} allNodes
+ * @param {number} numCols
+ * @param {number} width
+ * @param {number} height
+ * @param {number} gap
+ */
 export function computeLayout(allNodes, numCols, width, height, gap) {
 	const yScale = buildYScale(allNodes, numCols, height);
 	for (const row of range(numCols)) {

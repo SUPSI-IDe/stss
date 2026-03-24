@@ -1,24 +1,36 @@
-<script>
-	let { label, definition, x = 0, y = 0, onclose } = $props();
+<script lang="ts">
+    import type { TooltipData } from './types';
 
-	let posX = $state(x);
-	let posY = $state(y);
+    let { label, definition, x = 0, y = 0, onclose }: TooltipData & {
+        x?: number;
+        y?: number;
+        onclose: () => void;
+    } = $props();
 
-	function startDrag(event) {
-		if (event.target.closest('.tooltip-close')) return;
-		const ox = event.clientX - posX;
-		const oy = event.clientY - posY;
-		function onMove(e) {
-			posX = e.clientX - ox;
-			posY = e.clientY - oy;
-		}
-		function onUp() {
-			window.removeEventListener('mousemove', onMove);
-			window.removeEventListener('mouseup', onUp);
-		}
-		window.addEventListener('mousemove', onMove);
-		window.addEventListener('mouseup', onUp);
-	}
+    let posX = $state<number>(0);
+    let posY = $state<number>(0);
+
+    function startDrag(event: MouseEvent) {
+        const target = event.target as HTMLElement | null;
+        if (target && target.closest('.tooltip-close')) return;
+        const ox = event.clientX - posX;
+        const oy = event.clientY - posY;
+        function onMove(e: MouseEvent) {
+            posX = e.clientX - ox;
+            posY = e.clientY - oy;
+        }
+        function onUp() {
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseup', onUp);
+        }
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onUp);
+    }
+
+    $effect(() => {
+        posX = x;
+        posY = y;
+    });
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->

@@ -1,3 +1,7 @@
+/**
+ * @param {string} text
+ * @param {number} limit
+ */
 export function wrapText(text, limit) {
 	const words = text.split(' ');
 	const lines = [];
@@ -14,16 +18,23 @@ export function wrapText(text, limit) {
 	return lines;
 }
 
+/** @param {string} fontSpec */
 export function createTextMeasurer(fontSpec) {
 	const ctx = document.createElement('canvas').getContext('2d');
+	if (!ctx) throw new Error('Canvas context not available');
 	ctx.font = fontSpec;
-	return (str) => ctx.measureText(str).width;
+	return /** @param {string} str */ (str) => ctx.measureText(str).width;
 }
 
+/**
+ * @param {Map<string, import('./types').TooltipData>} tooltipMap
+ */
 export function createSegmenter(tooltipMap) {
 	const entries = [...tooltipMap.entries()].sort((a, b) => b[0].length - a[0].length);
 
+	/** @param {string} line */
 	return function segmentLine(line) {
+		/** @type {import('./types').Segment[]} */
 		const segments = [];
 		let remaining = line;
 		while (remaining.length > 0) {
@@ -33,7 +44,7 @@ export function createSegmenter(tooltipMap) {
 				const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				const regex = new RegExp('\\b' + escaped + '\\b', 'i');
 				const match = remaining.match(regex);
-				if (match && match.index < earliestIndex) {
+				if (match && match.index != null && match.index < earliestIndex) {
 					earliestIndex = match.index;
 					earliestMatch = { data, index: match.index, matchText: match[0] };
 				}

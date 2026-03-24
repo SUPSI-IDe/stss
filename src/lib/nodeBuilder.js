@@ -1,6 +1,12 @@
 import { select } from 'd3';
 import { wrapText } from './textUtils.js';
 
+/**
+ * @param {string[][]} layers
+ * @param {(row: number, label: string) => boolean} isClusterNodeFn
+ * @param {number} maxLine
+ * @returns {import('./types').NodeData[]}
+ */
 export function buildAllNodes(layers, isClusterNodeFn, maxLine) {
 	return layers.flatMap((labels, row) =>
 		labels.map((label) => {
@@ -18,11 +24,31 @@ export function buildAllNodes(layers, isClusterNodeFn, maxLine) {
 				lines = wrapText(label, maxLine);
 				memberRanges = null;
 			}
-			return { row, label, lines, memberRanges };
+			return {
+				row,
+				label,
+				lines,
+				memberRanges,
+				// placeholders filled by measureNodes later
+				bbox: { x: 0, y: 0, width: 0, height: 0 },
+				rectW: 0,
+				rectH: 0,
+				rectY: 0,
+				x: 0,
+				y: 0,
+				segmentedLines: []
+			};
 		})
 	);
 }
 
+/**
+ * @param {import('./types').NodeData[]} allNodes
+ * @param {any} svgGroup
+ * @param {number} lineH
+ * @param {number} padX
+ * @param {number} padY
+ */
 export function measureNodes(allNodes, svgGroup, lineH, padX, padY) {
 	const measure = svgGroup.append('g').attr('class', 'measure').attr('opacity', 0);
 
@@ -30,9 +56,13 @@ export function measureNodes(allNodes, svgGroup, lineH, padX, padY) {
 		.selectAll('g')
 		.data(allNodes)
 		.join('g')
-		.each(function (d) {
+		.each(function (
+			/** @type {import('./types').NodeData} */ d,
+			/** @type {number} */ i,
+			/** @type {SVGGElement[]} */ nodes
+		) {
 			const multiLine = d.lines.length > 1;
-			const el = select(this)
+			const el = select(nodes[i])
 				.append('text')
 				.attr('text-anchor', multiLine ? 'start' : 'middle')
 				.attr('font-size', 14);
@@ -58,6 +88,11 @@ export function measureNodes(allNodes, svgGroup, lineH, padX, padY) {
 	measure.remove();
 }
 
+/**
+ * @param {import('./types').NodeData[]} allNodes
+ * @param {number} badgePad
+ * @param {number} badgeSize
+ */
 export function adjustBadgeWidths(allNodes, badgePad, badgeSize) {
 	allNodes.forEach((d) => {
 		let maxBadgeExtra = 0;

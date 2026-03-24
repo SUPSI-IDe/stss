@@ -1,50 +1,85 @@
-<script>
-	import FlowDiagram from '$lib/FlowDiagram.svelte';
-	import TooltipCard from '$lib/TooltipCard.svelte';
+<script lang="ts">
+    import { onDestroy, onMount } from 'svelte';
+    import type { PageData } from './$types';
+    import FlowDiagram from '$lib/FlowDiagram.svelte';
+    import TooltipCard from '$lib/TooltipCard.svelte';
+    import type { TooltipData } from '$lib/types';
 
-	let { data } = $props();
-	let tooltip = $state(null);
+    type TooltipState = TooltipData & { x: number; y: number };
 
-	function openTooltip(event, tipData) {
-		tooltip = {
-			label: tipData.label,
-			definition: tipData.definition,
-			x: event.clientX + 12,
-			y: event.clientY + 12
-		};
-	}
+    let { data }: { data: PageData } = $props();
+    let tooltip = $state<TooltipState | null>(null);
+    let timestamp = $state('');
+    let timer: number | null = null;
+
+    function updateTimestamp() {
+        const now = new Date();
+        timestamp = new Intl.DateTimeFormat('en-CH', {
+            timeZone: 'Europe/Zurich',
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+            timeZoneName: 'short'
+        }).format(now);
+    }
+
+    onMount(() => {
+        updateTimestamp();
+        timer = window.setInterval(updateTimestamp, 60_000);
+    });
+
+    onDestroy(() => {
+        if (timer !== null) clearInterval(timer);
+    });
+
+    function openTooltip(event: MouseEvent, tipData: TooltipData) {
+        tooltip = {
+            id: tipData.id,
+            label: tipData.label,
+            definition: tipData.definition,
+            x: event.clientX + 12,
+            y: event.clientY + 12
+        };
+    }
 </script>
 
-<div id="navbar">
-	<span class="nav-item">STSS-SMALL DATA</span>
-	<span class="nav-item">ABOUT</span>
-	<span class="nav-item nav-spacer"></span>
-	<span class="nav-item nav-spacer"></span>
-	<span class="nav-item nav-spacer"></span>
-	<span class="nav-item">POWERED BY BLUE CITY</span>
-</div>
-<div id="page-title">
-	<div class="title-row title-row-top">
-		<span>SEEING</span>
-		<span>THINKING</span>
-		<span>SHARING</span>
-		<span>SENSING</span>
-	</div>
-	<div class="title-row title-row-bottom">
-		<span>SMALL DATA</span>
-	</div>
-</div>
-<div id="app">
-	<FlowDiagram
-		allNodes={data.allNodes}
-		uniqueFlows={data.uniqueFlows}
-		realClusterLabelSet={data.realClusterLabelSet}
-		onOpenTooltip={openTooltip}
-	/>
-</div>
+<nav class="nav-grid" aria-label="Primary">
+    <div class="brand">STSS SMALL DATA</div>
+    <a class="about" href="#about">ABOUT</a>
+    <div class="powered-title">POWERED BY BLUECITY</div>
+    <div class="timestamp" aria-live="polite">{timestamp}</div>
+    <div class="explore-info">
+        <div>Explore the repository data flows:</div>
+        <div>
+            Hover over any word in the diagram to reveal its connected flows, highlighting the underlying processes of the project. The
+            diagram acts as both a map and an interface, allowing you to navigate relationships between elements. Each node also provides
+            access to specific terms and dedicated pages, offering deeper insight into the methodologies used. Through this exploration, the
+            project uncovers the value of small data, emphasizing diverse approaches and perspectives.
+        </div>
+    </div>
+    <div class="license-block">
+        <span class="license-label">License:</span>
+        <span class="license-text">
+            © 2024. This project is licensed under CC BY 4.0. Supported by Movetia. Exchange and mobility.
+        </span>
+    </div>
+</nav>
+
+<main class="content">
+    <FlowDiagram
+        allNodes={data.allNodes}
+        uniqueFlows={data.uniqueFlows}
+        realClusterLabelSet={data.realClusterLabelSet}
+        onOpenTooltip={openTooltip}
+    />
+</main>
 
 {#if tooltip}
 	<TooltipCard
+		id={tooltip.id}
 		label={tooltip.label}
 		definition={tooltip.definition}
 		x={tooltip.x}
@@ -54,90 +89,113 @@
 {/if}
 
 <style>
-	:global(*) {
-		margin: 0;
-		padding: 0;
-	}
+    @font-face {
+        font-family: 'Helvetica Neue';
+        src: url('/font/HelveticaNeue-Medium.woff') format('woff');
+        font-style: normal;
+        font-display: swap;
+    }
 
-	:global(html),
-	:global(body) {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		background: #fafafa;
-	}
+    :global(*) {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-	:global(body) {
-		display: flex;
-		flex-direction: column;
-	}
+    :global(:root) {
+        --text-black: #040404;
+        --bg: #f4f4f4;
+        --text-gray: #818181;
+    }
 
-	@font-face {
-		font-family: 'OTMontreal';
-		src: url('/font/OTNeueMontreal-MediumSqueezed.woff') format('woff');
-		font-weight: 500;
-		font-style: normal;
-	}
+    :global(html),
+    :global(body) {
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+    }
 
-	@font-face {
-		font-family: 'Helvetica Neue';
-		src: url('/font/HelveticaNeue-Medium.woff') format('woff');
-		font-weight: 500;
-		font-style: normal;
-	}
+    :global(body) {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        color: var(--text-black);
+        font-family: 'Helvetica Neue', 'Helvetica Neue Medium', sans-serif;
+        font-size: 13.38px;
+        letter-spacing: 0.1px;
+        line-height: 1.11;
+    }
 
-	#navbar {
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		align-items: center;
-		background: #fafafa;
-		font-family: system-ui, sans-serif;
-		font-size: 16px;
-		text-transform: uppercase;
-	}
+    .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(18, 1fr);
+        grid-template-rows: auto auto;
+        gap: 12px;
+        margin: 8px 8px 0 8px;
+        width: calc(100vw - 16px);
+        box-sizing: border-box;
+        align-items: start;
+    }
 
-	.nav-item:first-child {
-		text-align: left;
-	}
+    .brand {
+        grid-column: 1 / span 4;
+        align-self: start;
+    }
 
-	.nav-item:nth-child(2) {
-		text-align: left;
-	}
+    .about {
+        grid-column: 5 / span 6;
+        align-self: start;
+        text-decoration: none;
+        color: var(--text-black);
+    }
 
-	.nav-item:last-child {
-		text-align: right;
-	}
+    .about:hover {
+        text-decoration: underline;
+    }
 
-	#page-title {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		font-family: 'OTMontreal', sans-serif;
-		font-size: 8rem;
-		letter-spacing: -2px;
-		line-height: 80%;
-		text-transform: uppercase;
-	}
+    .powered-title {
+        grid-column: 13 / span 4;
+        grid-row: 1;
+        text-transform: uppercase;
+        align-self: start;
+    }
 
-	.title-row {
-		display: flex;
-	}
+    .timestamp {
+        grid-column: 17 / span 2;
+        grid-row: 1;
+        justify-self: end;
+        align-self: start;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
 
-	.title-row-top {
-		justify-content: space-between;
-	}
+    .explore-info {
+        grid-column: 1 / span 8;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        color: var(--text-gray);
+        font-size: 12px;
+        align-self: start;
+    }
 
-	.title-row-bottom {
-		justify-content: center;
-	}
+    .license-block {
+        grid-column: 13 / span 4;
+        grid-row: 2;
+        color: var(--text-gray);
+        font-size: 12px;
+        line-height: 1.4;
+        display: grid;
+        gap: 2px;
+        align-self: start;
+    }
 
-	#app {
-		width: 100%;
-		flex: 1;
-		overflow: hidden;
-		background: #fafafa;
-		box-sizing: border-box;
-		padding-top: 24px;
-		padding-bottom: 24px;
-	}
+    .content {
+        flex: 1;
+        width: 100%;
+        overflow: hidden;
+        padding: 16px 8px 24px 8px;
+        box-sizing: border-box;
+    }
 </style>
