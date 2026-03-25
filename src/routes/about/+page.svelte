@@ -97,7 +97,7 @@ nine implementation partners from industry.`
         display: flex;
         flex-direction: column;
         gap: 28px;
-        line-height: 1.25;
+        line-height: 1.11;
     }
 
     .bluecity {
@@ -133,7 +133,7 @@ nine implementation partners from industry.`
         margin: auto 8px 8px 8px;
         color: var(--text-gray);
         font-size: 12px;
-        line-height: 1.35;
+        line-height: 1.11;
         align-items: end;
     }
 
