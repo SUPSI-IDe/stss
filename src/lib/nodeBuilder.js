@@ -36,7 +36,7 @@ export function buildAllNodes(layers, isClusterNodeFn, maxLine) {
 				rectY: 0,
 				x: 0,
 				y: 0,
-				segmentedLines: []
+				lineData: []
 			};
 		})
 	);
@@ -95,9 +95,9 @@ export function measureNodes(allNodes, svgGroup, lineH, padY) {
 export function adjustBadgeWidths(allNodes, badgePad, badgeSize) {
 	allNodes.forEach((d) => {
 		let maxBadgeExtra = 0;
-		d.segmentedLines.forEach((segments) => {
+		d.lineData.forEach((line) => {
 			let extra = 0;
-			segments.forEach((seg) => {
+			line.segments.forEach((seg) => {
 				if (seg.tooltip) extra += badgePad * 2 + badgeSize;
 			});
 			maxBadgeExtra = Math.max(maxBadgeExtra, extra);

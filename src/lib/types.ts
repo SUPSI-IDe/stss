@@ -26,6 +26,11 @@ export interface Segment {
 
 export type SegmentedLine = Segment[];
 
+export interface LineData {
+  segments: Segment[];
+  width: number;
+}
+
 export interface NodeData {
   row: number;
   label: string;
@@ -37,7 +42,7 @@ export interface NodeData {
   rectY: number;
   x: number;
   y: number;
-  segmentedLines: SegmentedLine[];
+  lineData: LineData[];
 }
 
 export interface Flow {

@@ -16,7 +16,7 @@ export function findNode(allNodes, row, label) {
 export function nodeTop(allNodes, row, label) {
 	const d = findNode(allNodes, row, label);
 	if (!d) throw new Error('Node not found for nodeTop');
-	return [d.x, d.y + d.rectY];
+	return [d.x, d.y];
 }
 
 /**
@@ -28,7 +28,7 @@ export function nodeTop(allNodes, row, label) {
 export function nodeBottom(allNodes, row, label) {
 	const d = findNode(allNodes, row, label);
 	if (!d) throw new Error('Node not found for nodeBottom');
-	return [d.x, d.y + d.rectY + d.rectH];
+	return [d.x, d.y];
 }
 
 /**

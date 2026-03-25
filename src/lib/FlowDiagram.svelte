@@ -20,7 +20,7 @@
   import { measureNodes, adjustBadgeWidths } from "./nodeBuilder.js";
   import { computeLayout } from "./layoutEngine.js";
   import { createFlowPathGenerator } from "./geometry.js";
-  import type { NodeData, Flow, TooltipData } from "./types";
+  import type { NodeData, Flow, TooltipData, LineData } from "./types";
 
   let {
     allNodes,
@@ -60,8 +60,8 @@
         return svgMeasureEl.node()!.getComputedTextLength();
       };
 
-      const measureLine = (segments: import("./types").SegmentedLine) =>
-        segments.reduce((sum, seg) => {
+      const measureLineWidth = (line: LineData) =>
+        line.segments.reduce((sum, seg) => {
           let w = measureWidth(seg.text);
           if (seg.tooltip) w += BADGE_PAD * 2 + BADGE_SIZE;
           return sum + w;
@@ -70,10 +70,13 @@
       measureNodes(allNodes, svg as any, LINE_H, PAD_Y);
       adjustBadgeWidths(allNodes, BADGE_PAD, BADGE_SIZE);
 
-      // Recompute widths based on actual rendered segments to avoid trailing gaps
+      // Compute per-line widths and set node rectW to the max
       allNodes.forEach((d) => {
-        if (d.segmentedLines && d.segmentedLines.length) {
-          const maxW = Math.max(...d.segmentedLines.map(measureLine));
+        if (d.lineData && d.lineData.length) {
+          d.lineData.forEach((line) => {
+            line.width = measureLineWidth(line);
+          });
+          const maxW = Math.max(...d.lineData.map((l) => l.width));
           d.bbox.width = maxW;
           d.rectW = maxW;
         }
@@ -110,13 +113,20 @@
         .join("g")
         .attr("transform", (d: NodeData) => `translate(${d.x},${d.y})`);
 
-      nodeGroups
-        .append("rect")
-        .attr("x", (d: NodeData) => -d.rectW / 2)
-        .attr("y", (d: NodeData) => d.rectY)
-        .attr("width", (d: NodeData) => d.rectW)
-        .attr("height", (d: NodeData) => d.rectH)
-        .attr("fill", "transparent");
+      // Draw one rect per line instead of one rect per node
+      nodeGroups.each((d: NodeData, _i: number, nodes: SVGGElement[]) => {
+        const g = d3.select(nodes[_i] as SVGGElement);
+        const lineRectH = d.rectH / d.lineData.length;
+        d.lineData.forEach((line, i) => {
+          g.append("rect")
+            .attr("class", "line-rect")
+            .attr("x", -d.rectW / 2)
+            .attr("y", d.rectY + i * lineRectH)
+            .attr("width", line.width)
+            .attr("height", lineRectH)
+            .attr("fill", "transparent");
+        });
+      });
 
       nodeGroups.each((d: NodeData, _i: number, nodes: SVGGElement[]) => {
         const g = d3.select(nodes[_i] as SVGGElement);
@@ -126,63 +136,61 @@
           .attr("font-size", 14)
           .attr("fill", "#333");
 
-        const textBlockH = (d.lines.length - 1) * LINE_H;
+        const textBlockH = (d.lineData.length - 1) * LINE_H;
         const startY = -textBlockH / 2;
         const startX = -d.rectW / 2;
 
-        d.segmentedLines.forEach(
-          (segments: import("./types").SegmentedLine, i: number) => {
-            let cx = startX;
-            const ly = startY + i * LINE_H;
+        d.lineData.forEach((line: LineData, i: number) => {
+          let cx = startX;
+          const ly = startY + i * LINE_H;
 
-            segments.forEach((seg: import("./types").Segment) => {
-              if (seg.tooltip) cx += BADGE_PAD;
-              const tspan = el.append("tspan")
-                .text(seg.text)
-                .attr("x", cx)
-                .attr("y", ly)
-                .attr("dy", "0.35em");
+          line.segments.forEach((seg: import("./types").Segment) => {
+            if (seg.tooltip) cx += BADGE_PAD;
+            const tspan = el.append("tspan")
+              .text(seg.text)
+              .attr("x", cx)
+              .attr("y", ly)
+              .attr("dy", "0.35em");
 
-              cx += tspan.node()!.getComputedTextLength();
+            cx += tspan.node()!.getComputedTextLength();
 
-              if (seg.tooltip) {
-                cx += BADGE_PAD;
-                const tipData = seg.tooltip;
-                const badgeG = g
-                  .append("g")
-                  .attr("class", "badge")
-                  .attr("pointer-events", "all")
-                  .style("cursor", "pointer")
-                  .attr(
-                    "transform",
-                    `translate(${cx},${ly + 14 * 0.35 - BADGE_SIZE + 2})`,
-                  )
-                  .on("click", (event: MouseEvent) => {
-                    event.stopPropagation();
-                    onOpenTooltip(event, tipData);
-                  });
+            if (seg.tooltip) {
+              cx += BADGE_PAD;
+              const tipData = seg.tooltip;
+              const badgeG = g
+                .append("g")
+                .attr("class", "badge")
+                .attr("pointer-events", "all")
+                .style("cursor", "pointer")
+                .attr(
+                  "transform",
+                  `translate(${cx},${ly + 14 * 0.35 - BADGE_SIZE + 2})`,
+                )
+                .on("click", (event: MouseEvent) => {
+                  event.stopPropagation();
+                  onOpenTooltip(event, tipData);
+                });
 
-                badgeG
-                  .append("rect")
-                  .attr("width", BADGE_SIZE)
-                  .attr("height", BADGE_SIZE)
-                  .attr("fill", "black");
+              badgeG
+                .append("rect")
+                .attr("width", BADGE_SIZE)
+                .attr("height", BADGE_SIZE)
+                .attr("fill", "black");
 
-                badgeG
-                  .append("text")
-                  .attr("class", "badge-label")
-                  .attr("x", BADGE_SIZE / 2)
-                  .attr("y", BADGE_SIZE / 2)
-                  .attr("fill", "white")
-                  .attr("text-anchor", "middle")
-                  .attr("dominant-baseline", "central")
-                  .text(String(seg.tooltip.id));
+              badgeG
+                .append("text")
+                .attr("class", "badge-label")
+                .attr("x", BADGE_SIZE / 2)
+                .attr("y", BADGE_SIZE / 2)
+                .attr("fill", "white")
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "central")
+                .text(String(seg.tooltip.id));
 
-                cx += BADGE_SIZE + BADGE_PAD;
-              }
-            });
-          },
-        );
+              cx += BADGE_SIZE + BADGE_PAD;
+            }
+          });
+        });
       });
 
       nodeGroups
@@ -193,19 +201,22 @@
             .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
             .attr("stroke-width", (f: Flow) => (match(f) ? 2 : 1));
           const matchingFlows = uniqueFlows.filter(match);
-          nodeGroups.select("rect").attr("fill", function (nd: NodeData) {
+          nodeGroups.each(function (this: SVGGElement, nd: NodeData) {
             const nodeFlows = matchingFlows.filter(
               (f) => f.path[nd.row] === nd.label,
             );
-            if (nodeFlows.length === 0) return "transparent";
-            const counts: Record<number, number> = {};
-            nodeFlows.forEach((f) => {
-              counts[f.group] = (counts[f.group] || 0) + 1;
-            });
-            const topGroup = Object.entries(counts).sort(
-              (a, b) => b[1] - a[1],
-            )[0][0];
-            return GROUP_COLORS[+topGroup - 1];
+            let color = "transparent";
+            if (nodeFlows.length > 0) {
+              const counts: Record<number, number> = {};
+              nodeFlows.forEach((f) => {
+                counts[f.group] = (counts[f.group] || 0) + 1;
+              });
+              const topGroup = Object.entries(counts).sort(
+                (a, b) => b[1] - a[1],
+              )[0][0];
+              color = GROUP_COLORS[+topGroup - 1];
+            }
+            d3.select(this).selectAll(".line-rect").attr("fill", color);
           });
         })
         .on("mouseleave", () => {
@@ -213,7 +224,7 @@
             .attr("stroke-opacity", 0)
             .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
             .attr("stroke-width", 1);
-          nodeGroups.select("rect").attr("fill", "transparent");
+          nodeGroups.selectAll(".line-rect").attr("fill", "transparent");
         });
 
       window.addEventListener("resize", () => {

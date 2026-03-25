@@ -47,7 +47,10 @@ export async function load({ fetch }) {
 	const allNodes = buildAllNodes(layers, isClusterNodeFn, MAX_LINE);
 	const segmentLine = createSegmenter(tooltipMap);
 	allNodes.forEach((d) => {
-		d.segmentedLines = d.lines.map((line) => segmentLine(line));
+		d.lineData = d.lines.map((line) => ({
+			segments: segmentLine(line),
+			width: 0
+		}));
 	});
 
 	return { allNodes, uniqueFlows, tooltipMap, realClusterLabelSet };
