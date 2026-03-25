@@ -72,6 +72,7 @@
         align-self: start;
         text-decoration: none;
         color: var(--text-black);
+
     }
 
     .about:hover {

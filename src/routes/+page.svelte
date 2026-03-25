@@ -109,37 +109,39 @@
     }
 </script>
 
-{#if overlayVisible}
-    <div class="overlay" aria-live="polite">
-        <div class="overlay-text">
-            {#each displayedLines as line, idx}
-                <div class="line" aria-label={LINES[idx]}>{line}</div>
-            {/each}
+<div class="page">
+    {#if overlayVisible}
+        <div class="overlay" aria-live="polite">
+            <div class="overlay-text">
+                {#each displayedLines as line, idx}
+                    <div class="line" aria-label={LINES[idx]}>{line}</div>
+                {/each}
+            </div>
         </div>
-    </div>
-{/if}
+    {/if}
 
-<NavBar timestamp={timestamp} />
+    <NavBar timestamp={timestamp} />
 
-<main class="content">
-    <FlowDiagram
-        allNodes={data.allNodes}
-        uniqueFlows={data.uniqueFlows}
-        realClusterLabelSet={data.realClusterLabelSet}
-        onOpenTooltip={openTooltip}
-    />
-</main>
+    <main class="content">
+        <FlowDiagram
+            allNodes={data.allNodes}
+            uniqueFlows={data.uniqueFlows}
+            realClusterLabelSet={data.realClusterLabelSet}
+            onOpenTooltip={openTooltip}
+        />
+    </main>
 
-{#if tooltip}
-	<TooltipCard
-		id={tooltip.id}
-		label={tooltip.label}
-		definition={tooltip.definition}
-		x={tooltip.x}
-		y={tooltip.y}
-		onclose={() => (tooltip = null)}
-	/>
-{/if}
+    {#if tooltip}
+        <TooltipCard
+            id={tooltip.id}
+            label={tooltip.label}
+            definition={tooltip.definition}
+            x={tooltip.x}
+            y={tooltip.y}
+            onclose={() => (tooltip = null)}
+        />
+    {/if}
+</div>
 
 <style>
     @font-face {
@@ -183,6 +185,13 @@
         font-family: 'Helvetica Neue', 'Helvetica Neue Medium', sans-serif;
         font-size: 13.38px;
         letter-spacing: 0.1px;
+    }
+
+    .page {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
         line-height: 1.11;
     }
 

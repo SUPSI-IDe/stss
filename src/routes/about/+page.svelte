@@ -211,7 +211,6 @@ nine implementation partners from industry.`}
         color: var(--text-black);
         font-family: 'Helvetica Neue', 'Helvetica Neue Medium', sans-serif;
         font-size: 13.38px;
-        line-height: 1.25;
     }
 
     .page {
@@ -221,6 +220,7 @@ nine implementation partners from industry.`}
         flex-direction: column;
         gap: 28px;
         box-sizing: border-box;
+        line-height: 1.25;
     }
 
     .bluecity {
