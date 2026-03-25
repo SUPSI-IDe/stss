@@ -4,6 +4,7 @@ export interface RawRow {
   B: string;
   C: string;
   D: string;
+  SD: string;
   E: string;
   F: string;
   G: string;
