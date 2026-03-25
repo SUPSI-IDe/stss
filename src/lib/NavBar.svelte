@@ -35,7 +35,7 @@
     if (browser) {
         onMount(() => {
             updateTimestamp();
-            timer = setInterval(updateTimestamp, 60_000);
+            timer = setInterval(updateTimestamp, 1_000);
         });
         onDestroy(() => {
             if (timer !== null) clearInterval(timer);
