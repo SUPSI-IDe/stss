@@ -2,6 +2,7 @@
     import { onMount, onDestroy } from 'svelte';
     import { browser } from '$app/environment';
     import { base } from '$app/paths';
+    import { page } from '$app/stores';
 
     let {
         variant = 'explore',
@@ -44,8 +45,8 @@
 </script>
 
 <nav class="nav-grid" aria-label="Primary">
-    <div class="brand">STSS SMALL DATA</div>
-    <a class="about" href={`${base}/about`}>ABOUT</a>
+    <a class="brand" href={`${base}/`} class:active-link={$page.url.pathname === `${base}/` || $page.url.pathname === base}>STSS SMALL DATA</a>
+    <a class="about" href={`${base}/about`} class:active-link={$page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
     <div class="powered-title">POWERED BY BLUECITY</div>
     <div class="timestamp" aria-live="polite">{timestamp}</div>
     {#if variant === 'explore'}
@@ -86,6 +87,12 @@
 
     .brand {
         grid-column: 1 / span 4;
+        color: var(--text-black);
+        text-decoration: none;
+    }
+
+    .brand:hover {
+        text-decoration: underline;
     }
 
     .about {
@@ -95,6 +102,10 @@
     }
 
     .about:hover {
+        text-decoration: underline;
+    }
+
+    .active-link {
         text-decoration: underline;
     }
 
