@@ -8,7 +8,6 @@
     BADGE_SIZE,
     BADGE_PAD,
     LINE_H,
-    PAD_X,
     PAD_Y,
     COLS,
     GAP,
@@ -68,7 +67,7 @@
           return sum + w;
         }, 0);
 
-      measureNodes(allNodes, svg as any, LINE_H, PAD_X, PAD_Y);
+      measureNodes(allNodes, svg as any, LINE_H, PAD_Y);
       adjustBadgeWidths(allNodes, BADGE_PAD, BADGE_SIZE);
 
       // Recompute widths based on actual rendered segments to avoid trailing gaps
@@ -76,7 +75,7 @@
         if (d.segmentedLines && d.segmentedLines.length) {
           const maxW = Math.max(...d.segmentedLines.map(measureLine));
           d.bbox.width = maxW;
-          d.rectW = maxW + PAD_X * 2;
+          d.rectW = maxW;
         }
       });
 
@@ -129,7 +128,7 @@
 
         const textBlockH = (d.lines.length - 1) * LINE_H;
         const startY = -textBlockH / 2;
-        const startX = -d.rectW / 2 + PAD_X;
+        const startX = -d.rectW / 2;
 
         d.segmentedLines.forEach(
           (segments: import("./types").SegmentedLine, i: number) => {

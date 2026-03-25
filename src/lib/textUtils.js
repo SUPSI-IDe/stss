@@ -18,17 +18,6 @@ export function wrapText(text, limit) {
 	return lines;
 }
 
-/** @param {string} fontSpec */
-export function createTextMeasurer(fontSpec) {
-	const ctx = document.createElement('canvas').getContext('2d');
-	if (!ctx) throw new Error('Canvas context not available');
-	ctx.font = fontSpec;
-	return /** @param {string} str */ (str) => ctx.measureText(str).width;
-}
-
-/**
- * @param {Map<string, import('./types').TooltipData>} tooltipMap
- */
 /** Compound phrases where a tooltip term should not split the phrase mid-word */
 const COMPOUND_PHRASES = ['individual experience'];
 

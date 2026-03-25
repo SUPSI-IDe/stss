@@ -46,10 +46,9 @@ export function buildAllNodes(layers, isClusterNodeFn, maxLine) {
  * @param {import('./types').NodeData[]} allNodes
  * @param {any} svgGroup
  * @param {number} lineH
- * @param {number} padX
  * @param {number} padY
  */
-export function measureNodes(allNodes, svgGroup, lineH, padX, padY) {
+export function measureNodes(allNodes, svgGroup, lineH, padY) {
 	const measure = svgGroup.append('g').attr('class', 'measure').attr('opacity', 0);
 
 	measure
@@ -80,7 +79,7 @@ export function measureNodes(allNodes, svgGroup, lineH, padX, padY) {
 
 			const b = el.node().getBBox();
 			d.bbox = { x: b.x, y: b.y, width: b.width, height: b.height };
-			d.rectW = b.width + padX * 2;
+			d.rectW = b.width;
 			d.rectH = b.height + padY * 2;
 			d.rectY = b.y - padY;
 		});
