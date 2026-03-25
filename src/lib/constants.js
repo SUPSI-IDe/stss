@@ -1,5 +1,5 @@
 export const COLS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-export const GROUP_COLORS = ['#39ff14', '#ff7a00', '#ffd600', '#c9a3ff', '#5ec7ff'];
+export const GROUP_COLORS = ['#26FF00', '#B7FF00', '#FF4400', '#00FFE5', '#FF0090'];
 export const MAX_LINE = 30;
 export const GAP = 52;
 export const MARGIN = { top: 0, right: 8, bottom: 0, left: 8 };
