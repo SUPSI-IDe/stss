@@ -29,6 +29,12 @@ export function createTextMeasurer(fontSpec) {
 /**
  * @param {Map<string, import('./types').TooltipData>} tooltipMap
  */
+/** Compound phrases where a tooltip term should not split the phrase mid-word */
+const COMPOUND_PHRASES = ['individual experience'];
+
+/**
+ * @param {Map<string, import('./types').TooltipData>} tooltipMap
+ */
 export function createSegmenter(tooltipMap) {
 	const entries = [...tooltipMap.entries()].sort((a, b) => b[0].length - a[0].length);
 
@@ -45,6 +51,13 @@ export function createSegmenter(tooltipMap) {
 				const regex = new RegExp('\\b' + escaped + '\\b', 'i');
 				const match = remaining.match(regex);
 				if (match && match.index != null && match.index < earliestIndex) {
+					// Skip if this match would split a compound phrase
+					const lower = remaining.toLowerCase();
+					const skip = COMPOUND_PHRASES.some((phrase) => {
+						const pi = lower.indexOf(phrase);
+						return pi !== -1 && match.index >= pi && match.index < pi + phrase.length;
+					});
+					if (skip) continue;
 					earliestIndex = match.index;
 					earliestMatch = { data, index: match.index, matchText: match[0] };
 				}
