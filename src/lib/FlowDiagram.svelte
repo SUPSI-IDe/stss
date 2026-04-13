@@ -65,12 +65,12 @@
         return svgMeasureEl.node()!.getComputedTextLength();
       };
 
-      const measureLineWidth = (line: LineData) =>
+      const measureLineWidth = (line: LineData, isFirst: boolean, hasPage: boolean) =>
         line.segments.reduce((sum, seg) => {
           let w = measureWidth(seg.text);
           if (seg.tooltip) w += BADGE_PAD * 2 + BADGE_SIZE;
           return sum + w;
-        }, 0);
+        }, 0) + (isFirst && hasPage ? BADGE_PAD + measureWidth("+") : 0);
 
       measureNodes(allNodes, svg as any, LINE_H, PAD_Y);
       adjustBadgeWidths(allNodes, BADGE_PAD, BADGE_SIZE);
@@ -78,8 +78,8 @@
       // Compute per-line widths and set node rectW to the max
       allNodes.forEach((d) => {
         if (d.lineData && d.lineData.length) {
-          d.lineData.forEach((line) => {
-            line.width = measureLineWidth(line);
+          d.lineData.forEach((line, i) => {
+            line.width = measureLineWidth(line, i === 0, d.hasPage ?? false);
           });
           const maxW = Math.max(...d.lineData.map((l) => l.width));
           d.bbox.width = maxW;
@@ -198,6 +198,16 @@
               cx += BADGE_SIZE + BADGE_PAD;
             }
           });
+
+          if (i === 0 && d.hasPage) {
+            cx += BADGE_PAD;
+            el.append("tspan")
+              .text("+")
+              .attr("x", cx)
+              .attr("y", ly)
+              .attr("dy", "0.25em")
+              .attr("fill", "black");
+          }
         });
       });
 

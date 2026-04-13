@@ -14,3 +14,24 @@ export const CORNER_R = 6;
 export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
+
+export const PAGE_NODES = new Set([
+	'waste phenomena',
+	'seeing',
+	'thinking',
+	'sharing',
+	'sensing',
+	'urban context',
+	'personal experience',
+	'online platform',
+	'data plotting',
+	'data discussion',
+	'data walking',
+	'data prototyping',
+	'data scraping',
+	'data mapping',
+	'gesture tracking',
+	'urban scraping',
+	'pixel urbani',
+	'interfaces for debate'
+]);

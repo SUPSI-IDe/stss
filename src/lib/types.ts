@@ -44,6 +44,7 @@ export interface NodeData {
   x: number;
   y: number;
   lineData: LineData[];
+  hasPage?: boolean;
 }
 
 export interface Flow {

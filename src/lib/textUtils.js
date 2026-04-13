@@ -19,7 +19,7 @@ export function wrapText(text, limit) {
 }
 
 /** Compound phrases where a tooltip term should not split the phrase mid-word */
-const COMPOUND_PHRASES = ['individual experience'];
+const COMPOUND_PHRASES = ['personal experience'];
 
 /**
  * @param {Map<string, import('./types').TooltipData>} tooltipMap

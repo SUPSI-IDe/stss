@@ -1,5 +1,5 @@
 import { tsvParse, csvParse } from 'd3-dsv';
-import { COLS, CLUSTER_COLS, MAX_LINE } from '$lib/constants.js';
+import { COLS, CLUSTER_COLS, MAX_LINE, PAGE_NODES } from '$lib/constants.js';
 import { buildClusterData, isClusterNode } from '$lib/clusterProcessing.js';
 import { buildLayers, buildFlows, deduplicateFlows } from '$lib/flowProcessing.js';
 import { buildAllNodes } from '$lib/nodeBuilder.js';
@@ -51,6 +51,7 @@ export async function load({ fetch }) {
 			segments: segmentLine(line),
 			width: 0
 		}));
+		d.hasPage = PAGE_NODES.has(d.label.toLowerCase().trim());
 	});
 
 	return { allNodes, uniqueFlows, tooltipMap, realClusterLabelSet };
