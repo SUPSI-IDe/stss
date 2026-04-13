@@ -36,7 +36,7 @@ nine implementation partners from industry.`
     <section class="bluecity">
         <div class="bluecity-grid">
             <div class="bluecity-text">
-                <h3>BLUECITY</h3>
+                <p>BLUECITY</p>
                 <p>
                     Our investigation of this topic happens within the Bluecity project
                     (<a href="https://www.bluecity.store/" target="_blank" rel="noreferrer">https://www.bluecity.store/</a>) which is an
@@ -115,11 +115,6 @@ nine implementation partners from industry.`
         display: grid;
         gap: 8px;
         line-height: 1.15;
-    }
-
-    .bluecity h3 {
-        text-transform: uppercase;
-        font-weight: 400;
     }
 
     .bluecity a {
