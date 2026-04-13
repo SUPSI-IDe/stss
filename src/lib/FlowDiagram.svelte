@@ -31,7 +31,12 @@
     allNodes: NodeData[];
     uniqueFlows: Flow[];
     realClusterLabelSet: Map<number, Set<string>>;
-    onOpenTooltip: (event: MouseEvent, tipData: TooltipData) => void;
+    onOpenTooltip: (
+      event: MouseEvent,
+      tipData: TooltipData,
+      anchorX: number,
+      anchorY: number,
+    ) => void;
   } = $props();
 
   let containerEl: HTMLDivElement;
@@ -168,7 +173,10 @@
                 )
                 .on("click", (event: MouseEvent) => {
                   event.stopPropagation();
-                  onOpenTooltip(event, tipData);
+                  const rect = (
+                    event.currentTarget as SVGGElement
+                  ).getBoundingClientRect();
+                  onOpenTooltip(event, tipData, rect.left, rect.top);
                 });
 
               badgeG
