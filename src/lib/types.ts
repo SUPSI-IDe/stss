@@ -4,6 +4,7 @@ export interface RawRow {
   B: string;
   C: string;
   D: string;
+  SD: string;
   E: string;
   F: string;
   G: string;
@@ -43,6 +44,7 @@ export interface NodeData {
   x: number;
   y: number;
   lineData: LineData[];
+  hasPage?: boolean;
 }
 
 export interface Flow {

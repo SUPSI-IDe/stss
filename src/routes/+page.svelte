@@ -11,13 +11,18 @@
     let { data }: { data: PageData } = $props();
     let tooltip = $state<TooltipState | null>(null);
 
-    function openTooltip(event: MouseEvent, tipData: TooltipData) {
+    function openTooltip(
+        _event: MouseEvent,
+        tipData: TooltipData,
+        anchorX: number,
+        anchorY: number
+    ) {
         tooltip = {
             id: tipData.id,
             label: tipData.label,
             definition: tipData.definition,
-            x: event.clientX + 12,
-            y: event.clientY + 12
+            x: anchorX,
+            y: anchorY
         };
     }
 </script>
@@ -36,14 +41,16 @@
     </main>
 
     {#if tooltip}
-        <TooltipCard
-            id={tooltip.id}
-            label={tooltip.label}
-            definition={tooltip.definition}
-            x={tooltip.x}
-            y={tooltip.y}
-            onclose={() => (tooltip = null)}
-        />
+        {#key tooltip.id}
+            <TooltipCard
+                id={tooltip.id}
+                label={tooltip.label}
+                definition={tooltip.definition}
+                x={tooltip.x}
+                y={tooltip.y}
+                onclose={() => (tooltip = null)}
+            />
+        {/key}
     {/if}
 </div>
 

@@ -39,9 +39,13 @@ export function computeLayout(allNodes, numCols, width, height, gap) {
 		const spacing =
 			rowNodes.length > 1 ? (available - totalNodeW) / (rowNodes.length - 1) : 0;
 		let cursor = PAD;
-		for (const d of rowNodes) {
-			d.x = cursor + d.bbox.width / 2;
-			cursor += d.bbox.width + spacing;
+		if (rowNodes.length === 1) {
+			rowNodes[0].x = width / 2;
+		} else {
+			for (const d of rowNodes) {
+				d.x = cursor + d.bbox.width / 2;
+				cursor += d.bbox.width + spacing;
+			}
 		}
 		const rowTop = yScale(row) - maxRowHeight(allNodes, row) / 2;
 		for (const d of rowNodes) {
