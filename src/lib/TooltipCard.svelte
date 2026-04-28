@@ -58,8 +58,8 @@
     .tooltip-card {
         position: fixed;
         z-index: 100;
-        background: black;
-        color: white;
+        background:var(--text-black);
+        color: var(--bg);
         width: 400px;
         padding: 20px 12px;
         user-select: none;
@@ -85,7 +85,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: var(--bg);
         font-family: 'Helvetica Neue', sans-serif;
         font-size: 13.38px;
         letter-spacing: 0.1px;
@@ -105,7 +105,7 @@
         right: 10px;
         background: none;
         border: none;
-        color: white;
+        color: var(--bg);
         font-size: 13.38px;
         cursor: pointer;
         line-height: 1;
