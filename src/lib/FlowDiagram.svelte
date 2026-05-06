@@ -22,6 +22,9 @@
   import { createFlowPathGenerator } from "./geometry.js";
   import type { NodeData, Flow, TooltipData, LineData } from "./types";
 
+  const FLOW_ANIMATION_MS = 900;
+  const FLOW_INITIAL_VISIBLE_LENGTH = 18;
+
   let {
     allNodes,
     uniqueFlows,
@@ -110,6 +113,71 @@
         .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
         .attr("stroke-width", 1)
         .attr("stroke-opacity", 0);
+
+      const nearestLengthOnPath = (
+        path: SVGPathElement,
+        x: number,
+        y: number,
+      ) => {
+        const total = path.getTotalLength();
+        const steps = Math.max(24, Math.ceil(total / 10));
+        let bestLength = 0;
+        let bestDistance = Infinity;
+
+        for (let i = 0; i <= steps; i += 1) {
+          const length = (total * i) / steps;
+          const point = path.getPointAtLength(length);
+          const distance = (point.x - x) ** 2 + (point.y - y) ** 2;
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            bestLength = length;
+          }
+        }
+
+        return bestLength;
+      };
+
+      const animateFlowFromNode = (
+        path: SVGPathElement,
+        originNode: NodeData,
+      ) => {
+        const total = path.getTotalLength();
+        if (!total) return;
+
+        const origin = nearestLengthOnPath(path, originNode.x, originNode.y);
+        const initialStart = Math.max(0, origin - FLOW_INITIAL_VISIBLE_LENGTH / 2);
+        const initialEnd = Math.min(total, origin + FLOW_INITIAL_VISIBLE_LENGTH / 2);
+        const initialVisible = Math.max(0.1, initialEnd - initialStart);
+
+        const selection = d3.select(path)
+          .attr(
+            "stroke-dasharray",
+            `0 ${initialStart} ${initialVisible} ${total - initialEnd}`,
+          )
+          .attr("stroke-dashoffset", 0)
+          .attr("stroke-opacity", 0.9);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            selection
+              .transition()
+              .duration(FLOW_ANIMATION_MS)
+              .ease(d3.easeCubicOut)
+              .attrTween("stroke-dasharray", () => (t: number) => {
+                const start = initialStart * (1 - t);
+                const end = initialEnd + (total - initialEnd) * t;
+                const visible = Math.max(0.1, end - start);
+                const rest = Math.max(0, total - end);
+                return `0 ${start} ${visible} ${rest}`;
+              })
+              .on("end", () => {
+                d3.select(path)
+                  .attr("stroke-dasharray", null)
+                  .attr("stroke-dashoffset", null);
+              });
+          });
+        });
+      };
 
       const nodeGroups = svg
         .append("g")
@@ -214,10 +282,17 @@
       nodeGroups
         .on("mouseenter", (_: MouseEvent, d: NodeData) => {
           const match = (f: Flow) => f.path[d.row] === d.label;
+          flowPaths.interrupt();
           flowPaths
-            .attr("stroke-opacity", (f: Flow) => (match(f) ? 0.9 : 0))
+            .attr("stroke-opacity", 0)
             .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
-            .attr("stroke-width", (f: Flow) => (match(f) ? 2 : 1));
+            .attr("stroke-width", (f: Flow) => (match(f) ? 2 : 1))
+            .attr("stroke-dasharray", null)
+            .attr("stroke-dashoffset", null)
+            .filter(match)
+            .each(function (this: SVGPathElement) {
+              animateFlowFromNode(this as SVGPathElement, d);
+            });
           const matchingFlows = uniqueFlows.filter(match);
           nodeGroups.each(function (this: SVGGElement, nd: NodeData) {
             const nodeFlows = matchingFlows.filter(
@@ -238,10 +313,13 @@
           });
         })
         .on("mouseleave", () => {
+          flowPaths.interrupt();
           flowPaths
             .attr("stroke-opacity", 0)
             .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
-            .attr("stroke-width", 1);
+            .attr("stroke-width", 1)
+            .attr("stroke-dasharray", null)
+            .attr("stroke-dashoffset", null);
           nodeGroups.selectAll(".line-rect").attr("fill", "transparent");
         });
 
