@@ -24,6 +24,20 @@
 
   const FLOW_ANIMATION_MS = 900;
   const FLOW_INITIAL_VISIBLE_LENGTH = 18;
+  const ROW_GUIDE_LABELS: string[] = [
+    "what data",
+    "row label 2",
+    "row label 3",
+    "row label 4",
+    "row label 5",
+    "row label 6",
+    "row label 7",
+    "row label 8",
+    "row label 9",
+  ];
+  const ROW_GUIDE_LINE_OFFSET = 12;
+  const ROW_GUIDE_LABEL_GAP = 4;
+  const ROW_GUIDE_TOP_INSET = 26;
 
   let {
     allNodes,
@@ -92,7 +106,59 @@
 
       svgMeasureEl.remove();
 
-      computeLayout(allNodes, COLS.length, width, height, GAP);
+      const layoutHeight = Math.max(0, height - ROW_GUIDE_TOP_INSET);
+      computeLayout(allNodes, COLS.length, width, layoutHeight, GAP);
+
+      const applyRowGuideTopInset = () => {
+        allNodes.forEach((d) => {
+          d.y += ROW_GUIDE_TOP_INSET;
+        });
+      };
+
+      applyRowGuideTopInset();
+
+      type RowGuideDatum = { row: number; y: number; label: string };
+      const rowGuides = svg.append("g").attr("class", "row-guides");
+
+      const buildRowGuideData = (): RowGuideDatum[] =>
+        d3.range(COLS.length).map((row: number) => {
+          const rowNodes = allNodes.filter((d) => d.row === row);
+          const rowTopY =
+            d3.min(rowNodes, (d: NodeData) => d.y + d.rectY) ?? 0;
+
+          return {
+            row,
+            y: rowTopY - ROW_GUIDE_LINE_OFFSET,
+            label: ROW_GUIDE_LABELS[row] ?? "",
+          };
+        });
+
+      const updateRowGuides = () => {
+        const guideGroups = rowGuides
+          .selectAll<SVGGElement, RowGuideDatum>("g.row-guide")
+          .data(buildRowGuideData(), (d: RowGuideDatum) => String(d.row))
+          .join((enter: any) => {
+            const g = enter.append("g").attr("class", "row-guide");
+            g.append("line").attr("class", "row-guide-line");
+            g.append("text").attr("class", "row-guide-label");
+            return g;
+          });
+
+        guideGroups
+          .select<SVGLineElement>("line.row-guide-line")
+          .attr("x1", 0)
+          .attr("x2", width)
+          .attr("y1", (d: RowGuideDatum) => d.y)
+          .attr("y2", (d: RowGuideDatum) => d.y);
+
+        guideGroups
+          .select<SVGTextElement>("text.row-guide-label")
+          .attr("x", 0)
+          .attr("y", (d: RowGuideDatum) => d.y - ROW_GUIDE_LABEL_GAP)
+          .text((d: RowGuideDatum) => d.label);
+      };
+
+      updateRowGuides();
 
       const isClusterNodeFn = (colIdx: number, label: string) =>
         isClusterNode(colIdx, label, CLUSTER_COLS, realClusterLabelSet);
@@ -281,6 +347,7 @@
 
       nodeGroups
         .on("mouseenter", (_: MouseEvent, d: NodeData) => {
+          rowGuides.selectAll(".row-guide-line").style("stroke-opacity", 0);
           const match = (f: Flow) => f.path[d.row] === d.label;
           flowPaths.interrupt();
           flowPaths
@@ -313,6 +380,7 @@
           });
         })
         .on("mouseleave", () => {
+          rowGuides.selectAll(".row-guide-line").style("stroke-opacity", 1);
           flowPaths.interrupt();
           flowPaths
             .attr("stroke-opacity", 0)
@@ -331,7 +399,10 @@
           .attr("width", containerEl.clientWidth)
           .attr("height", containerEl.clientHeight);
 
-        computeLayout(allNodes, COLS.length, width, height, GAP);
+        const layoutHeight = Math.max(0, height - ROW_GUIDE_TOP_INSET);
+        computeLayout(allNodes, COLS.length, width, layoutHeight, GAP);
+        applyRowGuideTopInset();
+        updateRowGuides();
 
         nodeGroups.attr(
           "transform",
@@ -364,6 +435,19 @@
   :global(svg .badge-label) {
     font-size: 13.38px !important;
     letter-spacing: 0.1px !important;
+  }
+
+  :global(svg .row-guide-line) {
+    stroke: #ADADAD;
+    stroke-width: 0.2;
+    stroke-opacity: 1;
+  }
+
+  :global(svg .row-guide-label) {
+    fill: #ADADAD;
+    font-size: 11px;
+    letter-spacing: 0.1px;
+    text-transform: lowercase;
   }
 
   :global(circle) {

@@ -155,7 +155,7 @@
     }
 
     .nav-content-gap {
-        height: 55px;
+        height: 22px;
         width: 100%;
         pointer-events: none;
     }
