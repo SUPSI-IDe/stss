@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { base } from "$app/paths";
   import * as d3 from "d3";
   import {
     MARGIN,
@@ -25,19 +26,23 @@
   const FLOW_ANIMATION_MS = 900;
   const FLOW_INITIAL_VISIBLE_LENGTH = 18;
   const ROW_GUIDE_LABELS: string[] = [
-    "what data",
-    "row label 2",
-    "row label 3",
+    "object of study",
+    "purpose",
+    "modality",
     "row label 4",
-    "row label 5",
-    "row label 6",
-    "row label 7",
-    "row label 8",
-    "row label 9",
+    "method",
+    "type of data",
+    "data source",
+    "participatory practice",
+    "workshop",
   ];
-  const ROW_GUIDE_LINE_OFFSET = 12;
-  const ROW_GUIDE_LABEL_GAP = 4;
+  const ROW_GUIDE_LABEL_GAP = 12;
   const ROW_GUIDE_TOP_INSET = 26;
+  const HIDDEN_ROW_GUIDE_LABELS = new Set([3]);
+  const DIAGRAM_LEFT_OFFSET = 28;
+  const ROW_ARROW_HREF = `${base}/images/icona_freccia.svg`;
+  const ROW_ARROW_WIDTH = 9;
+  const ROW_ARROW_HEIGHT = 8;
 
   let {
     allNodes,
@@ -107,7 +112,13 @@
       svgMeasureEl.remove();
 
       const layoutHeight = Math.max(0, height - ROW_GUIDE_TOP_INSET);
-      computeLayout(allNodes, COLS.length, width, layoutHeight, GAP);
+      computeLayout(
+        allNodes,
+        COLS.length,
+        Math.max(0, width - DIAGRAM_LEFT_OFFSET),
+        layoutHeight,
+        GAP,
+      );
 
       const applyRowGuideTopInset = () => {
         allNodes.forEach((d) => {
@@ -115,50 +126,80 @@
         });
       };
 
+      const applyDiagramLeftOffset = () => {
+        allNodes.forEach((d) => {
+          d.x += DIAGRAM_LEFT_OFFSET;
+        });
+      };
+
       applyRowGuideTopInset();
+      applyDiagramLeftOffset();
 
-      type RowGuideDatum = { row: number; y: number; label: string };
-      const rowGuides = svg.append("g").attr("class", "row-guides");
+      type RowGuideLabelDatum = { row: number; y: number; label: string };
+      const rowGuideLabels = svg.append("g").attr("class", "row-guide-labels");
 
-      const buildRowGuideData = (): RowGuideDatum[] =>
+      const buildRowGuideLabelData = (): RowGuideLabelDatum[] =>
+        d3
+          .range(COLS.length)
+          .filter((row: number) => !HIDDEN_ROW_GUIDE_LABELS.has(row))
+          .map((row: number) => {
+            const rowNodes = allNodes.filter((d) => d.row === row);
+            const rowTopY =
+              d3.min(rowNodes, (d: NodeData) => d.y + d.rectY) ?? 0;
+
+            return {
+              row,
+              y: rowTopY - ROW_GUIDE_LABEL_GAP,
+              label: ROW_GUIDE_LABELS[row] ?? "",
+            };
+          });
+
+      const updateRowGuideLabels = () => {
+        rowGuideLabels
+          .selectAll<SVGTextElement, RowGuideLabelDatum>("text.row-guide-label")
+          .data(buildRowGuideLabelData(), (d: RowGuideLabelDatum) => String(d.row))
+          .join("text")
+          .attr("class", "row-guide-label")
+          .attr("x", 0)
+          .attr("y", (d: RowGuideLabelDatum) => d.y)
+          .text((d: RowGuideLabelDatum) => d.label);
+      };
+
+      updateRowGuideLabels();
+
+      type RowArrowDatum = { row: number; x: number; y: number };
+      const rowArrows = svg.append("g").attr("class", "row-arrows");
+
+      const buildRowArrowData = (): RowArrowDatum[] =>
         d3.range(COLS.length).map((row: number) => {
           const rowNodes = allNodes.filter((d) => d.row === row);
-          const rowTopY =
-            d3.min(rowNodes, (d: NodeData) => d.y + d.rectY) ?? 0;
+          const firstTextLineY =
+            d3.min(rowNodes, (d: NodeData) => {
+              const textBlockH = (d.lineData.length - 1) * LINE_H;
+              return d.y - textBlockH / 2;
+            }) ?? 0;
 
           return {
             row,
-            y: rowTopY - ROW_GUIDE_LINE_OFFSET,
-            label: ROW_GUIDE_LABELS[row] ?? "",
+            x: 0,
+            y: firstTextLineY - ROW_ARROW_HEIGHT / 2,
           };
         });
 
-      const updateRowGuides = () => {
-        const guideGroups = rowGuides
-          .selectAll<SVGGElement, RowGuideDatum>("g.row-guide")
-          .data(buildRowGuideData(), (d: RowGuideDatum) => String(d.row))
-          .join((enter: any) => {
-            const g = enter.append("g").attr("class", "row-guide");
-            g.append("line").attr("class", "row-guide-line");
-            g.append("text").attr("class", "row-guide-label");
-            return g;
-          });
-
-        guideGroups
-          .select<SVGLineElement>("line.row-guide-line")
-          .attr("x1", 0)
-          .attr("x2", width)
-          .attr("y1", (d: RowGuideDatum) => d.y)
-          .attr("y2", (d: RowGuideDatum) => d.y);
-
-        guideGroups
-          .select<SVGTextElement>("text.row-guide-label")
-          .attr("x", 0)
-          .attr("y", (d: RowGuideDatum) => d.y - ROW_GUIDE_LABEL_GAP)
-          .text((d: RowGuideDatum) => d.label);
+      const updateRowArrows = () => {
+        rowArrows
+          .selectAll<SVGImageElement, RowArrowDatum>("image.row-arrow")
+          .data(buildRowArrowData(), (d: RowArrowDatum) => String(d.row))
+          .join("image")
+          .attr("class", "row-arrow")
+          .attr("href", ROW_ARROW_HREF)
+          .attr("width", ROW_ARROW_WIDTH)
+          .attr("height", ROW_ARROW_HEIGHT)
+          .attr("x", (d: RowArrowDatum) => d.x)
+          .attr("y", (d: RowArrowDatum) => d.y);
       };
 
-      updateRowGuides();
+      updateRowArrows();
 
       const isClusterNodeFn = (colIdx: number, label: string) =>
         isClusterNode(colIdx, label, CLUSTER_COLS, realClusterLabelSet);
@@ -347,7 +388,6 @@
 
       nodeGroups
         .on("mouseenter", (_: MouseEvent, d: NodeData) => {
-          rowGuides.selectAll(".row-guide-line").style("stroke-opacity", 0);
           const match = (f: Flow) => f.path[d.row] === d.label;
           flowPaths.interrupt();
           flowPaths
@@ -380,7 +420,6 @@
           });
         })
         .on("mouseleave", () => {
-          rowGuides.selectAll(".row-guide-line").style("stroke-opacity", 1);
           flowPaths.interrupt();
           flowPaths
             .attr("stroke-opacity", 0)
@@ -400,9 +439,17 @@
           .attr("height", containerEl.clientHeight);
 
         const layoutHeight = Math.max(0, height - ROW_GUIDE_TOP_INSET);
-        computeLayout(allNodes, COLS.length, width, layoutHeight, GAP);
+        computeLayout(
+          allNodes,
+          COLS.length,
+          Math.max(0, width - DIAGRAM_LEFT_OFFSET),
+          layoutHeight,
+          GAP,
+        );
         applyRowGuideTopInset();
-        updateRowGuides();
+        applyDiagramLeftOffset();
+        updateRowGuideLabels();
+        updateRowArrows();
 
         nodeGroups.attr(
           "transform",
@@ -435,12 +482,6 @@
   :global(svg .badge-label) {
     font-size: 13.38px !important;
     letter-spacing: 0.1px !important;
-  }
-
-  :global(svg .row-guide-line) {
-    stroke: #ADADAD;
-    stroke-width: 0.2;
-    stroke-opacity: 1;
   }
 
   :global(svg .row-guide-label) {
