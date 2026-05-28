@@ -64,6 +64,8 @@
   let containerEl: HTMLDivElement;
 
   onMount(() => {
+    let destroyed = false;
+    let cleanupResize = () => {};
     let width = containerEl.clientWidth - MARGIN.left - MARGIN.right;
     let height = containerEl.clientHeight;
 
@@ -78,6 +80,8 @@
       .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
     document.fonts.ready.then(() => {
+      if (destroyed) return;
+
       // SVG-based text measurement — inherits all CSS (uppercase, letter-spacing, etc.)
       const svgMeasureEl = svg.append("text")
         .attr("font-size", 14)
@@ -412,7 +416,7 @@
           nodeGroups.selectAll(".line-rect").attr("fill", "transparent");
         });
 
-      window.addEventListener("resize", () => {
+      const handleResize = () => {
         width = containerEl.clientWidth - MARGIN.left - MARGIN.right;
         height = containerEl.clientHeight;
 
@@ -439,8 +443,19 @@
         );
         flowGen = buildFlowGen();
         flowPaths.attr("d", flowGen.pathD);
-      });
+      };
+
+      window.addEventListener("resize", handleResize);
+      cleanupResize = () => {
+        window.removeEventListener("resize", handleResize);
+      };
     });
+
+    return () => {
+      destroyed = true;
+      cleanupResize();
+      svgEl.remove();
+    };
   });
 </script>
 
