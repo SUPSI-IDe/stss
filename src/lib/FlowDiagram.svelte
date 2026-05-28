@@ -20,7 +20,7 @@
   import { isClusterNode } from "./clusterProcessing.js";
   import { measureNodes, adjustBadgeWidths } from "./nodeBuilder.js";
   import { computeLayout } from "./layoutEngine.js";
-  import { createFlowPathGenerator } from "./geometry.js";
+  import { createFlowPathGenerator, nearestLengthOnPolyline } from "./geometry.js";
   import type { NodeData, Flow, TooltipData, LineData } from "./types";
 
   const FLOW_ANIMATION_MS = 900;
@@ -203,55 +203,37 @@
 
       const isClusterNodeFn = (colIdx: number, label: string) =>
         isClusterNode(colIdx, label, CLUSTER_COLS, realClusterLabelSet);
-      const flowPathD = createFlowPathGenerator(allNodes, isClusterNodeFn, {
-        lineH: LINE_H,
-        clusterPadLeft: CLUSTER_PAD_LEFT,
-        cornerR: CORNER_R,
-        stubLen: STUB_LEN,
-      });
+      const buildFlowGen = () =>
+        createFlowPathGenerator(allNodes, uniqueFlows, isClusterNodeFn, {
+          lineH: LINE_H,
+          clusterPadLeft: CLUSTER_PAD_LEFT,
+          cornerR: CORNER_R,
+          stubLen: STUB_LEN,
+        });
+      let flowGen = buildFlowGen();
 
       const flowPaths = svg
         .append("g")
         .selectAll("path")
         .data<Flow>(uniqueFlows)
         .join("path")
-        .attr("d", flowPathD)
+        .attr("d", flowGen.pathD)
         .attr("fill", "none")
         .attr("stroke", (f: Flow) => GROUP_COLORS[f.group - 1])
         .attr("stroke-width", 1)
         .attr("stroke-opacity", 0);
 
-      const nearestLengthOnPath = (
-        path: SVGPathElement,
-        x: number,
-        y: number,
-      ) => {
-        const total = path.getTotalLength();
-        const steps = Math.max(24, Math.ceil(total / 10));
-        let bestLength = 0;
-        let bestDistance = Infinity;
-
-        for (let i = 0; i <= steps; i += 1) {
-          const length = (total * i) / steps;
-          const point = path.getPointAtLength(length);
-          const distance = (point.x - x) ** 2 + (point.y - y) ** 2;
-          if (distance < bestDistance) {
-            bestDistance = distance;
-            bestLength = length;
-          }
-        }
-
-        return bestLength;
-      };
-
       const animateFlowFromNode = (
         path: SVGPathElement,
+        flow: Flow,
         originNode: NodeData,
       ) => {
-        const total = path.getTotalLength();
+        const polyline = flowGen.polyline(flow);
+        if (!polyline) return;
+        const total = polyline.totalLength;
         if (!total) return;
 
-        const origin = nearestLengthOnPath(path, originNode.x, originNode.y);
+        const origin = nearestLengthOnPolyline(polyline, originNode.x, originNode.y);
         const initialStart = Math.max(0, origin - FLOW_INITIAL_VISIBLE_LENGTH / 2);
         const initialEnd = Math.min(total, origin + FLOW_INITIAL_VISIBLE_LENGTH / 2);
         const initialVisible = Math.max(0.1, initialEnd - initialStart);
@@ -397,8 +379,8 @@
             .attr("stroke-dasharray", null)
             .attr("stroke-dashoffset", null)
             .filter(match)
-            .each(function (this: SVGPathElement) {
-              animateFlowFromNode(this as SVGPathElement, d);
+            .each(function (this: SVGPathElement, f: Flow) {
+              animateFlowFromNode(this as SVGPathElement, f, d);
             });
           const matchingFlows = uniqueFlows.filter(match);
           nodeGroups.each(function (this: SVGGElement, nd: NodeData) {
@@ -455,7 +437,8 @@
           "transform",
           (d: NodeData) => `translate(${d.x},${d.y})`,
         );
-        flowPaths.attr("d", flowPathD);
+        flowGen = buildFlowGen();
+        flowPaths.attr("d", flowGen.pathD);
       });
     });
   });
