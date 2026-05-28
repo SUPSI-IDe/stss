@@ -39,16 +39,17 @@ export function createSegmenter(tooltipMap) {
 				const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				const regex = new RegExp('\\b' + escaped + '\\b', 'i');
 				const match = remaining.match(regex);
-				if (match && match.index != null && match.index < earliestIndex) {
+				const matchIndex = match?.index;
+				if (match && matchIndex != null && matchIndex < earliestIndex) {
 					// Skip if this match would split a compound phrase
 					const lower = remaining.toLowerCase();
 					const skip = COMPOUND_PHRASES.some((phrase) => {
 						const pi = lower.indexOf(phrase);
-						return pi !== -1 && match.index >= pi && match.index < pi + phrase.length;
+						return pi !== -1 && matchIndex >= pi && matchIndex < pi + phrase.length;
 					});
 					if (skip) continue;
-					earliestIndex = match.index;
-					earliestMatch = { data, index: match.index, matchText: match[0] };
+					earliestIndex = matchIndex;
+					earliestMatch = { data, index: matchIndex, matchText: match[0] };
 				}
 			}
 			if (earliestMatch) {
