@@ -1,14 +1,14 @@
 Flow id	A	B	C	SD	D	E	F	G	H	group flow	cluster
-1	waste phenomena	interpretation	collective	small data	thinking	cigarette butts	urban context	data plotting 	Pixel Urbani	1	1
-2	waste phenomena	interpretation	collective	small data	thinking	position of bins	urban context	data plotting 	Pixel Urbani	1	5
-3	waste phenomena	interpretation	collective	small data	thinking	ecopoint temperature	urban context	data plotting 	Pixel Urbani	1	1
-4	waste phenomena	interpretation	collective	small data	thinking	position of ecopoints	urban context	data plotting 	Pixel Urbani	1	5
-5	waste phenomena	interpretation	collective	small data	thinking	waste overflow	urban context	data plotting 	Pixel Urbani	1	1
-6	waste phenomena	interpretation	collective	small data	thinking	cigarette butts	urban context	data discussion	Pixel Urbani	1	1
-7	waste phenomena	interpretation	collective	small data	thinking	position of bins	urban context	data discussion	Pixel Urbani	1	5
-8	waste phenomena	interpretation	collective	small data	thinking	ecopoint temperature	urban context	data discussion	Pixel Urbani	1	1
-9	waste phenomena	interpretation	collective	small data	thinking	position of ecopoints	urban context	data discussion	Pixel Urbani	1	5
-10	waste phenomena	interpretation	collective	small data	thinking	waste overflow	urban context	data discussion	Pixel Urbani	1	1
+1	waste flow	interpretation	collective	small data	thinking	cigarette butts	urban context	data plotting 	Pixel Urbani	1	1
+2	waste flow	interpretation	collective	small data	thinking	position of bins	urban context	data plotting 	Pixel Urbani	1	5
+3	waste flow	interpretation	collective	small data	thinking	ecopoint temperature	urban context	data plotting 	Pixel Urbani	1	1
+4	waste flow	interpretation	collective	small data	thinking	position of ecopoints	urban context	data plotting 	Pixel Urbani	1	5
+5	waste flow	interpretation	collective	small data	thinking	waste overflow	urban context	data plotting 	Pixel Urbani	1	1
+6	waste flow	interpretation	collective	small data	thinking	cigarette butts	urban context	data discussion	Pixel Urbani	1	1
+7	waste flow	interpretation	collective	small data	thinking	position of bins	urban context	data discussion	Pixel Urbani	1	5
+8	waste flow	interpretation	collective	small data	thinking	ecopoint temperature	urban context	data discussion	Pixel Urbani	1	1
+9	waste flow	interpretation	collective	small data	thinking	position of ecopoints	urban context	data discussion	Pixel Urbani	1	5
+10	waste flow	interpretation	collective	small data	thinking	waste overflow	urban context	data discussion	Pixel Urbani	1	1
 11	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	cigarette butts	urban context	data walking	Pixel Urbani	2	1
 12	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	position of bins	urban context	data walking	Pixel Urbani	2	5
 13	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	ecopoint temperature	urban context	data walking	Pixel Urbani	2	1
@@ -19,18 +19,18 @@ Flow id	A	B	C	SD	D	E	F	G	H	group flow	cluster
 18	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	ecopoint temperature	urban context	data prototyping	Urban Scraping	2	1
 19	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	position of ecopoints	urban context	data prototyping	Urban Scraping	2	5
 20	interplay with urban infrastructure and citizen's behaviour	situated access	individual	small data	seeing	waste overflow	urban context	data prototyping	Urban Scraping	2	1
-21	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	comments	social media	data scraping	Interfaces for debate	3	2
-22	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	review	social media	data scraping	Interfaces for debate	3	2
-23	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	post	social media	data scraping	Interfaces for debate	3	2
-24	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	comments	online platform	data scraping	Interfaces for debate	3	2
-25	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	review	online platform	data scraping	Interfaces for debate	3	2
-26	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	post	online platform	data scraping	Interfaces for debate	3	2
-21	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	comments	social media	data scraping	Interfaces for debate	3	2
-22	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	review	social media	data scraping	Interfaces for debate	3	2
-23	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	post	social media	data scraping	Interfaces for debate	3	2
-24	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	comments	online platform	data scraping	Interfaces for debate	3	2
-25	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	review	online platform	data scraping	Interfaces for debate	3	2
-26	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	post	online platform	data scraping	Interfaces for debate	3	2
+21	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	comments	social media	data scraping	Interfaces for Public Debate	3	2
+22	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	review	social media	data scraping	Interfaces for Public Debate	3	2
+23	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	post	social media	data scraping	Interfaces for Public Debate	3	2
+24	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	comments	online platform	data scraping	Interfaces for Public Debate	3	2
+25	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	review	online platform	data scraping	Interfaces for Public Debate	3	2
+26	citizen opinion of the waste experience and citizens' behaviour	situated access	individual	small data	seeing	post	online platform	data scraping	Interfaces for Public Debate	3	2
+21	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	comments	social media	data scraping	Interfaces for Public Debate	3	2
+22	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	review	social media	data scraping	Interfaces for Public Debate	3	2
+23	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	post	social media	data scraping	Interfaces for Public Debate	3	2
+24	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	comments	online platform	data scraping	Interfaces for Public Debate	3	2
+25	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	review	online platform	data scraping	Interfaces for Public Debate	3	2
+26	citizen opinion of the waste experience and citizens' behaviour	situated access	collective	small data	seeing	post	online platform	data scraping	Interfaces for Public Debate	3	2
 27	waste disposal	dialogue co-creation	collective	small data	sharing	routes	Personal experience	data mapping	Pixel Urbani	4	4
 28	waste disposal	dialogue co-creation	collective	small data	sharing	time	Personal experience	data mapping	Pixel Urbani	4	4
 29	waste disposal	dialogue co-creation	collective	small data	sharing	recycling habits	Personal experience	data mapping	Pixel Urbani	4	3

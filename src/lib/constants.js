@@ -44,25 +44,22 @@ export const STUB_LEN = 14;
 export const PAD_Y = 1;
 
 export const PAGE_ROUTES = new Map([
-  ["waste phenomena", "/waste-flow"],
+  ["waste flow", "/waste-flow"],
   ["small data", "/urban-small-data"],
   ["seeing", "/urban-small-data#seeing"],
   ["sensing", "/urban-small-data#sensing"],
   ["thinking", "/urban-small-data#thinking"],
   ["sharing", "/urban-small-data#sharing"],
   ["data plotting", "/participatory-data-practices#data-plotting"],
-  ["data discussion", "/participatory-data-practices"],
   ["data walking", "/participatory-data-practices#data-walking"],
   ["data prototyping", "/participatory-data-practices#data-prototyping"],
   ["data scraping", "/participatory-data-practices#data-scraping"],
   ["data mapping", "/participatory-data-practices#data-mapping"],
   ["gesture tracking", "/participatory-data-practices#gesture-tracking"],
-  ["annotation", "/participatory-data-practices"],
   ["urban scraping", "/urban-scraping"],
   ["pixel urbani", "/pixel-urbani"],
   ["urban context", "/source-of-small-data"],
   ["personal experience", "/source-of-small-data"],
   ["online platform", "/source-of-small-data"],
-  ["social media", "/source-of-small-data"],
-  ["interfaces for debate", "/interfaces-for-public-debate"],
+  ["interfaces for public debate", "/interfaces-for-public-debate"],
 ]);
