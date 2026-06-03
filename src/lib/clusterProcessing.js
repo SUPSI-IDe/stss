@@ -4,7 +4,6 @@
  * @param {Map<number, string>} clusterColsMap
  */
 export function buildClusterData(raw, cols, clusterColsMap) {
-	const clusterMaps = new Map();
 	const clusterLabels = new Map();
 	const realClusters = new Map();
 	const realClusterLabelSet = new Map();
@@ -21,8 +20,6 @@ export function buildClusterData(raw, cols, clusterColsMap) {
 			const val = (r[colName] ?? '').trim();
 			cmap.get(cid)?.add(val);
 		});
-		clusterMaps.set(colIdx, cmap);
-
 		const labels = new Map();
 		const real = new Set();
 		cmap.forEach((members, cid) => {
@@ -50,7 +47,7 @@ export function buildClusterData(raw, cols, clusterColsMap) {
 		valToCluster.set(colIdx, vmap);
 	}
 
-	return { clusterMaps, clusterLabels, realClusters, realClusterLabelSet, valToCluster };
+	return { clusterLabels, realClusters, realClusterLabelSet, valToCluster };
 }
 
 /**

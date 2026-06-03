@@ -1,5 +1,6 @@
-import { select } from 'd3';
 import { wrapText } from './textUtils.js';
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /**
  * @param {string[][]} layers
@@ -43,66 +44,44 @@ export function buildAllNodes(layers, isClusterNodeFn, maxLine) {
 }
 
 /**
+ * Measures each node's wrapped text against the live DOM (so measurement
+ * inherits the real CSS) and records its bbox-derived rect metrics.
  * @param {import('./types').NodeData[]} allNodes
- * @param {any} svgGroup
+ * @param {SVGSVGElement} svgEl an attached, rendered SVG element to measure within
  * @param {number} lineH
  * @param {number} padY
  */
-export function measureNodes(allNodes, svgGroup, lineH, padY) {
-	const measure = svgGroup.append('g').attr('class', 'measure').attr('opacity', 0);
+export function measureNodes(allNodes, svgEl, lineH, padY) {
+	const measure = document.createElementNS(SVG_NS, 'g');
+	measure.setAttribute('opacity', '0');
+	svgEl.appendChild(measure);
 
-	measure
-		.selectAll('g')
-		.data(allNodes)
-		.join('g')
-		.each(function (
-			/** @type {import('./types').NodeData} */ d,
-			/** @type {number} */ i,
-			/** @type {SVGGElement[]} */ nodes
-		) {
-			const multiLine = d.lines.length > 1;
-			const el = select(nodes[i])
-				.append('text')
-				.attr('text-anchor', multiLine ? 'start' : 'middle')
-				.attr('font-size', 14);
+	for (const d of allNodes) {
+		const multiLine = d.lines.length > 1;
+		const text = document.createElementNS(SVG_NS, 'text');
+		text.setAttribute('text-anchor', multiLine ? 'start' : 'middle');
+		text.setAttribute('font-size', '14');
 
-			const textBlockH = (d.lines.length - 1) * lineH;
-			const startY = -textBlockH / 2;
+		const textBlockH = (d.lines.length - 1) * lineH;
+		const startY = -textBlockH / 2;
 
-			d.lines.forEach((line, i) => {
-				el.append('tspan')
-					.text(line)
-					.attr('x', 0)
-					.attr('y', startY + i * lineH)
-					.attr('dy', '0.35em');
-			});
-
-			const b = el.node().getBBox();
-			d.bbox = { x: b.x, y: b.y, width: b.width, height: b.height };
-			d.rectW = b.width;
-			d.rectH = b.height + padY * 2;
-			d.rectY = b.y - padY;
+		d.lines.forEach((line, i) => {
+			const tspan = document.createElementNS(SVG_NS, 'tspan');
+			tspan.textContent = line;
+			tspan.setAttribute('x', '0');
+			tspan.setAttribute('y', String(startY + i * lineH));
+			tspan.setAttribute('dy', '0.35em');
+			text.appendChild(tspan);
 		});
+
+		measure.appendChild(text);
+
+		const b = text.getBBox();
+		d.bbox = { x: b.x, y: b.y, width: b.width, height: b.height };
+		d.rectW = b.width;
+		d.rectH = b.height + padY * 2;
+		d.rectY = b.y - padY;
+	}
 
 	measure.remove();
-}
-
-/**
- * @param {import('./types').NodeData[]} allNodes
- * @param {number} badgePad
- * @param {number} badgeSize
- */
-export function adjustBadgeWidths(allNodes, badgePad, badgeSize) {
-	allNodes.forEach((d) => {
-		let maxBadgeExtra = 0;
-		d.lineData.forEach((line) => {
-			let extra = 0;
-			line.segments.forEach((seg) => {
-				if (seg.tooltip) extra += badgePad * 2 + badgeSize;
-			});
-			maxBadgeExtra = Math.max(maxBadgeExtra, extra);
-		});
-		d.bbox.width += maxBadgeExtra;
-		d.rectW += maxBadgeExtra;
-	});
 }

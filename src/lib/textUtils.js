@@ -25,7 +25,14 @@ const COMPOUND_PHRASES = ['personal experience'];
  * @param {Map<string, import('./types').TooltipData>} tooltipMap
  */
 export function createSegmenter(tooltipMap) {
-	const entries = [...tooltipMap.entries()].sort((a, b) => b[0].length - a[0].length);
+	// Compile each term's word-boundary regex once; longest terms first so a
+	// longer phrase wins over a substring at the same position.
+	const entries = [...tooltipMap.entries()]
+		.sort((a, b) => b[0].length - a[0].length)
+		.map(([term, data]) => ({
+			data,
+			regex: new RegExp('\\b' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i')
+		}));
 
 	/** @param {string} line */
 	return function segmentLine(line) {
@@ -35,9 +42,7 @@ export function createSegmenter(tooltipMap) {
 		while (remaining.length > 0) {
 			let earliestMatch = null;
 			let earliestIndex = remaining.length;
-			for (const [term, data] of entries) {
-				const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-				const regex = new RegExp('\\b' + escaped + '\\b', 'i');
+			for (const { data, regex } of entries) {
 				const match = remaining.match(regex);
 				const matchIndex = match?.index;
 				if (match && matchIndex != null && matchIndex < earliestIndex) {

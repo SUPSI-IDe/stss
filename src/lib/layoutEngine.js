@@ -1,5 +1,3 @@
-import { scalePoint, range } from 'd3';
-
 /**
  * @param {import('./types').NodeData[]} allNodes
  * @param {number} row
@@ -9,17 +7,21 @@ export function maxRowHeight(allNodes, row) {
 }
 
 /**
+ * Evenly spaces `numCols` rows between the first/last row centers — the
+ * d3 `scalePoint(...).padding(0)` this replaces is just linear spacing.
  * @param {import('./types').NodeData[]} allNodes
  * @param {number} numCols
  * @param {number} height
+ * @returns {(row: number) => number}
  */
 export function buildYScale(allNodes, numCols, height) {
 	const lastRowH = maxRowHeight(allNodes, numCols - 1);
 	const firstRowH = maxRowHeight(allNodes, 0);
-	return scalePoint()
-		.domain(range(numCols))
-		.range([firstRowH / 2, height - lastRowH / 2])
-		.padding(0);
+	const start = firstRowH / 2;
+	const stop = height - lastRowH / 2;
+	if (numCols <= 1) return () => (start + stop) / 2;
+	const step = (stop - start) / (numCols - 1);
+	return (row) => start + step * row;
 }
 
 /**
@@ -27,11 +29,10 @@ export function buildYScale(allNodes, numCols, height) {
  * @param {number} numCols
  * @param {number} width
  * @param {number} height
- * @param {number} gap
  */
-export function computeLayout(allNodes, numCols, width, height, gap) {
+export function computeLayout(allNodes, numCols, width, height) {
 	const yScale = buildYScale(allNodes, numCols, height);
-	for (const row of range(numCols)) {
+	for (let row = 0; row < numCols; row++) {
 		const rowNodes = allNodes.filter((d) => d.row === row);
 		const totalNodeW = rowNodes.reduce((s, d) => s + d.bbox.width, 0);
 		const PAD = 8;

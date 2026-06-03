@@ -1,6 +1,5 @@
 <script lang="ts">
-    import NavBar from '$lib/NavBar.svelte';
-    import Overlay from '$lib/Overlay.svelte';
+    import { ExternalLink, IntroOverlay, NavBar } from '$lib/components';
 </script>
 
 <svelte:head>
@@ -8,7 +7,7 @@
 </svelte:head>
 
 <div class="page">
-    <Overlay lines={['ABOUT', 'STSS SMALL DATA']} />
+    <IntroOverlay lines={['ABOUT', 'STSS SMALL DATA']} />
     <NavBar
         variant="license"
         sections={[
@@ -39,7 +38,7 @@ nine implementation partners from industry.`
                 <p>BLUECITY</p>
                 <p>
                     Our investigation of this topic happens within the Bluecity project
-                    (<a href="https://www.bluecity.store/" target="_blank" rel="noreferrer">https://www.bluecity.store/</a>) which is an
+                    (<ExternalLink href="https://www.bluecity.store/">https://www.bluecity.store/</ExternalLink>) which is an
                     Innosuisse-funded research initiative exploring the role of digital twins in the urban context. The project is led by EPFL,
                     who developed a series of flows of data to better understand and frame the city of Lausanne, Switzerland.
                 </p>
@@ -66,7 +65,7 @@ nine implementation partners from industry.`
                 raise awareness on antibiotic consumption and antimicrobial resistance
             </span>
             <span class="license-text">
-                <a href="https://spearhead-amr.github.io/makeaware/" target="_blank" rel="noreferrer">https://spearhead-amr.github.io/makeaware/</a>
+                <ExternalLink href="https://spearhead-amr.github.io/makeaware/">https://spearhead-amr.github.io/makeaware/</ExternalLink>
             </span>
         </div>
 
@@ -81,8 +80,8 @@ nine implementation partners from industry.`
         <div class="license-block contacts">
             <span class="license-label">Contacts</span>
             <span class="license-text">
-                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a> -
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">Linkedin</a> -
+                <ExternalLink href="https://www.instagram.com/">Instagram</ExternalLink> -
+                <ExternalLink href="https://www.linkedin.com/">Linkedin</ExternalLink> -
                 <a href="mailto:info@bluecity.store">Mail</a>
             </span>
         </div>
@@ -91,13 +90,11 @@ nine implementation partners from industry.`
 
 <style>
     .page {
-        --text-gray: #7d7d7d;
         width: 100%;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         gap: 28px;
-        line-height: 1.11;
     }
 
     .bluecity {
@@ -106,45 +103,37 @@ nine implementation partners from industry.`
 
     .bluecity-grid {
         display: grid;
-        grid-template-columns: repeat(18, 1fr);
-        gap: 12px;
+        grid-template-columns: var(--grid-template);
+        gap: var(--grid-gap);
     }
 
     .bluecity-text {
         grid-column: 1 / span 9;
         display: grid;
         gap: 8px;
-        line-height: 1.15;
     }
 
-    .bluecity a {
+    .bluecity :global(a) {
         color: var(--text-black);
     }
 
     .bottom-grid {
         display: grid;
-        grid-template-columns: repeat(18, 1fr);
-        gap: 12px;
+        grid-template-columns: var(--grid-template);
+        gap: var(--grid-gap);
         margin: auto 8px 8px 8px;
         color: var(--text-gray);
-        font-size: 12px;
-        line-height: 1.11;
+        font-size: var(--text-small);
         align-items: end;
     }
 
-    .bottom-grid a {
+    .bottom-grid :global(a) {
         color: inherit;
         text-decoration: underline;
     }
 
     .license-block {
-        display: grid;
-        gap: 2px;
         align-self: start;
-    }
-
-    .license-text {
-        white-space: pre-line;
     }
 
     .cite-block {
@@ -157,5 +146,14 @@ nine implementation partners from industry.`
 
     .contacts {
         grid-column: 13 / span 4;
+    }
+
+    @media (max-width: 800px) {
+        .bluecity-text,
+        .cite-block,
+        .data-policy,
+        .contacts {
+            grid-column: 1 / -1;
+        }
     }
 </style>

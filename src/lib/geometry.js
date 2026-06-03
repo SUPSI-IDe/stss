@@ -8,26 +8,15 @@ export function findNode(allNodes, row, label) {
 }
 
 /**
+ * Anchor point a flow attaches to on a node — its center.
  * @param {import('./types').NodeData[]} allNodes
  * @param {number} row
  * @param {string} label
  * @returns {[number, number]}
  */
-export function nodeTop(allNodes, row, label) {
+export function nodeOrigin(allNodes, row, label) {
 	const d = findNode(allNodes, row, label);
-	if (!d) throw new Error('Node not found for nodeTop');
-	return [d.x, d.y];
-}
-
-/**
- * @param {import('./types').NodeData[]} allNodes
- * @param {number} row
- * @param {string} label
- * @returns {[number, number]}
- */
-export function nodeBottom(allNodes, row, label) {
-	const d = findNode(allNodes, row, label);
-	if (!d) throw new Error('Node not found for nodeBottom');
+	if (!d) throw new Error('Node not found for nodeOrigin');
 	return [d.x, d.y];
 }
 
@@ -222,11 +211,11 @@ export function createFlowPathGenerator(allNodes, uniqueFlows, isClusterNodeFn, 
 					stubSegments.add(pts.length - 1); // segment lp to lp+stub
 				} else {
 					if (pendingClusterExit && lastClusterBottomY !== null) {
-						const targetTopY = nodeTop(allNodes, i, label)[1];
+						const targetTopY = nodeOrigin(allNodes, i, label)[1];
 						midYOverrides[pts.length - 1] = (lastClusterBottomY + targetTopY) / 2;
 						pendingClusterExit = false;
 					}
-					pts.push(nodeTop(allNodes, i, label));
+					pts.push(nodeOrigin(allNodes, i, label));
 				}
 			}
 			if (i < f.path.length - 1) {
@@ -240,7 +229,7 @@ export function createFlowPathGenerator(allNodes, uniqueFlows, isClusterNodeFn, 
 					lastClusterBottomY = clusterNode.y + clusterNode.rectY + clusterNode.rectH;
 					pendingClusterExit = true;
 				} else {
-					pts.push(nodeBottom(allNodes, i, label));
+					pts.push(nodeOrigin(allNodes, i, label));
 				}
 			}
 		});
@@ -284,9 +273,11 @@ export function createFlowPathGenerator(allNodes, uniqueFlows, isClusterNodeFn, 
 	const allSegs = [];
 	flowExpanded.forEach(({ flow, flowIdx, corners, segments }) => {
 		segments.forEach((seg, segIdx) => {
-			// Keep cluster attachment endpoints fixed; offsetting either side pulls stubs off target.
-			const touchesStub = seg.stub || segments[segIdx - 1]?.stub || segments[segIdx + 1]?.stub;
-			if (touchesStub) return;
+			// The stub itself stays put (its tip is pinned to the cluster member),
+			// but the verticals feeding into it may lane-offset so flows sharing a
+			// cluster's attachment corridor stay visually separated. The offset only
+			// shifts the outer turn, so the stub still lands on the member.
+			if (seg.stub) return;
 			const [x1, y1] = corners[segIdx];
 			const [x2, y2] = corners[segIdx + 1];
 			if (seg.type === 'v') {
@@ -444,6 +435,7 @@ export function createFlowPathGenerator(allNodes, uniqueFlows, isClusterNodeFn, 
 		});
 
 		// Any corner adjacent to a stub segment must stay sharp.
+		/** @type {Set<number>} */
 		const sharpCorners = new Set();
 		segments.forEach((seg, segIdx) => {
 			if (seg.stub) {

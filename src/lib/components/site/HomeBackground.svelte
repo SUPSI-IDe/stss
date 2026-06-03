@@ -1,25 +1,33 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    import NavBar from '$lib/NavBar.svelte';
-    import Overlay from '$lib/Overlay.svelte';
-    import FlowDiagram from '$lib/FlowDiagram.svelte';
-    import TooltipCard from '$lib/TooltipCard.svelte';
-    import type { TooltipData } from '$lib/types';
+    import NavBar from './NavBar.svelte';
+    import FlowDiagram from '$lib/components/diagram/FlowDiagram.svelte';
+    import TooltipCard from '$lib/components/diagram/TooltipCard.svelte';
+    import IntroOverlay from '$lib/components/overlays/IntroOverlay.svelte';
+    import type { Flow, NodeData, TooltipData } from '$lib/types';
 
-    type TooltipState = TooltipData & { x: number; y: number };
+    type TooltipState = Omit<TooltipData, 'label'> & { x: number; y: number };
+    type HomeBackgroundData = {
+        allNodes: NodeData[];
+        uniqueFlows: Flow[];
+        realClusterLabelSet: Map<number, Set<string>>;
+    };
 
-    let { data }: { data: PageData } = $props();
+    let {
+        data,
+        showIntro = true
+    }: {
+        data: HomeBackgroundData;
+        showIntro?: boolean;
+    } = $props();
     let tooltip = $state<TooltipState | null>(null);
 
     function openTooltip(
-        _event: MouseEvent,
         tipData: TooltipData,
         anchorX: number,
         anchorY: number
     ) {
         tooltip = {
             id: tipData.id,
-            label: tipData.label,
             definition: tipData.definition,
             x: anchorX,
             y: anchorY
@@ -27,8 +35,10 @@
     }
 </script>
 
-<div class="page">
-    <Overlay lines={['EXPLORE', 'STSS SMALL DATA']} />
+<div class="home-background">
+    {#if showIntro}
+        <IntroOverlay lines={['EXPLORE', 'STSS SMALL DATA']} />
+    {/if}
     <NavBar />
 
     <main class="content">
@@ -44,7 +54,6 @@
         {#key tooltip.id}
             <TooltipCard
                 id={tooltip.id}
-                label={tooltip.label}
                 definition={tooltip.definition}
                 x={tooltip.x}
                 y={tooltip.y}
@@ -55,12 +64,11 @@
 </div>
 
 <style>
-    .page {
+    .home-background {
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100vh;
-        line-height: 1.11;
     }
 
     .content {

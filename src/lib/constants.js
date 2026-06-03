@@ -1,12 +1,39 @@
-export const COLS = ['A', 'B', 'C', 'SD', 'D', 'E', 'F', 'G', 'H'];
-export const GROUP_COLORS = ['#26FF00', '#B7FF00', '#FF4400', '#00FFE5', '#FF0090'];
+/**
+ * Single source of truth for diagram columns, in display order (top row first).
+ * Everything keyed by column index is derived from this — no magic offsets.
+ * - `key`: TSV column holding this row's value.
+ * - `guide`: row-guide label; omit to render no guide for that row.
+ * - `clusterCol`: TSV column holding the cluster id; present only on clustered rows.
+ * @type {{ key: string, guide?: string, clusterCol?: string }[]}
+ */
+export const COLUMNS = [
+  { key: "A", guide: "object of study" },
+  { key: "B", guide: "purpose" },
+  { key: "C", guide: "modality" },
+  { key: "D", guide: "method" },
+  { key: "E", guide: "type of data", clusterCol: "cluster" },
+  { key: "F", guide: "data source" },
+  { key: "G", guide: "participatory practice", clusterCol: "cluster_g" },
+  { key: "H", guide: "workshop" },
+];
+
+export const COLS = COLUMNS.map((c) => c.key);
+/** @type {Map<number, string>} */
+export const CLUSTER_COLS = new Map(
+  COLUMNS.flatMap((c, i) => (c.clusterCol ? [[i, c.clusterCol]] : [])),
+);
+/** Row-guide label per column index, or null where no guide should render. */
+export const ROW_GUIDE_LABELS = COLUMNS.map((c) => c.guide ?? null);
+
+export const GROUP_COLORS = [
+  "#26FF00",
+  "#B7FF00",
+  "#FF4400",
+  "#00FFE5",
+  "#FF0090",
+];
 export const MAX_LINE = 30;
-export const GAP = 52;
 export const MARGIN = { top: 0, right: 8, bottom: 0, left: 8 };
-export const CLUSTER_COLS = new Map([
-	[5, 'cluster'],
-	[7, 'cluster_g']
-]);
 export const BADGE_SIZE = 14;
 export const BADGE_PAD = 4;
 export const LINE_H = 13.5;
@@ -15,23 +42,25 @@ export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
 
-export const PAGE_NODES = new Set([
-	'waste phenomena',
-	'seeing',
-	'thinking',
-	'sharing',
-	'sensing',
-	'urban context',
-	'personal experience',
-	'online platform',
-	'data plotting',
-	'data discussion',
-	'data walking',
-	'data prototyping',
-	'data scraping',
-	'data mapping',
-	'gesture tracking',
-	'urban scraping',
-	'pixel urbani',
-	'interfaces for debate'
+export const PAGE_ROUTES = new Map([
+  ["waste phenomena", "/waste-flow"],
+  ["seeing", "/urban-small-data#seeing"],
+  ["sensing", "/urban-small-data#sensing"],
+  ["thinking", "/urban-small-data#thinking"],
+  ["sharing", "/urban-small-data#sharing"],
+  ["data plotting", "/participatory-data-practices#data-plotting"],
+  ["data discussion", "/participatory-data-practices"],
+  ["data walking", "/participatory-data-practices#data-walking"],
+  ["data prototyping", "/participatory-data-practices#data-prototyping"],
+  ["data scraping", "/participatory-data-practices#data-scraping"],
+  ["data mapping", "/participatory-data-practices#data-mapping"],
+  ["gesture tracking", "/participatory-data-practices#gesture-tracking"],
+  ["annotation", "/participatory-data-practices"],
+  ["urban scraping", "/urban-scraping"],
+  ["pixel urbani", "/pixel-urbani"],
+  ["urban context", "/source-of-small-data"],
+  ["personal experience", "/source-of-small-data"],
+  ["online platform", "/source-of-small-data"],
+  ["social media", "/source-of-small-data"],
+  ["interfaces for debate", "/interfaces-for-public-debate"],
 ]);

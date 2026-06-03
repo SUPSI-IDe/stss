@@ -1,20 +1,18 @@
 import { tsvParse, csvParse } from 'd3-dsv';
-import { COLS, CLUSTER_COLS, MAX_LINE, PAGE_NODES } from '$lib/constants.js';
+import { COLS, CLUSTER_COLS, MAX_LINE, PAGE_ROUTES, GROUP_COLORS } from '$lib/constants.js';
 import { buildClusterData, isClusterNode } from '$lib/clusterProcessing.js';
 import { buildLayers, buildFlows, deduplicateFlows } from '$lib/flowProcessing.js';
 import { buildAllNodes } from '$lib/nodeBuilder.js';
 import { createSegmenter } from '$lib/textUtils.js';
-import { base } from '$app/paths';
+import { asset } from '$app/paths';
 
 /** @typedef {import('$lib/types').RawRow} RawRow */
-/** @typedef {import('$lib/types').Flow} Flow */
-/** @typedef {import('$lib/types').NodeData} NodeData */
 /** @typedef {import('$lib/types').TooltipData} TooltipData */
 
 export async function load({ fetch }) {
 	const [tsvText, csvText] = await Promise.all([
-		fetch(`${base}/sourcedata.tsv`).then((r) => r.text()),
-		fetch(`${base}/TooltipTable.csv`).then((r) => r.text())
+		fetch(asset('/sourcedata.tsv')).then((r) => r.text()),
+		fetch(asset('/TooltipTable.csv')).then((r) => r.text())
 	]);
 
 	const raw = /** @type {RawRow[]} */ (tsvParse(tsvText));
@@ -44,15 +42,28 @@ export async function load({ fetch }) {
 	const flows = buildFlows(raw, COLS, CLUSTER_COLS, valToCluster);
 	const uniqueFlows = deduplicateFlows(flows);
 
+	// Surface bad `group flow` cells at build time — an out-of-range or
+	// non-numeric group otherwise renders an invisible flow (GROUP_COLORS[NaN]).
+	uniqueFlows.forEach((f) => {
+		if (!Number.isInteger(f.group) || f.group < 1 || f.group > GROUP_COLORS.length) {
+			console.warn(
+				`Flow has invalid group ${f.group} (expected 1–${GROUP_COLORS.length}): ${f.path.join(' → ')}`
+			);
+		}
+	});
+
 	const allNodes = buildAllNodes(layers, isClusterNodeFn, MAX_LINE);
 	const segmentLine = createSegmenter(tooltipMap);
 	allNodes.forEach((d) => {
+		const pageRoute = PAGE_ROUTES.get(d.label.toLowerCase().trim());
+
 		d.lineData = d.lines.map((line) => ({
 			segments: segmentLine(line),
 			width: 0
 		}));
-		d.hasPage = PAGE_NODES.has(d.label.toLowerCase().trim());
+		d.hasPage = Boolean(pageRoute);
+		d.pageRoute = pageRoute;
 	});
 
-	return { allNodes, uniqueFlows, tooltipMap, realClusterLabelSet };
+	return { allNodes, uniqueFlows, realClusterLabelSet };
 }

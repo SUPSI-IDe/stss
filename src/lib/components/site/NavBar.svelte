@@ -1,8 +1,7 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { browser } from '$app/environment';
-    import { base } from '$app/paths';
-    import { page } from '$app/stores';
+    import { base, resolve } from '$app/paths';
+    import { page } from '$app/state';
 
     let {
         variant = 'explore',
@@ -33,30 +32,28 @@
         }).format(new Date());
     }
 
-    if (browser) {
-        onMount(() => {
-            updateTimestamp();
-            timer = setInterval(updateTimestamp, 1_000);
-        });
-        onDestroy(() => {
-            if (timer !== null) clearInterval(timer);
-        });
-    }
+    onMount(() => {
+        updateTimestamp();
+        timer = setInterval(updateTimestamp, 1_000);
+    });
+    onDestroy(() => {
+        if (timer !== null) clearInterval(timer);
+    });
 </script>
 
 <nav class="nav-grid" aria-label="Primary">
-    <a class="brand" href={`${base}/`} class:active-link={$page.url.pathname === `${base}/` || $page.url.pathname === base}>STSS SMALL DATA</a>
-    <a class="about" href={`${base}/about`} class:active-link={$page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
+    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>STSS SMALL DATA</a>
+    <a class="about" href={resolve('/about')} class:active-link={page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
     <div class="powered-title">POWERED BY BLUECITY</div>
-    <div class="timestamp" aria-live="polite">{timestamp}</div>
+    <div class="timestamp">{timestamp}</div>
     {#if variant === 'explore'}
         <div class="explore-info">
             <div>{sections[0]?.title}</div>
             <div>{sections[0]?.body}</div>
         </div>
     {:else}
-        {#each sections as section, i}
-            <div class="license-block secondary">
+        {#each sections as section (section.title)}
+            <div class="license-block credit-block">
                 <span class="license-label">{section.title}</span>
                 <span class="license-text">{section.body}</span>
             </div>
@@ -77,9 +74,9 @@
 <style>
     .nav-grid {
         display: grid;
-        grid-template-columns: repeat(18, 1fr);
+        grid-template-columns: var(--grid-template);
         grid-template-rows: auto auto;
-        gap: 12px;
+        gap: var(--grid-gap);
         margin: 8px 8px 0 8px;
         width: calc(100vw - 16px);
         align-items: start;
@@ -130,27 +127,21 @@
         flex-direction: column;
         gap: 2px;
         color: var(--text-gray);
-        font-size: 12px;
+        font-size: var(--text-small);
     }
 
     .license-block {
         grid-column: 13 / span 4;
         grid-row: 2;
         color: var(--text-gray);
-        font-size: 12px;
-        display: grid;
-        gap: 2px;
+        font-size: var(--text-small);
     }
 
-    .license-text {
-        white-space: pre-line;
-    }
-
-    .secondary {
+    .credit-block {
         grid-column: 1 / span 4;
     }
 
-    .secondary + .secondary {
+    .credit-block + .credit-block {
         grid-column: 5 / span 4;
     }
 
@@ -161,10 +152,6 @@
     }
 
     @media (max-width: 800px) {
-        .nav-grid {
-            grid-template-columns: repeat(6, 1fr);
-        }
-
         .brand {
             grid-column: 1 / span 3;
         }
@@ -186,7 +173,7 @@
             grid-column: 1 / span 6;
         }
 
-        .secondary + .secondary {
+        .credit-block + .credit-block {
             grid-column: 1 / span 6;
         }
     }

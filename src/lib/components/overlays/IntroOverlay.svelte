@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { browser } from '$app/environment';
 
     let { lines }: { lines: string[] } = $props();
 
@@ -40,24 +39,22 @@
         resetIdle();
     }
 
-    if (browser) {
-        onMount(() => {
-            animate();
-            resetIdle();
-            window.addEventListener('mousemove', onMove, { passive: true });
-        });
-        onDestroy(() => {
-            if (animTimer) clearInterval(animTimer);
-            if (idleTimer) clearTimeout(idleTimer);
-            window.removeEventListener('mousemove', onMove);
-        });
-    }
+    onMount(() => {
+        animate();
+        resetIdle();
+    });
+    onDestroy(() => {
+        if (animTimer) clearInterval(animTimer);
+        if (idleTimer) clearTimeout(idleTimer);
+    });
 </script>
 
+<svelte:window onmousemove={onMove} />
+
 {#if visible}
-    <div class="overlay" aria-live="polite">
+    <div class="overlay">
         <div class="overlay-text">
-            {#each displayed as line, i}
+            {#each displayed as line, i (lines[i])}
                 <div class="line" aria-label={lines[i]}>{line}</div>
             {/each}
         </div>

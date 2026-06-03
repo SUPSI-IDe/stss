@@ -1,10 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import type { TooltipData } from './types';
-    import { BADGE_SIZE } from './constants.js';
+    import type { TooltipData } from '$lib/types';
+    import { BADGE_SIZE } from '$lib/constants.js';
 
     let { id, definition, x = 0, y = 0, onclose }: Omit<TooltipData, 'label'> & {
-        label?: string;
         x?: number;
         y?: number;
         onclose: () => void;
@@ -47,6 +46,7 @@
     class:open
     class:flip-x={flipX}
     style="left:{posX}px;top:{posY}px"
+    style:--tooltip-w="{TOOLTIP_W}px"
     ontransitionend={handleTransitionEnd}
 >
     <div class="badge-number">{id}</div>
@@ -60,7 +60,7 @@
         z-index: 100;
         background:var(--text-black);
         color: var(--bg);
-        width: 400px;
+        width: var(--tooltip-w);
         padding: 20px 12px;
         user-select: none;
         clip-path: inset(0 calc(100% - 14px) calc(100% - 14px) 0);
@@ -86,11 +86,8 @@
         align-items: center;
         justify-content: center;
         color: var(--bg);
-        font-family: 'Helvetica Neue', sans-serif;
-        font-size: 13.38px;
-        letter-spacing: 0.1px;
+        font-size: var(--text-base);
         text-transform: uppercase;
-        line-height: 1;
         pointer-events: none;
     }
 
@@ -106,9 +103,8 @@
         background: none;
         border: none;
         color: var(--bg);
-        font-size: 13.38px;
+        font-size: var(--text-base);
         cursor: pointer;
-        line-height: 1;
     }
 
     .tooltip-card.flip-x .tooltip-close {
@@ -117,9 +113,7 @@
     }
 
     .tooltip-body {
-        font-family: 'Helvetica Neue', sans-serif;
-        font-size: 12px;
-        line-height: 1.11;
+        font-size: var(--text-small);
         margin-top: 10px;
     }
 </style>
