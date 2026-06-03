@@ -158,7 +158,7 @@
         grid-column: 1 / 9;
         grid-row: 1;
         align-self: start;
-        padding: 0 8px;
+        padding: 24px 8px 0;
         display: grid;
         gap: 18px;
     }
