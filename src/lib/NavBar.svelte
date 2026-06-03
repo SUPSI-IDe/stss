@@ -96,7 +96,7 @@
     }
 
     .about {
-        grid-column: 5 / span 6;
+        grid-column: 6 / span 6;
         text-decoration: none;
         color: var(--text-black);
     }
@@ -151,7 +151,7 @@
     }
 
     .secondary + .secondary {
-        grid-column: 5 / span 4;
+        grid-column: 6 / span 4;
     }
 
     .nav-content-gap {
