@@ -27,11 +27,11 @@ export const CLUSTER_COLS = new Map(
 export const ROW_GUIDE_LABELS = COLUMNS.map((c) => c.guide ?? null);
 
 export const GROUP_COLORS = [
-  "#26FF00",
-  "#B7FF00",
-  "#FF4400",
-  "#00FFE5",
-  "#FF0090",
+  "#FF6027", // thinking
+  "#26FF00", // seeing
+  "#B7FF00", // second seeing flow
+  "#00FFE5", // governance/sharing
+  "#FF39A9", // sensing
 ];
 export const MAX_LINE = 30;
 export const MARGIN = { top: 0, right: 8, bottom: 0, left: 8 };
