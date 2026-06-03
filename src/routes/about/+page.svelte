@@ -35,20 +35,20 @@ nine implementation partners from industry.`
     <section class="bluecity">
         <div class="bluecity-grid">
             <div class="bluecity-text">
-                <p>BLUECITY</p>
-                <p>
+                <p class="bluecity-title">BLUECITY</p>
+                <p class="bluecity-copy">
                     Our investigation of this topic happens within the Bluecity project
                     (<ExternalLink href="https://www.bluecity.store/">https://www.bluecity.store/</ExternalLink>) which is an
                     Innosuisse-funded research initiative exploring the role of digital twins in the urban context. The project is led by EPFL,
                     who developed a series of flows of data to better understand and frame the city of Lausanne, Switzerland.
                 </p>
-                <p>
+                <p class="bluecity-copy">
                     Our contribution is localised within the city of Lugano and aims to understand how citizen participation and local
                     data practices can foster new forms of communication and collaboration between residents and governance actors.
                     This setting offers the opportunity to investigate small data through situated encounters with waste in everyday life
                     and its routines, positioning participation as a mode of inquiry grounded in local experience.
                 </p>
-                <p>
+                <p class="bluecity-copy">
                     Urban waste management was identified as a particularly generative field for exploring small data, as waste
                     simultaneously operates as infrastructure, routine, and cultural artefact revealing the entanglement of material flows,
                     social values, and behaviours in urban life.
@@ -109,8 +109,16 @@ nine implementation partners from industry.`
 
     .bluecity-text {
         grid-column: 1 / span 9;
-        display: grid;
-        gap: 8px;
+    }
+
+    .bluecity-title {
+        margin-bottom: 8px;
+    }
+
+    .bluecity-copy {
+        margin: 0;
+        padding: 0;
+        text-indent: 1.5em;
     }
 
     .bluecity :global(a) {
