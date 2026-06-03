@@ -54,6 +54,7 @@
         realClusterLabelSet,
         activeTooltipId = null,
         onOpenTooltip,
+        onPageHoverChange = () => {},
     }: {
         allNodes: NodeData[];
         uniqueFlows: Flow[];
@@ -64,6 +65,7 @@
             anchorX: number,
             anchorY: number,
         ) => void;
+        onPageHoverChange?: (pageRoute: string | null) => void;
     } = $props();
 
     const nodeKey = (row: number, label: string) => `${row} ${label}`;
@@ -406,8 +408,14 @@
 
     function enterNode(node: NodeData) {
         hoveredNode = node;
+        onPageHoverChange(node.pageRoute ?? null);
         progress.set(0, { duration: 0 });
         progress.set(1);
+    }
+
+    function leaveNode() {
+        hoveredNode = null;
+        onPageHoverChange(null);
     }
 
     function clickNode(event: MouseEvent, node: NodeData) {
@@ -422,7 +430,7 @@
         const path = (
             hashAt === -1 ? node.pageRoute : node.pageRoute.slice(0, hashAt)
         ) as Pathname;
-        goto(resolve(path));
+        void goto(resolve(path)).finally(() => onPageHoverChange(null));
     }
 
     function clickBadge(event: MouseEvent, tooltip: TooltipData) {
@@ -486,7 +494,7 @@
                             transform="translate({node.x},{node.y})"
                             role="presentation"
                             onmouseenter={() => enterNode(node)}
-                            onmouseleave={() => (hoveredNode = null)}
+                            onmouseleave={leaveNode}
                             onclick={(e) => clickNode(e, node)}
                         >
                             {#each node.render?.lineRects ?? [] as r, lineIndex (nodeLineKey(node.row, node.label, lineIndex))}
