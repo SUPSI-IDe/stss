@@ -2,8 +2,10 @@
     import type { Attachment } from "svelte/attachments";
     import { Tween } from "svelte/motion";
     import { cubicOut } from "svelte/easing";
+    import { SvelteMap } from "svelte/reactivity";
     import { goto } from "$app/navigation";
-    import { asset, base } from "$app/paths";
+    import { asset, resolve } from "$app/paths";
+    import type { Pathname } from "$app/types";
     import {
         MARGIN,
         GROUP_COLORS,
@@ -65,6 +67,10 @@
     } = $props();
 
     const nodeKey = (row: number, label: string) => `${row} ${label}`;
+    const nodeLineKey = (row: number, label: string, lineIndex: number) =>
+        `${nodeKey(row, label)} ${lineIndex}`;
+    const renderKey = (x: number, y: number, label: string | number) =>
+        `${x} ${y} ${label}`;
 
     // Measured node data (rect metrics + node-relative draw model), set once
     // after fonts load. x/y stay at 0 here — layout positions them below.
@@ -267,7 +273,7 @@
 
     // Flows indexed by node they pass through, so hover is O(matching flows).
     const flowsByNode = $derived.by(() => {
-        const map = new Map<string, Flow[]>();
+        const map = new SvelteMap<string, Flow[]>();
         uniqueFlows.forEach((f) => {
             f.path.forEach((label, row) => {
                 const key = nodeKey(row, label);
@@ -275,6 +281,14 @@
                 if (bucket) bucket.push(f);
                 else map.set(key, [f]);
             });
+        });
+        return map;
+    });
+
+    const positionedByNode = $derived.by(() => {
+        const map = new SvelteMap<string, NodeData>();
+        positioned.forEach((node) => {
+            map.set(nodeKey(node.row, node.label), node);
         });
         return map;
     });
@@ -306,25 +320,57 @@
             : null,
     );
 
-    // Per-node highlight fill: the dominant flow group among matching flows
-    // passing through it.
-    const nodeFill = $derived.by(() => {
-        const fill = new Map<string, string>();
+    // Per-line highlight fill: cluster nodes only color the member rows
+    // targeted by the matching flows; regular nodes color every line.
+    const lineFill = $derived.by(() => {
+        const fill = new SvelteMap<string, string>();
         if (!hoveredNode) return fill;
-        const counts = new Map<string, Record<number, number>>();
+        const counts = new SvelteMap<string, Record<number, number>>();
+
+        const addCount = (key: string, group: number) => {
+            const c = counts.get(key);
+            if (c) c[group] = (c[group] || 0) + 1;
+            else counts.set(key, { [group]: 1 });
+        };
+
         matchingFlows.forEach((f) => {
             f.path.forEach((label, row) => {
                 const key = nodeKey(row, label);
-                const c = counts.get(key);
-                if (c) c[f.group] = (c[f.group] || 0) + 1;
-                else counts.set(key, { [f.group]: 1 });
+                const node = positionedByNode.get(key);
+                if (!node) return;
+
+                if (isClusterNodeFn(row, label)) {
+                    const rawVal = f.rawClusterVals.get(row);
+                    const range = rawVal
+                        ? node.memberRanges?.get(rawVal)
+                        : null;
+                    if (!range) return;
+
+                    for (
+                        let lineIndex = range.start;
+                        lineIndex <= range.end;
+                        lineIndex += 1
+                    ) {
+                        addCount(nodeLineKey(row, label, lineIndex), f.group);
+                    }
+                    return;
+                }
+
+                for (
+                    let lineIndex = 0;
+                    lineIndex < node.lineData.length;
+                    lineIndex += 1
+                ) {
+                    addCount(nodeLineKey(row, label, lineIndex), f.group);
+                }
             });
         });
         counts.forEach((c, key) => {
             const topGroup = Object.entries(c).sort(
                 (a, b) => b[1] - a[1],
             )[0][0];
-            fill.set(key, GROUP_COLORS[+topGroup - 1]);
+            const color = GROUP_COLORS[+topGroup - 1];
+            if (color) fill.set(key, color);
         });
         return fill;
     });
@@ -373,9 +419,10 @@
         // kill the animation; instead the overlay scrolls itself once settled.
         const hashAt = node.pageRoute.indexOf("#");
         if (hashAt !== -1) setPendingScroll(node.pageRoute.slice(hashAt));
-        const path =
-            hashAt === -1 ? node.pageRoute : node.pageRoute.slice(0, hashAt);
-        goto(`${base}${path}`);
+        const path = (
+            hashAt === -1 ? node.pageRoute : node.pageRoute.slice(0, hashAt)
+        ) as Pathname;
+        goto(resolve(path));
     }
 
     function clickBadge(event: MouseEvent, tooltip: TooltipData) {
@@ -433,9 +480,6 @@
 
                 <g class="nodes">
                     {#each positioned as node (nodeKey(node.row, node.label))}
-                        {@const fill =
-                            nodeFill.get(nodeKey(node.row, node.label)) ??
-                            "transparent"}
                         <g
                             class="node"
                             class:has-page={node.pageRoute}
@@ -445,18 +489,24 @@
                             onmouseleave={() => (hoveredNode = null)}
                             onclick={(e) => clickNode(e, node)}
                         >
-                            {#each node.render?.lineRects ?? [] as r}
+                            {#each node.render?.lineRects ?? [] as r, lineIndex (nodeLineKey(node.row, node.label, lineIndex))}
                                 <rect
                                     class="line-rect"
                                     x={r.x}
                                     y={r.y}
                                     width={r.width}
                                     height={r.height}
-                                    {fill}
+                                    fill={lineFill.get(
+                                        nodeLineKey(
+                                            node.row,
+                                            node.label,
+                                            lineIndex,
+                                        ),
+                                    ) ?? "transparent"}
                                 />
                             {/each}
 
-                            {#each node.render?.tspans.filter((t) => t.plus) ?? [] as t}
+                            {#each node.render?.tspans.filter((t) => t.plus) ?? [] as t (renderKey(t.x, t.y, "plus"))}
                                 <circle
                                     class="page-plus-circle"
                                     cx={t.x}
@@ -471,7 +521,7 @@
                                 font-size="14"
                                 fill="#333"
                             >
-                                {#each node.render?.tspans ?? [] as t}
+                                {#each node.render?.tspans ?? [] as t (renderKey(t.x, t.y, t.text))}
                                     <tspan
                                         class:page-plus={t.plus}
                                         x={t.x}
@@ -484,7 +534,7 @@
                                 {/each}
                             </text>
 
-                            {#each node.render?.badges ?? [] as b}
+                            {#each node.render?.badges ?? [] as b (renderKey(b.x, b.y, b.tooltip.id))}
                                 <g
                                     class="badge"
                                     class:badge-active={activeTooltipId ===
