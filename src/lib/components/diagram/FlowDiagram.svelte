@@ -42,17 +42,21 @@
     const ROW_ARROW_HREF = asset("/images/icona_freccia.svg");
     const ROW_ARROW_WIDTH = 9;
     const ROW_ARROW_HEIGHT = 8;
+    const PAGE_PLUS_DIAMETER = BADGE_SIZE;
+    const PAGE_PLUS_RADIUS = PAGE_PLUS_DIAMETER / 2;
     const SVG_NS = "http://www.w3.org/2000/svg";
 
     let {
         allNodes,
         uniqueFlows,
         realClusterLabelSet,
+        activeTooltipId = null,
         onOpenTooltip,
     }: {
         allNodes: NodeData[];
         uniqueFlows: Flow[];
         realClusterLabelSet: Map<number, Set<string>>;
+        activeTooltipId?: number | null;
         onOpenTooltip: (
             tipData: TooltipData,
             anchorX: number,
@@ -126,7 +130,13 @@
 
             if (i === 0 && node.hasPage) {
                 cx += BADGE_PAD;
-                tspans.push({ x: cx, y: ly, text: "+", plus: true });
+                tspans.push({
+                    x: cx + PAGE_PLUS_RADIUS,
+                    y: ly,
+                    text: "+",
+                    plus: true,
+                });
+                cx += PAGE_PLUS_DIAMETER;
             }
         });
 
@@ -173,7 +183,7 @@
                     if (seg.tooltip) w += BADGE_PAD * 2 + BADGE_SIZE;
                     return sum + w;
                 }, 0) +
-                (isFirst && hasPage ? BADGE_PAD + measureWidth("+") : 0);
+                (isFirst && hasPage ? BADGE_PAD + PAGE_PLUS_DIAMETER : 0);
 
             measureNodes(nodes, svg, LINE_H, PAD_Y);
 
@@ -282,12 +292,17 @@
     // needs no offset, two only separate from each other, and so on.
     const flowGen = $derived(
         positioned.length && matchingFlows.length
-            ? createFlowPathGenerator(positioned, matchingFlows, isClusterNodeFn, {
-                  lineH: LINE_H,
-                  clusterPadLeft: CLUSTER_PAD_LEFT,
-                  cornerR: CORNER_R,
-                  stubLen: STUB_LEN,
-              })
+            ? createFlowPathGenerator(
+                  positioned,
+                  matchingFlows,
+                  isClusterNodeFn,
+                  {
+                      lineH: LINE_H,
+                      clusterPadLeft: CLUSTER_PAD_LEFT,
+                      cornerR: CORNER_R,
+                      stubLen: STUB_LEN,
+                  },
+              )
             : null,
     );
 
@@ -441,6 +456,16 @@
                                 />
                             {/each}
 
+                            {#each node.render?.tspans.filter((t) => t.plus) ?? [] as t}
+                                <circle
+                                    class="page-plus-circle"
+                                    cx={t.x}
+                                    cy={t.y}
+                                    r={PAGE_PLUS_RADIUS}
+                                    stroke="black"
+                                />
+                            {/each}
+
                             <text
                                 text-anchor="start"
                                 font-size="14"
@@ -452,7 +477,8 @@
                                         x={t.x}
                                         y={t.y}
                                         dy={t.plus ? "0.25em" : "0.35em"}
-                                        fill={t.plus ? "black" : null}
+                                        fill={t.plus ? "white" : null}
+                                        text-anchor={t.plus ? "middle" : null}
                                         >{t.text}</tspan
                                     >
                                 {/each}
@@ -461,20 +487,21 @@
                             {#each node.render?.badges ?? [] as b}
                                 <g
                                     class="badge"
+                                    class:badge-active={activeTooltipId ===
+                                        b.tooltip.id}
                                     transform="translate({b.x},{b.y})"
                                     role="presentation"
                                     onclick={(e) => clickBadge(e, b.tooltip)}
                                 >
                                     <rect
+                                        class="badge-box"
                                         width={BADGE_SIZE}
                                         height={BADGE_SIZE}
-                                        fill="black"
                                     />
                                     <text
                                         class="badge-label"
                                         x={BADGE_SIZE / 2}
                                         y={BADGE_SIZE / 2}
-                                        fill="white"
                                         text-anchor="middle"
                                         dominant-baseline="central"
                                         >{b.tooltip.id}</text
@@ -504,7 +531,24 @@
     }
 
     .sankey-container :global(svg .badge-label) {
+        fill: black;
         font-size: var(--text-base);
+    }
+
+    .sankey-container :global(svg .badge-box) {
+        fill: transparent;
+        stroke: black;
+        stroke-width: 1;
+    }
+
+    .sankey-container :global(svg .badge:hover .badge-box),
+    .sankey-container :global(svg .badge.badge-active .badge-box) {
+        fill: black;
+    }
+
+    .sankey-container :global(svg .badge:hover .badge-label),
+    .sankey-container :global(svg .badge.badge-active .badge-label) {
+        fill: white;
     }
 
     .sankey-container :global(svg .row-guide-label) {

@@ -46,6 +46,7 @@
             allNodes={data.allNodes}
             uniqueFlows={data.uniqueFlows}
             realClusterLabelSet={data.realClusterLabelSet}
+            activeTooltipId={tooltip?.id ?? null}
             onOpenTooltip={openTooltip}
         />
     </main>
