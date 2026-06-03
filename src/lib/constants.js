@@ -10,6 +10,7 @@ export const COLUMNS = [
   { key: "A", guide: "object of study" },
   { key: "B", guide: "purpose" },
   { key: "C", guide: "modality" },
+  { key: "SD" },
   { key: "D", guide: "method" },
   { key: "E", guide: "type of data", clusterCol: "cluster" },
   { key: "F", guide: "data source" },
@@ -44,6 +45,7 @@ export const PAD_Y = 1;
 
 export const PAGE_ROUTES = new Map([
   ["waste phenomena", "/waste-flow"],
+  ["small data", "/urban-small-data"],
   ["seeing", "/urban-small-data#seeing"],
   ["sensing", "/urban-small-data#sensing"],
   ["thinking", "/urban-small-data#thinking"],
