@@ -9,7 +9,9 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: '/stss-web'
+			// Auto-matches the GitHub Pages subfolder: CI sets BASE_PATH from
+			// actions/configure-pages (e.g. "/stss"). Empty in local dev (served at root).
+			base: process.env.BASE_PATH ?? ''
 		}
 	},
 	vitePlugin: {
