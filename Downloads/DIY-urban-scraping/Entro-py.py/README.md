@@ -45,7 +45,7 @@ The file may include:
 
 ## License
 
-© 2026. This dataset is part of the **BLUECITY Project** (Innosuisse Flagship 2022–2026) and was produced within the activities of the **Small Data Practices for Urban Governance** research initiative.
+© 2026. This dataset is part of the **BLUECITY Project** (Innosuisse Flagship 2022–2026) and was produced within the activities of the **Small Data Practices for Dialogue** research initiative.
 
 Unless otherwise stated, all contents of this repository are licensed under the **Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)**.
 
@@ -53,7 +53,7 @@ Unless otherwise stated, all contents of this repository are licensed under the 
 
 When using, reproducing, or referring to this dataset, please cite:
 
-> Botta, M., Autuori, A., Terenghi, G., Mioni, A., & Draisci, L. (2026). *Small Data Practices for Urban Governance!*  
+> Botta, M., Autuori, A., Terenghi, G., Mioni, A., & Draisci, L. (2026). *Small Data Practices for Dialogue!*<br>
 > https://supsi-ide.github.io/smalldatapractices/
 
 ## Acknowledgements

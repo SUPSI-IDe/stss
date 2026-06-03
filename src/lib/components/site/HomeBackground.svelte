@@ -7,7 +7,7 @@
     import TooltipCard from '$lib/components/diagram/TooltipCard.svelte';
     import IntroOverlay from '$lib/components/overlays/IntroOverlay.svelte';
     import OverlayHeader from '$lib/components/overlays/OverlayHeader.svelte';
-    import { PAGE_META } from '$lib/constants.js';
+    import { PAGE_META, SITE_TITLE } from '$lib/constants.js';
     import type { Flow, NodeData, TooltipData } from '$lib/types';
 
     type TooltipState = Omit<TooltipData, 'label'> & { x: number; y: number };
@@ -71,7 +71,7 @@
 
 <div class="home-background" style:--home-preview-reserve={`${previewReserve}px`}>
     {#if showIntro}
-        <IntroOverlay lines={['EXPLORE', 'STSS SMALL DATA']} />
+        <IntroOverlay lines={['EXPLORE', SITE_TITLE]} />
     {/if}
     <NavBar />
 

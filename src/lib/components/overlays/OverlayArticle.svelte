@@ -5,6 +5,7 @@
     import { page } from "$app/state";
     import SiteFooter from "$lib/components/site/SiteFooter.svelte";
     import OverlayHeader from "$lib/components/overlays/OverlayHeader.svelte";
+    import { SITE_TITLE } from "$lib/constants.js";
     import { overlayStack } from "$lib/overlayStack.svelte";
     import { takePendingScroll } from "$lib/overlayScroll";
 
@@ -61,7 +62,7 @@
 </script>
 
 <svelte:head>
-    <title>{chapter}. {title} | STSS Small Data</title>
+    <title>{chapter}. {title} | {SITE_TITLE}</title>
 </svelte:head>
 
 <!-- Header + body live together in the sliding panel so they move as one unit

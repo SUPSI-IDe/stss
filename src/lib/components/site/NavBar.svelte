@@ -2,6 +2,7 @@
     import { onMount, onDestroy } from 'svelte';
     import { base, resolve } from '$app/paths';
     import { page } from '$app/state';
+    import { SITE_TITLE } from '$lib/constants.js';
 
     let {
         variant = 'explore',
@@ -42,7 +43,7 @@
 </script>
 
 <nav class="nav-grid" aria-label="Primary">
-    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>STSS SMALL DATA</a>
+    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>{SITE_TITLE}</a>
     <a class="about" href={resolve('/about')} class:active-link={page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
     <div class="powered-title">POWERED BY BLUECITY</div>
     <div class="timestamp">{timestamp}</div>
@@ -86,6 +87,7 @@
         grid-column: 1 / span 4;
         color: var(--text-black);
         text-decoration: none;
+        text-transform: uppercase;
     }
 
     .brand:hover {
@@ -154,27 +156,35 @@
     @media (max-width: 800px) {
         .brand {
             grid-column: 1 / span 3;
+            grid-row: 1;
         }
 
         .about {
             grid-column: 1 / span 3;
+            grid-row: 2;
         }
 
         .powered-title {
             grid-column: 4 / span 3;
+            grid-row: 1;
+            justify-self: end;
+            text-align: right;
         }
 
         .timestamp {
             grid-column: 4 / span 3;
+            grid-row: 2;
         }
 
         .explore-info,
         .license-block {
             grid-column: 1 / span 6;
+            grid-row: auto;
         }
 
         .credit-block + .credit-block {
             grid-column: 1 / span 6;
+            grid-row: auto;
         }
     }
 </style>

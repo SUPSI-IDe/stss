@@ -10,7 +10,7 @@ const config = {
 		}),
 		paths: {
 			// Auto-matches the GitHub Pages subfolder: CI sets BASE_PATH from
-			// actions/configure-pages (e.g. "/stss"). Empty in local dev (served at root).
+			// actions/configure-pages (e.g. "/smalldatapractices"). Empty in local dev (served at root).
 			base: process.env.BASE_PATH ?? ''
 		}
 	},

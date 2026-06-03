@@ -9,6 +9,10 @@
     let animTimer: ReturnType<typeof setInterval> | null = null;
     let idleTimer: ReturnType<typeof setTimeout> | null = null;
 
+    function lineScale(line: string) {
+        return Math.min(1, 12 / Math.max(line.length, 1));
+    }
+
     function animate() {
         if (animTimer) clearInterval(animTimer);
         visible = true;
@@ -55,7 +59,7 @@
     <div class="overlay">
         <div class="overlay-text">
             {#each displayed as line, i (lines[i])}
-                <div class="line" aria-label={lines[i]}>{line}</div>
+                <div class="line" style:--line-scale={lineScale(lines[i])} aria-label={lines[i]}>{line}</div>
             {/each}
         </div>
     </div>
@@ -75,15 +79,28 @@
         text-align: center;
         text-transform: uppercase;
         font-family: 'OTNeueMontreal-MediumSqueezed', 'Helvetica Neue', sans-serif;
-        font-size: clamp(120px, 18vw, 253.19px);
-        line-height: 0.8;
-        letter-spacing: -6px;
+        line-height: 0.82;
+        letter-spacing: 0;
         color: var(--text-black);
         pointer-events: none;
         user-select: none;
     }
 
+    .line {
+        max-width: calc(100vw - 16px);
+        margin-inline: auto;
+        font-size: calc(clamp(120px, 18vw, 253.19px) * var(--line-scale));
+        overflow-wrap: break-word;
+        text-wrap: balance;
+    }
+
     .overlay-text .line + .line {
         margin-top: 0.12em;
+    }
+
+    @media (max-width: 800px) {
+        .line {
+            font-size: calc(clamp(72px, 18vw, 120px) * var(--line-scale));
+        }
     }
 </style>

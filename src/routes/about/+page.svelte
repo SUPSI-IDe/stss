@@ -1,13 +1,14 @@
 <script lang="ts">
     import { ExternalLink, IntroOverlay, NavBar } from '$lib/components';
+    import { SITE_TITLE } from '$lib/constants.js';
 </script>
 
 <svelte:head>
-    <title>About | STSS Small Data</title>
+    <title>About | {SITE_TITLE}</title>
 </svelte:head>
 
 <div class="page">
-    <IntroOverlay lines={['ABOUT', 'STSS SMALL DATA']} />
+    <IntroOverlay lines={['ABOUT', SITE_TITLE]} />
     <NavBar
         variant="license"
         sections={[

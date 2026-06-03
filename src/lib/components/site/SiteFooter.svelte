@@ -1,9 +1,10 @@
 <script lang="ts">
     import ExternalLink from "./ExternalLink.svelte";
+    import { SITE_TITLE } from "$lib/constants.js";
 </script>
 
 <footer class="site-footer">
-    <div class="footer-brand">STSS SMALL DATA</div>
+    <div class="footer-brand">{SITE_TITLE}</div>
 
     <div class="license-block footer-license">
         <span class="license-label">License</span>
@@ -48,6 +49,7 @@
     .footer-brand {
         grid-column: 1 / span 3;
         color: var(--text-black);
+        text-transform: uppercase;
     }
 
     .footer-license {
