@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
+    import { untrack, type Snippet } from "svelte";
     import { browser } from "$app/environment";
     import { cubicIn, cubicOut } from "svelte/easing";
     import type { TransitionConfig } from "svelte/transition";
@@ -9,21 +9,27 @@
 
     let {
         children,
-        exitMode = "close",
+        direction = "forward",
         z = 3000,
     }: {
         children: Snippet;
-        /** "close" slides the panel back down; "swap" fades it out in place
-         * while a new overlay slides up over it, then unmounts it. */
-        exitMode?: "close" | "swap";
+        /** "forward" opens a new page over the stack; "back" returns to a page
+         * already in the stack (this panel is the one being revealed). */
+        direction?: "forward" | "back";
         z?: number;
     } = $props();
+
+    // A panel's stacking is fixed for its lifetime. Forward panels sit above the
+    // one they cover; on a back navigation the *outgoing* panel must stay above
+    // the page it uncovers. Capturing z at creation keeps an outgoing panel from
+    // dropping when `z` (the stack depth) updates for the incoming one.
+    const z0 = untrack(() => z);
 
     const reducedMotion = () =>
         browser &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function slide(
+    function slideDown(
         duration: number,
         easing: (t: number) => number,
     ): TransitionConfig {
@@ -34,38 +40,37 @@
         };
     }
 
+    // Entrance: a forward page slides up from below the viewport. On a back
+    // navigation this panel is the page being revealed, so it sits in place
+    // while the outgoing panel slides down off it.
     function slideIn(_node: Element): TransitionConfig {
-        return slide(OVERLAY_ENTER_MS, cubicOut);
+        if (direction === "back") return { duration: 0 };
+        return slideDown(OVERLAY_ENTER_MS, cubicOut);
     }
 
-    // Outgoing panel: either slide down (closing to home) or fade out in place
-    // while the incoming panel slides up over it (swapping between overlays).
-    // Fading (rather than holding it static) keeps the translucent panels from
-    // popping the old page out all at once when it unmounts.
-    function overlayOut(_node: Element): TransitionConfig {
-        if (exitMode === "swap") {
-            return {
-                duration: reducedMotion() ? 0 : OVERLAY_ENTER_MS,
-                easing: cubicIn,
-                css: (t) => `opacity: ${t};`,
-            };
-        }
-        return slide(OVERLAY_EXIT_MS, cubicIn);
+    // Exit: on forward the covered page stays put (unchanged) behind the panel
+    // sliding up over it, and is only unmounted once that panel is fully up — so
+    // its content never blinks out early. Its header is dropped meanwhile (the
+    // page is now a pinned ancestor, see OverlayArticle), so no duplicate shows.
+    // Back/close slides the panel down to uncover the page below it.
+    function slideOut(_node: Element): TransitionConfig {
+        if (direction === "forward")
+            return { duration: reducedMotion() ? 0 : OVERLAY_ENTER_MS };
+        return slideDown(OVERLAY_EXIT_MS, cubicIn);
     }
 </script>
 
 <!-- |global so the slide plays on home→overlay too: a local transition is
      suppressed when its whole subtree (this layout) is created at once, and
      would only animate on overlay→overlay swaps. -->
-<section class="overlay-panel" style="z-index: {z};" in:slideIn|global out:overlayOut|global>
+<section class="overlay-panel" style="z-index: {z0};" in:slideIn|global out:slideOut|global>
     {@render children()}
 </section>
 
 <style>
     .overlay-panel {
-        position: fixed;
+        position: absolute;
         inset: 0;
-        z-index: 3000;
         overflow: hidden;
         background: rgba(244, 244, 244, 0.3);
         isolation: isolate;

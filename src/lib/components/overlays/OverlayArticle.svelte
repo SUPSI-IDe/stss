@@ -1,9 +1,20 @@
 <script lang="ts">
-    import { onMount, tick, type Snippet } from "svelte";
-    import { afterNavigate, goto } from "$app/navigation";
-    import { resolve } from "$app/paths";
+    import { onMount, tick, untrack, type Snippet } from "svelte";
+    import { afterNavigate } from "$app/navigation";
+    import { base } from "$app/paths";
+    import { page } from "$app/state";
     import SiteFooter from "$lib/components/site/SiteFooter.svelte";
+    import OverlayHeader from "$lib/components/overlays/OverlayHeader.svelte";
+    import { overlayStack } from "$lib/overlayStack.svelte";
     import { takePendingScroll } from "$lib/overlayScroll";
+
+    // This page's own route path, frozen at creation (page.url is global and
+    // would otherwise read the *next* route once navigation starts). While this
+    // page is a pinned ancestor its header is owned by the layout, so the panel
+    // drops its own header — keeping its body visible behind whatever opened
+    // over it, with no duplicate header bar.
+    const myPath = untrack(() => page.url.pathname.slice(base.length));
+    let showHeader = $derived(!overlayStack.isAncestorPath(myPath));
 
     // Must clear the SlideUpOverlay entrance (OVERLAY_ENTER_MS = 480) so the
     // scroll can't disturb the slide-up; we only scroll once it has settled.
@@ -47,21 +58,19 @@
         await tick();
         bodyEl?.querySelector(hash)?.scrollIntoView({ behavior, block: "start" });
     }
-
-    function handleClose() {
-        goto(resolve("/"), { replaceState: true });
-    }
 </script>
 
 <svelte:head>
     <title>{chapter}. {title} | STSS Small Data</title>
 </svelte:head>
 
+<!-- Header + body live together in the sliding panel so they move as one unit
+     on open/close. Only the headers of pages *below* this one are pinned by the
+     overlay layout. -->
 <section class="page-subgrid article-layout {pageClass}">
-    <div class="page-header page-subgrid">
-        <h1>{chapter}. {title}</h1>
-        <button type="button" onclick={handleClose}>Close</button>
-    </div>
+    {#if showHeader}
+        <OverlayHeader {chapter} {title} onClose={() => overlayStack.closeCurrent()} />
+    {/if}
     <div class="page-body page-subgrid" bind:this={bodyEl}>
         {@render children()}
         <SiteFooter />
@@ -69,55 +78,12 @@
 </section>
 
 <style>
-    .page-header {
-        position: relative;
-        z-index: 1;
-        background-color: var(--text-black);
-        color: var(--bg);
-        text-box-trim: trim-both;
-        grid-column: 1 / -1;
-        grid-row: 1;
-        min-height: min-content;
-    }
-
-    h1 {
-        font-weight: 500;
-        font-size: var(--text-base);
-        grid-column: 1 / 9;
-    }
-
-    button {
-        grid-column: 16 / 19;
-        text-align: right;
-        text-decoration: underline;
-    }
-
-    h1,
-    button {
-        text-transform: uppercase;
-        text-box-trim: trim-both;
-        align-self: center;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    @media (max-width: 800px) {
-        h1 {
-            grid-column: 1 / 4;
-        }
-
-        button {
-            grid-column: 4 / 7;
-        }
-    }
-
     .article-layout {
         grid-template-rows: auto minmax(0, 1fr);
         min-height: 0;
     }
 
     .page-body {
-        opacity: 1;
         grid-row: 2;
         min-height: 0;
         overflow-y: auto;

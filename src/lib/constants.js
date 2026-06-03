@@ -43,6 +43,22 @@ export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
 
+/**
+ * Per-overlay metadata, keyed by route path (without the base prefix). Used to
+ * render the pinned header bar of pages further down the overlay stack, which
+ * are not mounted and so can't supply their own chapter/title.
+ * @type {Record<string, { chapter: number, title: string }>}
+ */
+export const PAGE_META = {
+  "/waste-flow": { chapter: 1, title: "Waste Flow" },
+  "/urban-small-data": { chapter: 2, title: "Urban Small Data" },
+  "/source-of-small-data": { chapter: 3, title: "Sources of Small Data" },
+  "/participatory-data-practices": { chapter: 4, title: "Participatory Data Practices" },
+  "/urban-scraping": { chapter: 5, title: "Urban Scraping" },
+  "/pixel-urbani": { chapter: 6, title: "Pixel Urbani" },
+  "/interfaces-for-public-debate": { chapter: 7, title: "Interfaces for Public Debate" },
+};
+
 export const PAGE_ROUTES = new Map([
   ["waste flow", "/waste-flow"],
   ["small data", "/urban-small-data"],

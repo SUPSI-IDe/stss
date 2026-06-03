@@ -13,5 +13,6 @@ export { default as PlaceholderImage } from "./site/PlaceholderImage.svelte";
 export { default as SiteFooter } from "./site/SiteFooter.svelte";
 export { default as IntroOverlay } from "./overlays/IntroOverlay.svelte";
 export { default as OverlayArticle } from "./overlays/OverlayArticle.svelte";
+export { default as OverlayHeader } from "./overlays/OverlayHeader.svelte";
 export { default as ProjectCarousel } from "./overlays/ProjectCarousel.svelte";
 export { default as SlideUpOverlay } from "./overlays/SlideUpOverlay.svelte";
