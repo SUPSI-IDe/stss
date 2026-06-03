@@ -1,0 +1,1157 @@
+[
+    {
+        "image_file": "img_1.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.01780168277521928
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_104425_003547.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_104438_845807.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_104644_134259.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_104927_691491.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_105630_247956.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_165356_346851.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_165426_108286.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_172433_811091.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_172918_883771.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_172955_948286.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250710_173132_553261.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_095407_856519.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_095452_622005.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_100341_620126.png",
+        "sensor_readings": {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude_m": 0.0,
+                "is_locked": false,
+                "satellites_tracked": 0,
+                "time": "00:00:00.000"
+            },
+            "pms": {
+                "pm1_0": 0,
+                "pm2_5": 0,
+                "pm10": 0,
+                "aqi": "N/A"
+            },
+            "mic": {
+                "volume": 0.0
+            },
+            "distance": {
+                "distance_cm": 0.0
+            },
+            "thermal": {
+                "min_temp": null,
+                "max_temp": null,
+                "avg_temp": null,
+                "thermal_frame_np": null
+            },
+            "compass": {
+                "heading": 0.0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_114737_835940.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_11-47-37.png",
+            "timestamp": "2025-07-11_11-47-37",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_120501_290363.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-05-01.png",
+            "timestamp": "2025-07-11_12-05-01",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_120810_405457.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-08-10.png",
+            "timestamp": "2025-07-11_12-08-10",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122657_349464.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-57.png",
+            "timestamp": "2025-07-11_12-26-57",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122658_560816.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-58.png",
+            "timestamp": "2025-07-11_12-26-58",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122658_988323.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-58.png",
+            "timestamp": "2025-07-11_12-26-58",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122659_369721.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-59.png",
+            "timestamp": "2025-07-11_12-26-59",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122659_780866.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-59.png",
+            "timestamp": "2025-07-11_12-26-59",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122700_188794.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-26-59.png",
+            "timestamp": "2025-07-11_12-26-59",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122745_034430.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-27-44.png",
+            "timestamp": "2025-07-11_12-27-44",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_122809_169008.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-28-09.png",
+            "timestamp": "2025-07-11_12-28-09",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_125423_886293.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-54-23.png",
+            "timestamp": "2025-07-11_12-54-23",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_125448_829420.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_12-54-48.png",
+            "timestamp": "2025-07-11_12-54-48",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134529_362116.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-45-29.png",
+            "timestamp": "2025-07-11_13-45-29",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134551_494436.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-45-51.png",
+            "timestamp": "2025-07-11_13-45-51",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134806_834219.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-48-06.png",
+            "timestamp": "2025-07-11_13-48-06",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134831_088486.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-48-31.png",
+            "timestamp": "2025-07-11_13-48-31",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134846_843483.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-48-46.png",
+            "timestamp": "2025-07-11_13-48-46",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134850_815163.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-48-50.png",
+            "timestamp": "2025-07-11_13-48-50",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_134855_804301.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-48-55.png",
+            "timestamp": "2025-07-11_13-48-55",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_135130_413181.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-51-30.png",
+            "timestamp": "2025-07-11_13-51-30",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_135231_026708.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-52-30.png",
+            "timestamp": "2025-07-11_13-52-30",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_135236_839810.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-52-36.png",
+            "timestamp": "2025-07-11_13-52-36",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_135238_864129.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_13-52-38.png",
+            "timestamp": "2025-07-11_13-52-38",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_144448_753209.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_14-44-48.png",
+            "timestamp": "2025-07-11_14-44-48",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_144505_777665.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_14-45-05.png",
+            "timestamp": "2025-07-11_14-45-05",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250711_144506_543400.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-11_14-45-06.png",
+            "timestamp": "2025-07-11_14-45-06",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_111231_106582.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_11-12-30.png",
+            "timestamp": "2025-07-16_11-12-30",
+            "sensor_readings": {
+                "ratio": 0.0,
+                "average_bin_area": 389113.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_111232_686001.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_11-12-32.png",
+            "timestamp": "2025-07-16_11-12-32",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123345_717071.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-33-45.png",
+            "timestamp": "2025-07-16_12-33-45",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123355_616566.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-33-55.png",
+            "timestamp": "2025-07-16_12-33-55",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123414_804530.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-34-14.png",
+            "timestamp": "2025-07-16_12-34-14",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123502_663924.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-35-02.png",
+            "timestamp": "2025-07-16_12-35-02",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123508_587394.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-35-08.png",
+            "timestamp": "2025-07-16_12-35-08",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_123641_804074.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-36-41.png",
+            "timestamp": "2025-07-16_12-36-41",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_124419_390923.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_12-44-19.png",
+            "timestamp": "2025-07-16_12-44-19",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_130514_164604.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-05-13.png",
+            "timestamp": "2025-07-16_13-05-13",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_130515_778313.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-05-15.png",
+            "timestamp": "2025-07-16_13-05-15",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_130923_344826.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-09-23.png",
+            "timestamp": "2025-07-16_13-09-23",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_131145_579630.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-11-45.png",
+            "timestamp": "2025-07-16_13-11-45",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_131151_979974.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-11-51.png",
+            "timestamp": "2025-07-16_13-11-51",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_131718_618472.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-17-18.png",
+            "timestamp": "2025-07-16_13-17-18",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_131720_253223.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-17-19.png",
+            "timestamp": "2025-07-16_13-17-19",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_132325_481270.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-23-25.png",
+            "timestamp": "2025-07-16_13-23-25",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_132327_778762.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-23-27.png",
+            "timestamp": "2025-07-16_13-23-27",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_132453_204743.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-24-53.png",
+            "timestamp": "2025-07-16_13-24-53",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_132457_957552.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-24-57.png",
+            "timestamp": "2025-07-16_13-24-57",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_132459_256331.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-24-59.png",
+            "timestamp": "2025-07-16_13-24-59",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_133651_581218.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-36-51.png",
+            "timestamp": "2025-07-16_13-36-51",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_133653_284444.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-36-53.png",
+            "timestamp": "2025-07-16_13-36-53",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_133702_623542.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-37-02.png",
+            "timestamp": "2025-07-16_13-37-02",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_133704_127591.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-37-04.png",
+            "timestamp": "2025-07-16_13-37-04",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_134051_790858.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-40-51.png",
+            "timestamp": "2025-07-16_13-40-51",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    },
+    {
+        "image_file": "img_20250716_134101_739285.png",
+        "sensor_readings": {
+            "image_file": "img_2025-07-16_13-41-01.png",
+            "timestamp": "2025-07-16_13-41-01",
+            "sensor_readings": {
+                "ratio": 0,
+                "average_bin_area": 0.0,
+                "total_trash_area": 0
+            }
+        }
+    }
+]
