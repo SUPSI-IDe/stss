@@ -50,7 +50,7 @@
     ontransitionend={handleTransitionEnd}
 >
     <div class="badge-number">{id}</div>
-    <button class="tooltip-close" onclick={requestClose} aria-label="Close">&#x2715;</button>
+    <button type="button" class="tooltip-close" onclick={requestClose}>CLOSE</button>
     <div class="tooltip-body">{definition}</div>
 </div>
 
