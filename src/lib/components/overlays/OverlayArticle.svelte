@@ -2,6 +2,7 @@
     import { onMount, tick, type Snippet } from "svelte";
     import { afterNavigate, goto } from "$app/navigation";
     import { resolve } from "$app/paths";
+    import SiteFooter from "$lib/components/site/SiteFooter.svelte";
     import { takePendingScroll } from "$lib/overlayScroll";
 
     // Must clear the SlideUpOverlay entrance (OVERLAY_ENTER_MS = 480) so the
@@ -63,6 +64,7 @@
     </div>
     <div class="page-body page-subgrid" bind:this={bodyEl}>
         {@render children()}
+        <SiteFooter />
     </div>
 </section>
 
