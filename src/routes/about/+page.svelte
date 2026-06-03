@@ -141,7 +141,7 @@ nine implementation partners from industry.`
     }
 
     .data-policy {
-        grid-column: 5 / span 5;
+        grid-column: 6 / span 5;
     }
 
     .contacts {
