@@ -1,0 +1,129 @@
+/*
+ * Shared layout for project-showcase overlay pages (pixel-urbani, urban-scraping,
+ * …). Scoped under `.project-page` — add that class to the page's `pageClass` so
+ * these generic selectors (.media, .sub-section, …) never leak to other overlays.
+ * The carousel mechanics live in ProjectCarousel.svelte; page-specific bits
+ * (hero composition, project-description inner layout) stay in each page's <style>.
+ */
+
+.project-page .info-table {
+    padding: 6px 8px;
+}
+
+.project-page .info-table-cell {
+    grid-column: span 6;
+}
+
+.project-page .activity-table,
+.project-page .project-info-table {
+    padding: 6px 8px;
+    color: white;
+    background-color: black;
+}
+
+.project-page .activity-table .activity-table-row {
+    padding: 8px 0;
+    border-bottom: 1px solid white;
+}
+
+.project-page .activity-table .activity-table-row:last-of-type {
+    border-bottom: none;
+}
+
+.project-page .activity-table-cell,
+.project-page .project-info-cell {
+    grid-column: span 6;
+}
+
+.project-page .activity-table-cell h4 {
+    color: var(--text-muted);
+}
+
+.project-page .activity-table-cell a {
+    color: white;
+    display: block;
+}
+
+.project-page .activity-table-cell a::before {
+    content: "> ";
+}
+
+.project-page .sub-section {
+    padding: 0 8px;
+}
+
+.project-page .sub-section,
+.project-page .project-description {
+    margin-bottom: 45px;
+}
+
+.project-page .sub-section-num {
+    grid-column: 1 / 1;
+}
+
+.project-page .sub-section h2 {
+    font-size: var(--text-base);
+    grid-column: 2 / 5;
+}
+
+.project-page .sub-section p {
+    font-size: var(--text-lead);
+    grid-column: 9 / -1;
+}
+
+.project-page .media {
+    height: 800px;
+}
+
+.project-page .project-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: var(--grid-template);
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    column-gap: var(--grid-gap);
+}
+
+.project-page .project-slide .media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 0;
+}
+
+.project-page .project-slide .media :is(img, video) {
+    max-height: 80%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.project-page .project-info-cell h3 {
+    font-size: var(--text-base);
+}
+
+.project-page .project-info-cell p {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+}
+
+.project-page .project-description {
+    padding: 8px;
+    color: var(--text-on-dark);
+    background-color: black;
+    padding-bottom: 24px;
+}
+
+.project-page .project-description h3 {
+    color: white;
+    font-size: var(--text-base);
+}
+
+.project-page .project-description p {
+    font-size: var(--text-base);
+    color: var(--text-on-dark);
+}
