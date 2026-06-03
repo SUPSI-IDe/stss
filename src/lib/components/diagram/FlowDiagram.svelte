@@ -4,7 +4,7 @@
     import { cubicOut } from "svelte/easing";
     import { SvelteMap } from "svelte/reactivity";
     import { goto } from "$app/navigation";
-    import { asset, resolve } from "$app/paths";
+    import { resolve } from "$app/paths";
     import type { Pathname } from "$app/types";
     import {
         MARGIN,
@@ -41,8 +41,6 @@
     const ROW_GUIDE_LABEL_GAP = 12;
     const ROW_GUIDE_TOP_INSET = 26;
     const DIAGRAM_LEFT_OFFSET = 28;
-    const ROW_ARROW_HREF = asset("/images/icona_freccia.svg");
-    const ROW_ARROW_WIDTH = 9;
     const ROW_ARROW_HEIGHT = 8;
     const PAGE_PLUS_DIAMETER = BADGE_SIZE;
     const PAGE_PLUS_RADIUS = PAGE_PLUS_DIAMETER / 2;
@@ -461,14 +459,18 @@
 
                 <g class="row-arrows">
                     {#each rowArrows as a (a.row)}
-                        <image
+                        <g
                             class="row-arrow"
-                            href={ROW_ARROW_HREF}
-                            width={ROW_ARROW_WIDTH}
-                            height={ROW_ARROW_HEIGHT}
-                            x={a.x}
-                            y={a.y}
-                        />
+                            transform="translate({a.x},{a.y})"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M4.22 6.54L6.31 4.5H0V3.06H6.33L4.22 1L5.2 0L8.95 3.77L5.2 7.54L4.22 6.54Z"
+                            />
+                            <path
+                                d="M1.44141 3.06L1.44141 0L0.00140619 0L0.00140619 3.06H1.44141Z"
+                            />
+                        </g>
                     {/each}
                 </g>
 
@@ -613,6 +615,10 @@
         fill: var(--text-on-dark);
         font-size: 11px;
         text-transform: lowercase;
+    }
+
+    .sankey-container :global(svg .row-arrow) {
+        fill: black;
     }
 
     .sankey-container :global(svg .badge) {
