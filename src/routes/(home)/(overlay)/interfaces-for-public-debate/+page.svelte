@@ -1,9 +1,6 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import {
-        Citation,
-        CitationList,
-        ExternalLink,
         IntroductoryParagraph,
         OverlayArticle,
         ProjectCarousel,
@@ -180,26 +177,6 @@
             (Robards et al., 2020).
         </p>
     </IntroductoryParagraph>
-
-    <CitationList>
-        <Citation>
-            Borgna Thomsen, S. (2025). Data feminism in action: mapping Urban
-            Belonging in Copenhagen with experimental visualization and
-            participatory design. Gender, Place &amp; Culture, 32(3), 413–438.
-            <ExternalLink href="https://doi.org/10.1080/0966369X.2024.2421273">
-                https://doi.org/10.1080/0966369X.2024.2421273
-            </ExternalLink>
-        </Citation>
-
-        <Citation>
-            Dalton, C. M., Taylor, L., &amp; Thatcher, J. (2016). Critical Data
-            Studies: A dialog on data and space. Big Data &amp; Society, 3(1),
-            2053951716648346.
-            <ExternalLink href="https://doi.org/10.1177/2053951716648346">
-                https://doi.org/10.1177/2053951716648346
-            </ExternalLink>
-        </Citation>
-    </CitationList>
 
     <div class="sub-section page-subgrid">
         <span class="sub-section-num">7.1</span>

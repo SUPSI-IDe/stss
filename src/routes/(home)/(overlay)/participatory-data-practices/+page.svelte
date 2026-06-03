@@ -67,11 +67,6 @@
         </Citation>
 
         <Citation>
-            Marres, N. (2017). Digital sociology: The reinvention of social
-            research. Polity.
-        </Citation>
-
-        <Citation>
             Mills, C. W. (with Gitlin, T.). (2000). The Sociological Imagination
             (40th ed). Oxford University Press USA - OSO.
         </Citation>
@@ -87,28 +82,10 @@
         </Citation>
 
         <Citation>
-            Prost, S., Ntouros, V., Wood, G., Collingham, H., Taylor, N.,
-            Crivellaro, C., Rogers, J., &amp; Vines, J. (2023). Walking and
-            Talking: Place-based Data Collection and Mapping for Participatory
-            Design with Communities. Proceedings of the 2023 ACM Designing
-            Interactive Systems Conference, 2437–2452.
-            <ExternalLink href="https://doi.org/10.1145/3563657.3596054">
-                https://doi.org/10.1145/3563657.3596054
-            </ExternalLink>
-        </Citation>
-
-        <Citation>
             Ricci, D., Colombo, G., Meunier, A., &amp; Brilli, A. (2017).
             Designing Digital Methods to monitor and inform Urban Policy. The
             case of Paris and its Urban Nature initiative. 3rd International
             Conference on Public Policy (ICPP3).
-        </Citation>
-
-        <Citation>
-            Rogers, R. (2013). Digital Methods. The MIT Press.
-            <ExternalLink href="https://doi.org/10.7551/mitpress/8718.001.0001">
-                https://doi.org/10.7551/mitpress/8718.001.0001
-            </ExternalLink>
         </Citation>
     </CitationList>
 
