@@ -42,7 +42,7 @@ export const CORNER_R = 6;
 export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
-export const SITE_TITLE = "Small Data Practices for Dialogue";
+export const SITE_TITLE = "Small Data Practices for Urban Dialogue";
 
 /**
  * Per-overlay metadata, keyed by route path (without the base prefix). Used to
