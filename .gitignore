@@ -17,7 +17,15 @@ Thumbs.db
 .env.*
 !.env.example
 !.env.test
+
+# Local agent/tooling state
+.agents/
 .claude/
+CLAUDE.md
+.playwright-cli/
+.playwright-mcp/
+playwright-report/
+test-results/
 
 # Vite
 vite.config.js.timestamp-*
