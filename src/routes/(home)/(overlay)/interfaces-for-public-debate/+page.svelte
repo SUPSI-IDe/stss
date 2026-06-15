@@ -283,19 +283,20 @@
                     </div>
                 </div>
                 <div class="media page-subgrid">
-                    <div class="project-video-grid">
-                        {#each project.videos as video (video.src)}
-                            <video
-                                class="project-video"
-                                controls
-                                playsinline
-                                preload="metadata"
-                                poster={`${base}${video.poster}`}
-                            >
-                                <source src={`${base}${video.src}`} type="video/mp4" />
-                            </video>
-                        {/each}
-                    </div>
+                    <video
+                        class="project-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster={`${base}${project.videos[0].poster}`}
+                    >
+                        <source
+                            src={`${base}${project.videos[0].src}`}
+                            type="video/mp4"
+                        />
+                    </video>
                 </div>
                 <div class="project-description page-subgrid">
                     <p>{project.body}</p>
@@ -419,22 +420,6 @@
         background: var(--placeholder);
         color: var(--text-muted);
         font-size: var(--text-small);
-    }
-
-    .project-video-grid {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-        gap: 12px;
-        width: 100%;
-    }
-
-    .project-video {
-        display: block;
-        width: 100%;
-        height: 60vh;
-        background: var(--placeholder);
-        object-fit: contain;
     }
 
     figure.bleed {
