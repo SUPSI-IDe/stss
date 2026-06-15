@@ -1,5 +1,6 @@
 <script lang="ts">
     import ExternalLink from "./ExternalLink.svelte";
+    import supsiLogo from "$lib/assets/logo-main-small.svg";
     import { SITE_TITLE } from "$lib/constants.js";
 </script>
 
@@ -23,7 +24,9 @@
         </span>
     </div>
 
-    <div class="footer-partner">SUPSI</div>
+    <div class="footer-partner">
+        <img class="footer-partner-logo" src={supsiLogo} alt="SUPSI" />
+    </div>
 </footer>
 
 <style>
@@ -61,10 +64,15 @@
     }
 
     .footer-partner {
-        grid-column: 18 / 19;
+        grid-column: 17 / 19;
         grid-row: 1;
         justify-self: end;
-        color: var(--text-black);
+        width: fit-content;
+    }
+
+    .footer-partner-logo {
+        width: auto;
+        height: 14.63px;
     }
 
     @media (max-width: 800px) {

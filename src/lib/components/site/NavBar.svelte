@@ -10,11 +10,15 @@
             title: 'Explore the repository data flows:',
             body: `Hover over any word in the diagram to reveal its connected flows, highlighting the underlying processes of the project. The diagram acts as both a map and an interface, allowing you to navigate relationships between elements. Each node also provides access to specific terms and dedicated pages, offering deeper insight into the methodologies used. Through this exploration, the project uncovers the value of small data, emphasizing diverse approaches and perspectives.`
         }],
-        showGap = true
+        showGap = true,
+        licenseLabel = 'License:',
+        licenseText = '© 2024. This project is licensed under CC BY 4.0. Supported by Movetia. Exchange and mobility.'
     }: {
         variant?: 'explore' | 'license';
         sections?: { title: string; body: string }[];
         showGap?: boolean;
+        licenseLabel?: string;
+        licenseText?: string;
     } = $props();
 
     let timestamp = $state('');
@@ -61,10 +65,8 @@
         {/each}
     {/if}
     <div class="license-block">
-        <span class="license-label">License:</span>
-        <span class="license-text">
-            © 2024. This project is licensed under CC BY 4.0. Supported by Movetia. Exchange and mobility.
-        </span>
+        <span class="license-label">{licenseLabel}</span>
+        <span class="license-text">{licenseText}</span>
     </div>
 </nav>
 

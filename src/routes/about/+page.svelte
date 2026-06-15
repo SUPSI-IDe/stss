@@ -1,6 +1,29 @@
 <script lang="ts">
     import { ExternalLink, IntroOverlay, NavBar } from '$lib/components';
     import { SITE_TITLE } from '$lib/constants.js';
+
+    const aboutSections = [
+        {
+            title: 'Project Coordination',
+            body: `Prof. Dr. Massimo Botta - Full Professor of Interaction Design
+Antonella Autuori - PhD student
+Luca Draisci - Research and Teaching Assistant
+Ginevra Terenghi - Scientific Collaborator
+Alice Mioni - Research and Teaching Assistant`
+        },
+        {
+            title: 'Project Partners',
+            body: `University of Applied Sciences and Arts of Southern Switzerland (SUPSI)
+Swiss Federal Institute of Technology Lausanne (EPFL)
+ETH Zurich (ETHZ)
+Institute for Sustainable Energy
+HES-SO (HES.SO Sion)
+Nine implementation partners from industry.`
+        }
+    ];
+
+    const licenseText =
+        '©2026. This contribution is part of the BLUECITY project, Innosuisse Flagship 2022-26. Unless otherwise stated, the repository contents are licensed under CC BY-SA 4.0';
 </script>
 
 <svelte:head>
@@ -11,25 +34,9 @@
     <IntroOverlay lines={['ABOUT', SITE_TITLE]} />
     <NavBar
         variant="license"
-        sections={[
-            {
-                title: 'Project Coordination',
-                body: `Prof. Dr. Massimo Botta - Project Coordinator
-Antonella Autuori - Researcher
-Luca Draisci - Researcher - Web Developer
-Ginevra Terenghi - Researcher
-Alice Mioni - Researcher - Website Designer`
-            },
-            {
-                title: 'Project Partners',
-                body: `Swiss Federal Institute of Technology Lausanne (EPFL)
-ETH Zurich (ETHZ)
-Institute for Sustainable Energy
-HES-SO (HES.SO Sion)
-University of Applied Sciences and Arts of Southern Switzerland (SUPSI)
-nine implementation partners from industry.`
-            }
-        ]}
+        sections={aboutSections}
+        licenseLabel="License"
+        {licenseText}
         showGap={false}
     />
 
@@ -58,35 +65,6 @@ nine implementation partners from industry.`
         </div>
     </section>
 
-    <footer class="bottom-grid">
-        <div class="license-block cite-block">
-            <span class="license-label">How to cite this project</span>
-            <span class="license-text">
-                Cangiano, S., Terenghi, G., Autuori, A., Subet, M. (2025). MAKEAWARE! Data pills and workshops to
-                raise awareness on antibiotic consumption and antimicrobial resistance
-            </span>
-            <span class="license-text">
-                <ExternalLink href="https://spearhead-amr.github.io/makeaware/">https://spearhead-amr.github.io/makeaware/</ExternalLink>
-            </span>
-        </div>
-
-        <div class="license-block data-policy">
-            <span class="license-label">Data Policy</span>
-            <span class="license-text">
-                This Repository is hosted on GitHub Pages. We do not use cookies and we do not collect any data or information from your navigation.
-                All data is anonymised. Learn more about the use of data in the Data Privacy and Management Policy Page. Data is not used for profiling nor commercial or marketing use.
-            </span>
-        </div>
-
-        <div class="license-block contacts">
-            <span class="license-label">Contacts</span>
-            <span class="license-text">
-                <ExternalLink href="https://www.instagram.com/">Instagram</ExternalLink> -
-                <ExternalLink href="https://www.linkedin.com/">Linkedin</ExternalLink> -
-                <a href="mailto:info@bluecity.store">Mail</a>
-            </span>
-        </div>
-    </footer>
 </div>
 
 <style>
@@ -126,42 +104,8 @@ nine implementation partners from industry.`
         color: var(--text-black);
     }
 
-    .bottom-grid {
-        display: grid;
-        grid-template-columns: var(--grid-template);
-        gap: var(--grid-gap);
-        margin: auto 8px 8px 8px;
-        color: var(--text-gray);
-        font-size: var(--text-small);
-        align-items: end;
-    }
-
-    .bottom-grid :global(a) {
-        color: inherit;
-        text-decoration: underline;
-    }
-
-    .license-block {
-        align-self: start;
-    }
-
-    .cite-block {
-        grid-column: 1 / span 4;
-    }
-
-    .data-policy {
-        grid-column: 6 / span 5;
-    }
-
-    .contacts {
-        grid-column: 13 / span 4;
-    }
-
     @media (max-width: 800px) {
-        .bluecity-text,
-        .cite-block,
-        .data-policy,
-        .contacts {
+        .bluecity-text {
             grid-column: 1 / -1;
         }
     }
