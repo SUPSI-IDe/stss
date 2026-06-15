@@ -3,7 +3,6 @@
     import {
         IntroductoryParagraph,
         OverlayArticle,
-        ProjectCarousel,
     } from "$lib/components";
     import "$lib/styles/project-page.css";
 
@@ -34,7 +33,7 @@
         { name: "pila", x: 61, y: 40, w: 11 }, // centre
     ];
 
-    const slides: Slide[] = [
+    const slides: [Slide, ...Slide[]] = [
         {
             image: "mappa1.webp",
             district: "Besso",
@@ -196,7 +195,35 @@
             activity: "",
         },
     ];
+
+    let mapScroller: HTMLDivElement | undefined = $state();
+    let activeSlideIndex = $state(0);
+    let mapAtStart = $state(true);
+    let mapAtEnd = $state(false);
+    let activeSlide = $derived(slides[activeSlideIndex] ?? slides[0]);
+
+    function updateMapCarousel() {
+        if (!mapScroller) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = mapScroller;
+        const slideWidth = Math.max(clientWidth, 1);
+        activeSlideIndex = Math.min(
+            slides.length - 1,
+            Math.max(0, Math.round(scrollLeft / slideWidth)),
+        );
+        mapAtStart = scrollLeft <= 1;
+        mapAtEnd = scrollLeft >= scrollWidth - clientWidth - 1;
+    }
+
+    function scrollMapByOne(direction: 1 | -1) {
+        mapScroller?.scrollBy({
+            left: direction * mapScroller.clientWidth,
+            behavior: "smooth",
+        });
+    }
 </script>
+
+<svelte:window onresize={updateMapCarousel} />
 
 <OverlayArticle
     chapter={6}
@@ -244,7 +271,7 @@
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
                 <h4>workshop activity:</h4>
-                <a href={resolve("/participatory-data-practices") + "#data-walking"}>
+                <a href={resolve("/participatory-data-practices#data-walking")}>
                     data walking
                 </a>
             </div>
@@ -260,7 +287,7 @@
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
                 <h4>workshop activity:</h4>
-                <a href={resolve("/participatory-data-practices") + "#data-plotting"}>
+                <a href={resolve("/participatory-data-practices#data-plotting")}>
                     data plotting
                 </a>
             </div>
@@ -276,7 +303,7 @@
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
                 <h4>workshop activity:</h4>
-                <a href={resolve("/participatory-data-practices") + "#data-mapping"}>
+                <a href={resolve("/participatory-data-practices#data-mapping")}>
                     data mapping
                 </a>
             </div>
@@ -354,42 +381,60 @@
             local routines and observations into shared, interpretable evidence.
         </p>
     </div>
-    <ProjectCarousel prevLabel="Previous map" nextLabel="Next map">
-        {#each slides as slide (slide.image)}
-            <div class="project-slide">
-                <div class="project-info-table page-subgrid">
-                    <div class="project-info-cell">
-                        <h3>District:</h3>
-                        <p>{slide.district}</p>
-                    </div>
-                    <div class="project-info-cell">
-                        <h3>Means of Transport:</h3>
-                        <p>{slide.transport}</p>
-                    </div>
-                    <div class="project-info-cell">
-                        <h3>Time:</h3>
-                        <p>{slide.time}</p>
-                    </div>
-                    <div class="project-info-cell">
-                        <h3>Quantity per Week:</h3>
-                        <p>{slide.quantity}</p>
-                    </div>
-                </div>
-                <div class="media page-subgrid">
+    <div class="pixel-map-carousel">
+        {#if !mapAtStart}
+            <button
+                type="button"
+                class="map-carousel-arrow map-carousel-arrow-left"
+                aria-label="Previous map"
+                onclick={() => scrollMapByOne(-1)}>&lt;</button
+            >
+        {/if}
+        <div class="project-info-table page-subgrid">
+            <div class="project-info-cell">
+                <h3>District:</h3>
+                <p>{activeSlide.district}</p>
+            </div>
+            <div class="project-info-cell">
+                <h3>Means of Transport:</h3>
+                <p>{activeSlide.transport}</p>
+            </div>
+            <div class="project-info-cell">
+                <h3>Time:</h3>
+                <p>{activeSlide.time}</p>
+            </div>
+            <div class="project-info-cell">
+                <h3>Quantity per Week:</h3>
+                <p>{activeSlide.quantity}</p>
+            </div>
+        </div>
+        <div
+            class="pixel-map-scroller"
+            bind:this={mapScroller}
+            onscroll={updateMapCarousel}
+        >
+            {#each slides as slide (slide.image)}
+                <div class="pixel-map-slide">
                     <img
                         src="{base}/images/web_optimized/{slide.image}"
                         alt="Map by a {slide.district} participant"
                     />
                 </div>
-                {#if slide.activity}
-                    <div class="project-description page-subgrid">
-                        <h3>Related activities:</h3>
-                        <p>{slide.activity}</p>
-                    </div>
-                {/if}
-            </div>
-        {/each}
-    </ProjectCarousel>
+            {/each}
+        </div>
+        <div class="project-description page-subgrid">
+            <h3>Related activities:</h3>
+            <p>{activeSlide.activity}</p>
+        </div>
+        {#if !mapAtEnd}
+            <button
+                type="button"
+                class="map-carousel-arrow map-carousel-arrow-right"
+                aria-label="Next map"
+                onclick={() => scrollMapByOne(1)}>&gt;</button
+            >
+        {/if}
+    </div>
     <div class="sub-section page-subgrid">
         <span class="sub-section-num">6.2</span>
         <h2>Discussion on the method</h2>
@@ -445,6 +490,79 @@
         position: absolute;
         height: auto;
         pointer-events: none;
+    }
+
+    .pixel-map-carousel {
+        grid-column: 1 / -1;
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        height: 100vh;
+    }
+
+    .pixel-map-scroller {
+        display: flex;
+        min-height: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        overscroll-behavior-x: contain;
+    }
+
+    .pixel-map-carousel .project-info-table {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .pixel-map-carousel .project-info-table .project-info-cell {
+        grid-column: auto;
+        min-width: 0;
+    }
+
+    .pixel-map-slide {
+        flex: 0 0 100%;
+        display: flex;
+        scroll-snap-align: start;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        min-height: 0;
+    }
+
+    .pixel-map-slide :is(img, video) {
+        max-height: 80%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .map-carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        background-color: black;
+        color: white;
+        font-family: inherit;
+        font-size: var(--text-base);
+        font-weight: 500;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .map-carousel-arrow-left {
+        left: 8px;
+    }
+
+    .map-carousel-arrow-right {
+        right: 8px;
     }
 
     /* Page-specific: heading and body sit side by side. */
