@@ -33,6 +33,9 @@
         grid-template-columns: var(--grid-template);
         column-gap: var(--grid-gap);
         align-items: start;
+        /* Size to content (with min-height as a floor) instead of stretching to
+           fill the page-body grid track, which clipped the multi-line license. */
+        align-self: start;
         min-height: 108px;
         margin-top: 64px;
         padding: 38px 8px 18px;
