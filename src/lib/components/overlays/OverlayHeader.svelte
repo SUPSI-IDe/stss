@@ -39,7 +39,6 @@
         background-color: var(--text-black);
         color: var(--bg);
         text-box-trim: trim-both;
-        min-height: min-content;
     }
 
     .title {
