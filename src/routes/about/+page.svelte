@@ -1,6 +1,6 @@
 <script lang="ts">
     import { ExternalLink, IntroOverlay, NavBar } from '$lib/components';
-    import { SITE_TITLE } from '$lib/constants.js';
+    import { LICENSE_TEXT, SITE_TITLE } from '$lib/constants.js';
 
     const aboutSections = [
         {
@@ -22,8 +22,6 @@ Nine implementation partners from industry.`
         }
     ];
 
-    const licenseText =
-        '©2026. This contribution is part of the BLUECITY project, Innosuisse Flagship 2022-26. Unless otherwise stated, the repository contents are licensed under CC BY-SA 4.0';
 </script>
 
 <svelte:head>
@@ -36,7 +34,7 @@ Nine implementation partners from industry.`
         variant="license"
         sections={aboutSections}
         licenseLabel="License"
-        {licenseText}
+        licenseText={LICENSE_TEXT}
         showGap={false}
     />
 

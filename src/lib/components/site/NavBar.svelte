@@ -2,7 +2,7 @@
     import { onMount, onDestroy } from 'svelte';
     import { base, resolve } from '$app/paths';
     import { page } from '$app/state';
-    import { SITE_TITLE } from '$lib/constants.js';
+    import { LICENSE_TEXT, SITE_TITLE } from '$lib/constants.js';
 
     let {
         variant = 'explore',
@@ -12,7 +12,7 @@
         }],
         showGap = true,
         licenseLabel = 'License:',
-        licenseText = '© 2024. This project is licensed under CC BY 4.0. Supported by Movetia. Exchange and mobility.'
+        licenseText = LICENSE_TEXT
     }: {
         variant?: 'explore' | 'license';
         sections?: { title: string; body: string }[];

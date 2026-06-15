@@ -43,6 +43,8 @@ export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
 export const SITE_TITLE = "Small Data Practices for Urban Dialogue";
+export const LICENSE_TEXT =
+  "©2026. This contribution is part of the BLUECITY project, Innosuisse Flagship 2022-26. Unless otherwise stated, the repository contents are licensed under CC BY-SA 4.0";
 
 /**
  * Per-overlay metadata, keyed by route path (without the base prefix). Used to

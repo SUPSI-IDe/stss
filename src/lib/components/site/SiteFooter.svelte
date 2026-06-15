@@ -1,7 +1,7 @@
 <script lang="ts">
     import ExternalLink from "./ExternalLink.svelte";
     import supsiLogo from "$lib/assets/logo-main-small.svg";
-    import { SITE_TITLE } from "$lib/constants.js";
+    import { LICENSE_TEXT, SITE_TITLE } from "$lib/constants.js";
 </script>
 
 <footer class="site-footer">
@@ -9,10 +9,7 @@
 
     <div class="license-block footer-license">
         <span class="license-label">License</span>
-        <span class="license-text">
-            © 2024. This project is licensed under CC BY 4.0.
-            Supported by Movetia. Exchange and mobility.
-        </span>
+        <span class="license-text">{LICENSE_TEXT}</span>
     </div>
 
     <div class="license-block footer-contacts">
