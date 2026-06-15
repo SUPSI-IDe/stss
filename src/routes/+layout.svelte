@@ -48,7 +48,7 @@
     :global(body) {
         font-style: normal;
         font-weight: 500;
-        line-height: 111%;
+        line-height: 120%;
         -webkit-font-smoothing: antialiased;
         background: var(--bg);
         color: var(--text-black);
