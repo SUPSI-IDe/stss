@@ -11,17 +11,15 @@
     <IntroductoryParagraph>
         <p>
             To investigate waste-disposal and recycling practices, the project
-            draws on <a href={resolve("/urban-small-data")}>urban small data</a>
-            as framed by the
-            <a href={resolve("/")}>SSTS-framework</a>, engaging a range of
-            complementary
-            data sources. This approach is meant to expand beyond institutional
-            or large-scale datasets by incorporating data emerging from
-            environments, embodied experience, and digital infrastructures. Each
-            source generates specific traces and viewpoints shaped by the
-            conditions of their production. Together, these sources ground the
-            analysis in the everyday dynamics of the city and support a situated
-            and contextualised understanding of waste as an urban flow.
+            draws on <a href={resolve("/urban-small-data")}>urban small data</a
+            >, engaging a range of complementary data sources. This approach is
+            meant to expand beyond institutional or large-scale datasets by
+            incorporating data emerging from environments, embodied experience,
+            and digital infrastructures. Each source generates specific traces
+            and viewpoints shaped by the conditions of their production.
+            Together, these sources ground the analysis in the everyday dynamics
+            of the city and support a situated and contextualised understanding
+            of waste as an urban flow.
         </p>
         <p>
             The following section presents the data sources engaged and shows
