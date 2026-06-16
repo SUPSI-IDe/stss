@@ -7,6 +7,7 @@ export { default as ExternalLink } from "./site/ExternalLink.svelte";
 export { default as AutoplayVideo } from "./site/AutoplayVideo.svelte";
 export { default as Figure } from "./site/Figure.svelte";
 export { default as HomeBackground } from "./site/HomeBackground.svelte";
+export { default as DesktopDisclaimerOverlay } from "./site/DesktopDisclaimerOverlay.svelte";
 export { default as IntroductoryParagraph } from "./site/IntroductoryParagraph.svelte";
 export { default as MethodSection } from "./site/MethodSection.svelte";
 export { default as NavBar } from "./site/NavBar.svelte";

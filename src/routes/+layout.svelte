@@ -1,4 +1,5 @@
 <script>
+    import { DesktopDisclaimerOverlay } from "$lib/components";
     import favicon from "$lib/assets/favicon.svg";
 
     let { children } = $props();
@@ -8,7 +9,10 @@
     <link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children()}
+<div class="site-content">
+    {@render children()}
+</div>
+<DesktopDisclaimerOverlay />
 
 <style>
     @font-face {
@@ -125,6 +129,16 @@
     @media (max-width: 800px) {
         :global(:root) {
             --grid-template: repeat(6, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 1023px) {
+        :global(body) {
+            overflow: hidden;
+        }
+
+        .site-content {
+            visibility: hidden;
         }
     }
 
