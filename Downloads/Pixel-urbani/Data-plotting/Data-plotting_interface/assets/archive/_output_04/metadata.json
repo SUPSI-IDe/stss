@@ -1,0 +1,881 @@
+[
+   
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979323999999986
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_121138.png",
+            "timestamp": "2025-07-15_12-11-38"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979113999999994
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_122803.png",
+            "timestamp": "2025-07-15_12-28-03"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979543999999978
+                }
+            },
+            "cigarettes_detected": 2,
+            "distance_to_bin": 2.322673339594157,
+            "image_file": "img_20250715_122818.png",
+            "timestamp": "2025-07-15_12-28-18"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979583999999976
+                }
+            },
+            "cigarettes_detected": 3,
+            "distance_to_bin": 5.419571125719557,
+            "image_file": "img_20250715_122820.png",
+            "timestamp": "2025-07-15_12-28-20"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.98055399999994
+                }
+            },
+            "cigarettes_detected": 2,
+            "distance_to_bin": 70.45442463286689,
+            "image_file": "img_20250715_122853.png",
+            "timestamp": "2025-07-15_12-28-53"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.980573999999939
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 72.00287352590394,
+            "image_file": "img_20250715_122853.png",
+            "timestamp": "2025-07-15_12-28-53"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.980593999999938
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 73.55132241881677,
+            "image_file": "img_20250715_122854.png",
+            "timestamp": "2025-07-15_12-28-54"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.980653999999936
+                }
+            },
+            "cigarettes_detected": 2,
+            "distance_to_bin": 78.19666909791756,
+            "image_file": "img_20250715_122856.png",
+            "timestamp": "2025-07-15_12-28-56"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979433999999982
+                }
+            },
+            "cigarettes_detected": 2,
+            "distance_to_bin": 5.419571125596434,
+            "image_file": "img_20250715_123233.png",
+            "timestamp": "2025-07-15_12-32-33"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979383999999984
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_123826.png",
+            "timestamp": "2025-07-15_12-38-26"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.979423999999982
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 5.419571125596434,
+            "image_file": "img_20250715_124016.png",
+            "timestamp": "2025-07-15_12-40-16"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.978974
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_125744.png",
+            "timestamp": "2025-07-15_12-57-44"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.978974
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_125753.png",
+            "timestamp": "2025-07-15_12-57-53"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.978974
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_125754.png",
+            "timestamp": "2025-07-15_12-57-54"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.978974
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_125755.png",
+            "timestamp": "2025-07-15_12-57-55"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870953,
+                    "longitude": 8.978974
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_125756.png",
+            "timestamp": "2025-07-15_12-57-56"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_131701.png",
+            "timestamp": "2025-07-15_13-17-01"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_131702.png",
+            "timestamp": "2025-07-15_13-17-02"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_131704.png",
+            "timestamp": "2025-07-15_13-17-04"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132424.png",
+            "timestamp": "2025-07-15_13-24-24"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132426.png",
+            "timestamp": "2025-07-15_13-24-26"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132433.png",
+            "timestamp": "2025-07-15_13-24-33"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132435.png",
+            "timestamp": "2025-07-15_13-24-35"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132436.png",
+            "timestamp": "2025-07-15_13-24-36"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0,
+                    "longitude": 0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_132438.png",
+            "timestamp": "2025-07-15_13-24-38"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0.0,
+                    "longitude": 0.0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_143055.png",
+            "timestamp": "2025-07-15_14-30-55"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151713.png",
+            "timestamp": "2025-07-15_15-17-13"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151752.png",
+            "timestamp": "2025-07-15_15-17-52"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151753.png",
+            "timestamp": "2025-07-15_15-17-53"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151754.png",
+            "timestamp": "2025-07-15_15-17-54"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151754.png",
+            "timestamp": "2025-07-15_15-17-54"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151809.png",
+            "timestamp": "2025-07-15_15-18-09"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151811.png",
+            "timestamp": "2025-07-15_15-18-11"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151812.png",
+            "timestamp": "2025-07-15_15-18-12"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151812.png",
+            "timestamp": "2025-07-15_15-18-12"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151813.png",
+            "timestamp": "2025-07-15_15-18-13"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151813.png",
+            "timestamp": "2025-07-15_15-18-13"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151814.png",
+            "timestamp": "2025-07-15_15-18-14"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151814.png",
+            "timestamp": "2025-07-15_15-18-14"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.87084333333334,
+                    "longitude": 8.980243333333334
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0.0,
+            "image_file": "img_20250715_151815.png",
+            "timestamp": "2025-07-15_15-18-15"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 0.0,
+                    "longitude": 0.0
+                }
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "image_file": "img_20250715_152117.png",
+            "timestamp": "2025-07-15_15-21-17"
+        },
+        {
+            "sensor_readings": {
+                "gps": {
+                    "latitude": 45.870693333333335,
+                    "longitude": 8.979783333333334
+                }
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 130.50003603349464,
+            "image_file": "img_20250715_153340.png",
+            "timestamp": "2025-07-15_15-33-40"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-30-36.png",
+            "timestamp": "2025-07-16_12-30-36"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-30-47.png",
+            "timestamp": "2025-07-16_12-30-47"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-30-58.png",
+            "timestamp": "2025-07-16_12-30-58"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-33-18.png",
+            "timestamp": "2025-07-16_12-33-18"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-33-29.png",
+            "timestamp": "2025-07-16_12-33-29"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-34-21.png",
+            "timestamp": "2025-07-16_12-34-21"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-41-55.png",
+            "timestamp": "2025-07-16_12-41-55"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-42-05.png",
+            "timestamp": "2025-07-16_12-42-05"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-42-09.png",
+            "timestamp": "2025-07-16_12-42-09"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-42-19.png",
+            "timestamp": "2025-07-16_12-42-19"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-42-31.png",
+            "timestamp": "2025-07-16_12-42-31"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_12-45-56.png",
+            "timestamp": "2025-07-16_12-45-56"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-06-55.png",
+            "timestamp": "2025-07-16_13-06-55"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-07-02.png",
+            "timestamp": "2025-07-16_13-07-02"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-07-16.png",
+            "timestamp": "2025-07-16_13-07-16"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-08-49.png",
+            "timestamp": "2025-07-16_13-08-49"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-08-55.png",
+            "timestamp": "2025-07-16_13-08-55"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-08-59.png",
+            "timestamp": "2025-07-16_13-08-59"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-09-02.png",
+            "timestamp": "2025-07-16_13-09-02"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-09-12.png",
+            "timestamp": "2025-07-16_13-09-12"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-09-15.png",
+            "timestamp": "2025-07-16_13-09-15"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-10-25.png",
+            "timestamp": "2025-07-16_13-10-25"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-10-29.png",
+            "timestamp": "2025-07-16_13-10-29"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-10-45.png",
+            "timestamp": "2025-07-16_13-10-45"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 2,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-12-03.png",
+            "timestamp": "2025-07-16_13-12-03"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-12-19.png",
+            "timestamp": "2025-07-16_13-12-19"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-12-26.png",
+            "timestamp": "2025-07-16_13-12-26"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-13-48.png",
+            "timestamp": "2025-07-16_13-13-48"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-15-47.png",
+            "timestamp": "2025-07-16_13-15-47"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-15-53.png",
+            "timestamp": "2025-07-16_13-15-53"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-16-37.png",
+            "timestamp": "2025-07-16_13-16-37"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 0,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-25-35.png",
+            "timestamp": "2025-07-16_13-25-35"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-25-37.png",
+            "timestamp": "2025-07-16_13-25-37"
+        },
+        {
+            "gps": {
+                "latitude": 0.0,
+                "longitude": 0.0
+            },
+            "cigarettes_detected": 1,
+            "distance_to_bin": 0,
+            "bin_coordinates": null,
+            "image_file": "img_2025-07-16_13-26-02.png",
+            "timestamp": "2025-07-16_13-26-02"
+        }
+    ]

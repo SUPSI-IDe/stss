@@ -1,0 +1,67 @@
+/* RESET BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #000;
+    color: #000;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  /* CONTENITORE A GRIGLIA: mantenuto simile a prima */
+  #grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  /* Ogni “camera-box” sarà un quadrato di lato 300px (o 100% della colonna) */
+  .camera-box {
+    position: relative;
+    width: 100%;
+    /* Imposto l'altezza in base alla larghezza per renderlo quadrato:
+       padding-top: 100% significa “l’altezza è pari alla larghezza” */
+    padding-top: 100%;
+    background-color: #000000;
+    border: solid 1px #fff;
+    overflow: hidden;
+    /* border: 2px solid #222; */
+
+
+  }
+  
+  /* Il video sarà posizionato assolutamente dentro camera-box,
+     ruotato di 90°, e centrato. */
+  .camera-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Ruota di 90° in senso orario */
+    transform: translate(-50%, -50%) rotate(180deg);
+    /* Facciamo in modo che il video “copra” l’interno del quadrato:
+       usiamo l’altezza del quadrato come riferimento per dimensionare il video */
+    height: 100%;
+    width: auto;
+    /* Se necessario, possiamo alzare un po’ la priorità */
+    object-fit: cover; /* in caso elevare robustness */
+  }
+  
+  /* Overlay con nome file */
+  .camera-overlay {
+    position: relative;
+    float: left;
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    color: #000;
+    font-size: 12px;
+    padding: 4px 6px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    user-select: none;
+  }

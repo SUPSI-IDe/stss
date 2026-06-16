@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Griglia Videosorveglianza</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="grid-container">
+    <!-- Qui verranno inseriti via JavaScript i “box” video -->
+  </div>
+
+  <!-- Template “nascosto” per un singolo riquadro -->
+  <template id="camera-template">
+    <div class="camera-box">
+      <video class="camera-video" autoplay muted loop playsinline> <source src="/videos/{{ vid }}" type="video/mp4" />
+        Il tuo browser non supporta la visualizzazione del video.
+      </video>
+      <div class="camera-overlay"></div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
