@@ -95,7 +95,6 @@ Nine implementation partners from industry.`
     .bluecity-copy {
         margin: 0;
         padding: 0;
-        text-indent: 1.5em;
     }
 
     .bluecity :global(a) {

@@ -1,39 +1,41 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte';
-    import { base, resolve } from '$app/paths';
-    import { page } from '$app/state';
-    import { LICENSE_TEXT } from '$lib/constants.js';
+    import { onMount, onDestroy } from "svelte";
+    import { base, resolve } from "$app/paths";
+    import { page } from "$app/state";
+    import { LICENSE_TEXT } from "$lib/constants.js";
 
     let {
-        variant = 'explore',
-        sections = [{
-            title: 'Explore the repository data flows:',
-            body: `Hover over any word in the diagram to reveal its connected flows, highlighting the underlying processes of the project. The diagram acts as both a map and an interface, allowing you to navigate relationships between elements. Each node also provides access to specific terms and dedicated pages, offering deeper insight into the methodologies used. Through this exploration, the project uncovers the value of small data, emphasizing diverse approaches and perspectives.`
-        }],
+        variant = "explore",
+        sections = [
+            {
+                title: "Explore the repository data flows:",
+                body: `Hover over any word in the diagram to reveal its connected flows, highlighting the underlying processes of the project. The diagram acts as both a map and an interface, allowing you to navigate relationships between elements. Each node also provides access to specific terms and dedicated pages, offering deeper insight into the methodologies used. Through this exploration, the project uncovers the value of small data, emphasizing diverse approaches and perspectives.`,
+            },
+        ],
         showGap = true,
-        licenseLabel = 'License:',
-        licenseText = LICENSE_TEXT
+        licenseLabel = "License:",
+        licenseText = LICENSE_TEXT,
     }: {
-        variant?: 'explore' | 'license';
+        variant?: "explore" | "license";
         sections?: { title: string; body: string }[];
         showGap?: boolean;
         licenseLabel?: string;
         licenseText?: string;
     } = $props();
 
-    let timestamp = $state('');
+    let timestamp = $state("");
     let timer: ReturnType<typeof setInterval> | null = null;
 
     function updateTimestamp() {
-        timestamp = new Intl.DateTimeFormat('sv-SE', {
-            timeZone: 'Europe/Zurich',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
+        timestamp = new Intl.DateTimeFormat("sv-SE", {
+            timeZone: "Europe/Zurich",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
         }).format(new Date());
     }
 
@@ -47,11 +49,21 @@
 </script>
 
 <nav class="nav-grid" aria-label="Primary">
-    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>Small Data Practices</a>
-    <a class="about" href={resolve('/about')} class:active-link={page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
+    <a
+        class="brand"
+        href={resolve("/")}
+        class:active-link={page.url.pathname === `${base}/` ||
+            page.url.pathname === base}>Small Data Practices</a
+    >
+    <a
+        class="about"
+        href={resolve("/about")}
+        class:active-link={page.url.pathname.startsWith(`${base}/about`)}
+        >ABOUT</a
+    >
     <div class="powered-title">POWERED BY BLUECITY</div>
     <div class="timestamp">{timestamp}</div>
-    {#if variant === 'explore'}
+    {#if variant === "explore"}
         <div class="explore-info">
             <div>{sections[0]?.title}</div>
             <div>{sections[0]?.body}</div>
@@ -144,11 +156,11 @@
     }
 
     .credit-block {
-        grid-column: 1 / span 4;
+        grid-column: 1 / span 5;
     }
 
     .credit-block + .credit-block {
-        grid-column: 6 / span 4;
+        grid-column: 6 / span 5;
     }
 
     .nav-content-gap {
