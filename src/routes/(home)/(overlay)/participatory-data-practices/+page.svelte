@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { resolve } from "$app/paths";
+    import { asset, resolve } from "$app/paths";
     import {
+        AutoplayVideo,
         Citation,
         CitationList,
         DescriptionBlock,
@@ -8,12 +9,14 @@
         IntroductoryParagraph,
         MethodSection,
         OverlayArticle,
-        PlaceholderImage,
     } from "$lib/components";
     import IngredientsRow from "./components/IngredientsRow.svelte";
     import IngredientsSection from "./components/IngredientsSection.svelte";
     import ProtocolRow from "./components/ProtocolRow.svelte";
     import ProtocolSection from "./components/ProtocolSection.svelte";
+
+    const practiceMedia = (folder: string, filename: string) =>
+        asset(`/images/pages/participatory-data-practices/${folder}/${filename}`);
 </script>
 
 <OverlayArticle
@@ -109,8 +112,18 @@
             patterns, negotiate meanings, and imagine alternative ways in which
             urban spaces might be understood and transformed.
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <AutoplayVideo
+                src={practiceMedia("data_plotting", "data-plotting1.mp4")}
+                ariaLabel="Data plotting workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <AutoplayVideo
+                src={practiceMedia("data_plotting", "data-plotting2.mp4")}
+                ariaLabel="Data plotting workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients define the components that support the
@@ -265,8 +278,18 @@
             collective interpretation in lived experience and supporting a
             deeper understanding of urban waste flows.
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <AutoplayVideo
+                src={practiceMedia("data_walking", "data-walking1.mp4")}
+                ariaLabel="Data walking workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <img
+                src={practiceMedia("data_walking", "data-walking2.webp")}
+                alt="Data walking workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients define the materials, tools, and
@@ -416,8 +439,18 @@
             readings into visual representations, enabling participants to perceive
             waste infrastructures as dynamic and relational rather than static objects.
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <img
+                src={practiceMedia("data_prototyping", "data-prototyping1.webp")}
+                alt="Data prototyping workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <AutoplayVideo
+                src={practiceMedia("data_prototyping", "data-prototyping2.mp4")}
+                ariaLabel="Data prototyping workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients define the materials, tools, and
@@ -604,8 +637,18 @@
                 2021).
             </p>
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <img
+                src={practiceMedia("data_scraping", "data-scraping.webp")}
+                alt="Data scraping workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <AutoplayVideo
+                src={practiceMedia("data_scraping", "data-scraping2.mp4")}
+                ariaLabel="Data scraping workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients describe the materials, tools, and
@@ -850,8 +893,18 @@
                 reimagining urban environments.
             </p>
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <AutoplayVideo
+                src={practiceMedia("data_mapping", "data-mapping1.mp4")}
+                ariaLabel="Data mapping workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <AutoplayVideo
+                src={practiceMedia("data_mapping", "data-mapping2.mp4")}
+                ariaLabel="Data mapping workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients describe the materials, tools, and
@@ -1064,8 +1117,18 @@
                 redesigned to better accommodate diverse users and practices.
             </p>
         </DescriptionBlock>
-        <PlaceholderImage position="left" />
-        <PlaceholderImage position="right" />
+        <div class="practice-media practice-media-left">
+            <img
+                src={practiceMedia("gesture_tracking", "DSC07481-Edit.webp")}
+                alt="Gesture tracking workshop media 1"
+            />
+        </div>
+        <div class="practice-media practice-media-right">
+            <AutoplayVideo
+                src={practiceMedia("gesture_tracking", "wasted_gestures.mp4")}
+                ariaLabel="Gesture tracking workshop media 2"
+            />
+        </div>
         <IngredientsSection>
             {#snippet description()}
                 The following ingredients describe the materials, tools, and
@@ -1213,5 +1276,41 @@
 <style>
     :global(.participatory-data-practices) {
         --description-block-margin-bottom: 76px;
+    }
+
+    .practice-media {
+        display: flex;
+        aspect-ratio: 16 / 9;
+        margin-bottom: 32px;
+    }
+
+    .practice-media-left {
+        grid-column: 4 / span 6;
+        justify-content: flex-end;
+    }
+
+    .practice-media-right {
+        grid-column: 10 / span 6;
+        justify-content: flex-start;
+    }
+
+    .practice-media img,
+    .practice-media :global(video) {
+        display: block;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    @media (max-width: 800px) {
+        .practice-media-left,
+        .practice-media-right {
+            grid-column: 1 / -1;
+        }
+
+        .practice-media img,
+        .practice-media :global(video) {
+            max-width: 100%;
+        }
     }
 </style>

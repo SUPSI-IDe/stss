@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { resolve } from "$app/paths";
+    import { asset, resolve } from "$app/paths";
     import {
+        AutoplayVideo,
         Citation,
         CitationList,
         DescriptionBlock,
@@ -8,8 +9,10 @@
         IntroductoryParagraph,
         MethodSection,
         OverlayArticle,
-        PlaceholderImage,
     } from "$lib/components";
+
+    const smallDataVideo = (name: string) =>
+        asset(`/images/pages/small data/small-data-${name}.mp4`);
 </script>
 
 <OverlayArticle
@@ -176,7 +179,12 @@
             small data, participants are enabled to recognise patterns, rhythms, and
             dynamics typically invisible from institutional forms of monitoring.
         </DescriptionBlock>
-        <PlaceholderImage />
+        <div class="small-data-media">
+            <AutoplayVideo
+                src={smallDataVideo("seeing")}
+                ariaLabel="Seeing with small data"
+            />
+        </div>
         <DescriptionBlock heading="Application">
             During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano,
             multidisciplinary students prototyped DIY sensing devices using
@@ -208,7 +216,12 @@
             and opens inquiries to collaborative reflection among citizens, researchers,
             and institutions.
         </DescriptionBlock>
-        <PlaceholderImage />
+        <div class="small-data-media">
+            <AutoplayVideo
+                src={smallDataVideo("sharing")}
+                ariaLabel="Sharing through small data"
+            />
+        </div>
         <DescriptionBlock heading="Application">
             During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano, participants actively
             reconstructed their waste-disposal routines using Google Maps. They then
@@ -238,7 +251,12 @@
             but evolving artefacts that acquire meaning through interpretation, dialogue,
             and their relation to lived experience.
         </DescriptionBlock>
-        <PlaceholderImage />
+        <div class="small-data-media">
+            <AutoplayVideo
+                src={smallDataVideo("thinking")}
+                ariaLabel="Thinking through small data"
+            />
+        </div>
         <DescriptionBlock heading="Application">
             During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano, data generated through
             collective walks were visualised and discussed in a dedicated activity.
@@ -264,7 +282,12 @@
             sensing reveals physical aspects of everyday life that remain hidden to
             abstract representations of data.
         </DescriptionBlock>
-        <PlaceholderImage />
+        <div class="small-data-media">
+            <AutoplayVideo
+                src={smallDataVideo("sensing")}
+                ariaLabel="Sensing small data"
+            />
+        </div>
         <DescriptionBlock heading="Application">
             The <a href={resolve("/participatory-data-practices")}>Gesture Tracker interactive experience</a>, organised during
             the
@@ -287,3 +310,23 @@
         </DescriptionBlock>
     </MethodSection>
 </OverlayArticle>
+
+<style>
+    .small-data-media {
+        grid-column: 7 / span 6;
+        margin-bottom: 32px;
+        background: var(--placeholder);
+    }
+
+    .small-data-media :global(video) {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 800px) {
+        .small-data-media {
+            grid-column: 1 / -1;
+        }
+    }
+</style>
