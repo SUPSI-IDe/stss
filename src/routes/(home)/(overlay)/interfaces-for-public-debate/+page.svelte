@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { base, resolve } from "$app/paths";
+    import { asset, base, resolve } from "$app/paths";
     import {
+        AutoplayVideo,
         ExternalLink,
         IntroductoryParagraph,
         OverlayArticle,
@@ -108,7 +109,13 @@
             <p>participants: 8 students</p>
         </div>
     </div>
-    <div class="media page-subgrid"></div>
+    <div class="media hero-media page-subgrid">
+        <AutoplayVideo
+            class="hero-video hero-video-tall"
+            src={asset("/images/heroes/interfaces-for-debate.mp4")}
+            ariaLabel="Interfaces for Public Debate hero video"
+        />
+    </div>
     <div class="activity-table page-subgrid">
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
@@ -283,20 +290,16 @@
                     </div>
                 </div>
                 <div class="media page-subgrid">
-                    <video
+                    <AutoplayVideo
                         class="project-video"
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                        preload="metadata"
                         poster={`${base}${project.videos[0].poster}`}
-                    >
-                        <source
-                            src={`${base}${project.videos[0].src}`}
-                            type="video/mp4"
-                        />
-                    </video>
+                        sources={[
+                            {
+                                src: `${base}${project.videos[0].src}`,
+                                type: "video/mp4",
+                            },
+                        ]}
+                    />
                 </div>
                 <div class="project-description page-subgrid">
                     <p>{project.body}</p>
@@ -394,6 +397,24 @@
 
 <style>
     /* Shared project-page layout lives in $lib/styles/project-page.css. */
+    .hero-media {
+        place-items: center;
+    }
+
+    .hero-media :global(.hero-video) {
+        grid-column: 1 / -1;
+        display: block;
+        justify-self: center;
+        align-self: center;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .hero-media :global(.hero-video-tall) {
+        width: auto;
+        height: min(800px, 90vh);
+    }
+
     .project-info-cell p.tagline {
         text-transform: uppercase;
         letter-spacing: 0.4px;

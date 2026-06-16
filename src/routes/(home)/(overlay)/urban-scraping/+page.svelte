@@ -1,6 +1,7 @@
 <script lang="ts">
     import { asset, resolve } from "$app/paths";
     import {
+        AutoplayVideo,
         IntroductoryParagraph,
         OverlayArticle,
         ProjectCarousel,
@@ -29,15 +30,29 @@
             <p>participants: 9 students</p>
         </div>
     </div>
-    <div class="media page-subgrid"></div>
+    <div class="media hero-media page-subgrid">
+        <AutoplayVideo
+            class="hero-video hero-video-wide"
+            src={asset("/images/heroes/urban-scraping.mov")}
+            ariaLabel="Urban Scraping hero video"
+        />
+    </div>
     <div class="activity-table page-subgrid">
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
                 <h4>workshop activities:</h4>
-                <a href={resolve("/participatory-data-practices") + "#data-scraping"}>
+                <a
+                    href={resolve(
+                        "/participatory-data-practices#data-scraping",
+                    )}
+                >
                     data scraping
                 </a>
-                <a href={resolve("/participatory-data-practices") + "#data-plotting"}>
+                <a
+                    href={resolve(
+                        "/participatory-data-practices#data-plotting",
+                    )}
+                >
                     data plotting
                 </a>
             </div>
@@ -49,7 +64,7 @@
         <div class="activity-table-row page-subgrid">
             <div class="activity-table-cell">
                 <h4>workshop activities:</h4>
-                <a href={resolve("/participatory-data-practices") + "#data-mapping"}>
+                <a href={resolve("/participatory-data-practices#data-mapping")}>
                     data mapping
                 </a>
             </div>
@@ -153,13 +168,7 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <video
-                    src={asset("/videos/urban-scraping-1.mp4")}
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                ></video>
+                <AutoplayVideo src={asset("/videos/urban-scraping-1.mp4")} />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>
@@ -203,13 +212,7 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <video
-                    src={asset("/videos/urban-scraping-2.mp4")}
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                ></video>
+                <AutoplayVideo src={asset("/videos/urban-scraping-2.mp4")} />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>
@@ -254,13 +257,7 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <video
-                    src={asset("/videos/urban-scraping-3.mp4")}
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                ></video>
+                <AutoplayVideo src={asset("/videos/urban-scraping-3.mp4")} />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>
@@ -313,6 +310,24 @@
 
 <style>
     /* Shared project-page layout lives in $lib/styles/project-page.css. */
+    .hero-media {
+        place-items: center;
+    }
+
+    .hero-media :global(.hero-video) {
+        grid-column: 1 / -1;
+        display: block;
+        justify-self: center;
+        align-self: center;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .hero-media :global(.hero-video-wide) {
+        width: 100%;
+        height: auto;
+    }
+
     /* Page-specific: column placement of the description heading + body. */
     .project-description h3 {
         grid-column: span 3;

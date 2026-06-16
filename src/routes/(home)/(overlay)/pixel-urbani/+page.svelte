@@ -1,6 +1,7 @@
 <script lang="ts">
     import { base, resolve } from "$app/paths";
     import {
+        AutoplayVideo,
         IntroductoryParagraph,
         OverlayArticle,
     } from "$lib/components";
@@ -247,23 +248,20 @@
     <div class="media page-subgrid">
         <div class="composition">
             {#each objects as obj (obj.name)}
-                <video
+                <AutoplayVideo
                     class="object"
                     style="left: {obj.x}%; top: {obj.y}%; width: {obj.w}%;"
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                >
-                    <source
-                        src="{base}/videos/{obj.name}.webm"
-                        type="video/webm"
-                    />
-                    <source
-                        src="{base}/videos/{obj.name}.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                    sources={[
+                        {
+                            src: `${base}/videos/${obj.name}.webm`,
+                            type: "video/webm",
+                        },
+                        {
+                            src: `${base}/videos/${obj.name}.mp4`,
+                            type: "video/mp4",
+                        },
+                    ]}
+                />
             {/each}
         </div>
     </div>
@@ -486,7 +484,7 @@
         overflow: hidden;
     }
 
-    .object {
+    :global(.object) {
         position: absolute;
         height: auto;
         pointer-events: none;
@@ -528,7 +526,7 @@
         min-height: 0;
     }
 
-    .pixel-map-slide :is(img, video) {
+    .pixel-map-slide img {
         max-height: 80%;
         max-width: 100%;
         width: auto;
