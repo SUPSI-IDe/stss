@@ -45,6 +45,10 @@ export const PAD_Y = 1;
 export const SITE_TITLE = "Small Data Practices for Urban Dialogue";
 export const LICENSE_TEXT =
   "©2026. This contribution is part of the BLUECITY project, Innosuisse Flagship 2022-26. Unless otherwise stated, the repository contents are licensed under CC BY-SA 4.0";
+export const PROJECT_CITATION =
+  "Botta, M., Autuori, A., Terenghi, G., Mioni, A., & Draisci, L. (2026). Small Data Practices for Urban Dialogue.";
+export const DATA_POLICY_TEXT =
+  "This repository is hosted on GitHub Pages. We do not use cookies and we do not collect any data or information from your navigation. All data is anonymised. Data is not used for profiling nor commercial or marketing use.";
 
 /**
  * Per-overlay metadata, keyed by route path (without the base prefix). Used to

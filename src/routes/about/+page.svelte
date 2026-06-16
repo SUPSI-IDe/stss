@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ExternalLink, IntroOverlay, NavBar } from '$lib/components';
+    import { ExternalLink, IntroOverlay, NavBar, SiteFooter } from '$lib/components';
     import { LICENSE_TEXT, SITE_TITLE } from '$lib/constants.js';
 
     const aboutSections = [
@@ -63,6 +63,7 @@ Nine implementation partners from industry.`
         </div>
     </section>
 
+    <SiteFooter variant="about" />
 </div>
 
 <style>

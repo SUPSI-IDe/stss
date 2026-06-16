@@ -137,5 +137,6 @@
 
     :global(.license-text) {
         white-space: pre-line;
+        overflow-wrap: anywhere;
     }
 </style>

@@ -73,7 +73,9 @@
         <OverlayHeader {chapter} {title} onClose={() => overlayStack.closeCurrent()} />
     {/if}
     <div class="page-body page-subgrid" bind:this={bodyEl}>
-        {@render children()}
+        <div class="page-body-content page-subgrid">
+            {@render children()}
+        </div>
         <SiteFooter />
     </div>
 </section>
@@ -88,5 +90,13 @@
         grid-row: 2;
         min-height: 0;
         overflow-y: auto;
+        /* Content takes the free space so the footer is pushed to the bottom
+           when the page is short (auto margins can't do this across grid rows). */
+        grid-auto-rows: min-content;
+        grid-template-rows: 1fr auto;
+    }
+
+    .page-body-content {
+        grid-row: 1;
     }
 </style>
