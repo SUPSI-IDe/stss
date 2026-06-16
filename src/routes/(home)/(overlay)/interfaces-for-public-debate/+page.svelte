@@ -333,7 +333,11 @@
             oppositions.
         </p>
         <figure class="bleed">
-            <div class="placeholder">Brainstorming wheel diagram</div>
+            <img
+                class="debate-diagram"
+                src={asset("/images/brainstorming-wheel.png")}
+                alt="Brainstorming wheel diagram showing a topic branching into four positions, sources, and platforms."
+            />
             <figcaption>
                 The brainstorming wheel: a framing device that distributes
                 viewpoints across a spectrum rather than into binary oppositions.
@@ -448,22 +452,15 @@
         grid-column: 1 / -1;
     }
 
-    .placeholder {
-        display: grid;
-        place-items: center;
-        background: var(--placeholder);
-        color: var(--text-muted);
-        font-size: var(--text-small);
-        line-height: var(--text-muted-leading);
-    }
-
     figure.bleed {
         grid-column: 1 / -1;
         margin: 20px 0;
     }
 
-    figure.bleed .placeholder {
-        min-height: 40vh;
+    .debate-diagram {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
     figcaption {
