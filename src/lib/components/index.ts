@@ -4,6 +4,7 @@ export { default as Citation } from "./site/Citation.svelte";
 export { default as CitationList } from "./site/CitationList.svelte";
 export { default as DescriptionBlock } from "./site/DescriptionBlock.svelte";
 export { default as ExternalLink } from "./site/ExternalLink.svelte";
+export { default as AutoplayVideo } from "./site/AutoplayVideo.svelte";
 export { default as Figure } from "./site/Figure.svelte";
 export { default as HomeBackground } from "./site/HomeBackground.svelte";
 export { default as IntroductoryParagraph } from "./site/IntroductoryParagraph.svelte";
