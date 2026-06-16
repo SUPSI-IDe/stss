@@ -9,12 +9,16 @@
     let animTimer: ReturnType<typeof setInterval> | null = null;
     let idleTimer: ReturnType<typeof setTimeout> | null = null;
 
-    function lineScale(line: string) {
-        return Math.min(1, 12 / Math.max(line.length, 1));
+    const IDLE_REPLAY_MS = 30_000;
+
+    function clearAnimTimer() {
+        if (!animTimer) return;
+        clearInterval(animTimer);
+        animTimer = null;
     }
 
     function animate() {
-        if (animTimer) clearInterval(animTimer);
+        clearAnimTimer();
         visible = true;
         done = false;
         displayed = lines.map(() => '');
@@ -35,11 +39,18 @@
 
     function resetIdle() {
         if (idleTimer) clearTimeout(idleTimer);
-        idleTimer = setTimeout(animate, 60_000);
+        idleTimer = setTimeout(animate, IDLE_REPLAY_MS);
     }
 
-    function onMove() {
-        if (done && visible) visible = false;
+    function hide() {
+        if (!visible) return;
+        clearAnimTimer();
+        visible = false;
+        done = false;
+    }
+
+    function onActivity() {
+        hide();
         resetIdle();
     }
 
@@ -48,18 +59,18 @@
         resetIdle();
     });
     onDestroy(() => {
-        if (animTimer) clearInterval(animTimer);
+        clearAnimTimer();
         if (idleTimer) clearTimeout(idleTimer);
     });
 </script>
 
-<svelte:window onmousemove={onMove} />
+<svelte:window onpointermove={onActivity} onwheel={onActivity} />
 
 {#if visible}
     <div class="overlay">
         <div class="overlay-text">
             {#each displayed as line, i (lines[i])}
-                <div class="line" style:--line-scale={lineScale(lines[i])} aria-label={lines[i]}>{line}</div>
+                <div class="line" aria-label={lines[i]}>{line}</div>
             {/each}
         </div>
     </div>
@@ -73,23 +84,24 @@
         display: grid;
         place-items: center;
         z-index: 2000;
+        pointer-events: none;
     }
 
     .overlay-text {
         text-align: center;
         text-transform: uppercase;
         font-family: 'OTNeueMontreal-MediumSqueezed', 'Helvetica Neue', sans-serif;
+        font-size: clamp(120px, 18vw, 253px);
         line-height: 0.82;
         letter-spacing: 0;
         color: var(--text-black);
-        pointer-events: none;
         user-select: none;
     }
 
     .line {
         max-width: calc(100vw - 16px);
         margin-inline: auto;
-        font-size: calc(clamp(120px, 18vw, 253.19px) * var(--line-scale));
+        font-size: inherit;
         overflow-wrap: break-word;
         text-wrap: balance;
     }
@@ -99,8 +111,8 @@
     }
 
     @media (max-width: 800px) {
-        .line {
-            font-size: calc(clamp(72px, 18vw, 120px) * var(--line-scale));
+        .overlay-text {
+            font-size: clamp(72px, 18vw, 120px);
         }
     }
 </style>
