@@ -289,7 +289,9 @@
             />
         </div>
         <DescriptionBlock heading="Application">
-            The <a href={resolve("/participatory-data-practices")}>Gesture Tracker interactive experience</a>, organised during
+            The <a href={resolve("/participatory-data-practices#gesture-tracking")}
+                >Gesture Tracker interactive experience</a
+            >, organised during
             the
             <a href={resolve("/pixel-urbani")}>Urban Pixel initiative</a>, captured participants' waste-disposal
             movements as they unfolded in situ, translating them into real-time
