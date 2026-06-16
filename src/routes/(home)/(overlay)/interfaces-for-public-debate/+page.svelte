@@ -114,6 +114,10 @@
             class="hero-video hero-video-tall"
             sources={[
                 {
+                    src: asset("/images/alpha-assets/interfaces-safari.mov"),
+                    type: "video/quicktime",
+                },
+                {
                     src: asset("/images/alpha-assets/interfaces.webm"),
                     type: "video/webm",
                 },

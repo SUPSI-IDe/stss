@@ -35,6 +35,10 @@
             class="hero-video hero-video-wide"
             sources={[
                 {
+                    src: asset("/images/alpha-assets/urban-pixels-safari.mov"),
+                    type: "video/quicktime",
+                },
+                {
                     src: asset("/images/alpha-assets/urban-pixels.webm"),
                     type: "video/webm",
                 },
@@ -180,6 +184,10 @@
                 <AutoplayVideo
                     sources={[
                         {
+                            src: asset("/images/alpha-assets/waste-overflow-safari.mov"),
+                            type: "video/quicktime",
+                        },
+                        {
                             src: asset("/images/alpha-assets/waste-overflow.webm"),
                             type: "video/webm",
                         },
@@ -234,6 +242,10 @@
             <div class="media page-subgrid">
                 <AutoplayVideo
                     sources={[
+                        {
+                            src: asset("/images/alpha-assets/entropy-safari.mov"),
+                            type: "video/quicktime",
+                        },
                         {
                             src: asset("/images/alpha-assets/entropy.webm"),
                             type: "video/webm",
@@ -290,6 +302,10 @@
             <div class="media page-subgrid">
                 <AutoplayVideo
                     sources={[
+                        {
+                            src: asset("/images/alpha-assets/thermal-access-safari.mov"),
+                            type: "video/quicktime",
+                        },
                         {
                             src: asset("/images/alpha-assets/thermal-access.webm"),
                             type: "video/webm",
