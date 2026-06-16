@@ -2,7 +2,7 @@
     import { onMount, onDestroy } from 'svelte';
     import { base, resolve } from '$app/paths';
     import { page } from '$app/state';
-    import { LICENSE_TEXT, SITE_TITLE } from '$lib/constants.js';
+    import { LICENSE_TEXT } from '$lib/constants.js';
 
     let {
         variant = 'explore',
@@ -47,7 +47,7 @@
 </script>
 
 <nav class="nav-grid" aria-label="Primary">
-    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>{SITE_TITLE}</a>
+    <a class="brand" href={resolve('/')} class:active-link={page.url.pathname === `${base}/` || page.url.pathname === base}>Small Data Practices</a>
     <a class="about" href={resolve('/about')} class:active-link={page.url.pathname.startsWith(`${base}/about`)}>ABOUT</a>
     <div class="powered-title">POWERED BY BLUECITY</div>
     <div class="timestamp">{timestamp}</div>
