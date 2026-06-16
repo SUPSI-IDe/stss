@@ -103,5 +103,6 @@
         grid-column: 4 / -1;
         font-size: var(--text-lead);
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 </style>

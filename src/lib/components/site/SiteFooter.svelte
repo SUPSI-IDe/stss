@@ -42,6 +42,7 @@
         background: #fff;
         color: var(--text-gray);
         font-size: var(--text-base);
+        line-height: var(--text-muted-leading);
     }
 
     .site-footer :global(a) {

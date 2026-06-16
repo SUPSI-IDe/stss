@@ -13,5 +13,6 @@
         grid-column: span 4;
         font-size: var(--text-base);
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 </style>

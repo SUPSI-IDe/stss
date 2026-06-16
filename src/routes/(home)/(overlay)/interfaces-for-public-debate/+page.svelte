@@ -454,6 +454,7 @@
         background: var(--placeholder);
         color: var(--text-muted);
         font-size: var(--text-small);
+        line-height: var(--text-muted-leading);
     }
 
     figure.bleed {
@@ -469,5 +470,6 @@
         margin-top: 6px;
         font-size: var(--text-small);
         color: var(--text-gray);
+        line-height: var(--text-muted-leading);
     }
 </style>

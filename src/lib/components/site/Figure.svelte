@@ -31,6 +31,7 @@
         font-weight: 500;
         margin-bottom: 8px;
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 
     .figure-marker {

@@ -22,6 +22,7 @@
         font-weight: 500;
         font-size: var(--text-base);
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
         grid-column: 6/9;
         text-box-trim: trim-both;
         text-align: right;

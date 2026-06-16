@@ -166,6 +166,7 @@
     .intro :global(p) {
         font-size: var(--text-lead);
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 
     .content {
@@ -192,6 +193,7 @@
         border-top: 1px solid var(--text-muted);
         font-size: var(--text-base);
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 
     .marker {

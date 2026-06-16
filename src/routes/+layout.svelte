@@ -111,6 +111,7 @@
         --text-lead: 16.73px; /* section descriptions */
         --text-base: 13.38px; /* body, labels, headers */
         --text-small: 12px; /* footnotes, captions */
+        --text-muted-leading: 1.1;
 
         /* Grid system — single source of truth for the diagram/article layout.
            The full repeat() track list lives here because CSS cannot take a

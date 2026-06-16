@@ -36,6 +36,7 @@
         grid-column: 1 / 3;
         padding-left: 8px;
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 
     .protocol-description {

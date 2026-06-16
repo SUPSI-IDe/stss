@@ -132,6 +132,7 @@
         gap: 2px;
         color: var(--text-gray);
         font-size: var(--text-small);
+        line-height: var(--text-muted-leading);
     }
 
     .license-block {
@@ -139,6 +140,7 @@
         grid-row: 2;
         color: var(--text-gray);
         font-size: var(--text-small);
+        line-height: var(--text-muted-leading);
     }
 
     .credit-block {

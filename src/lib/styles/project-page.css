@@ -37,6 +37,7 @@
 
 .project-page .activity-table-cell h4 {
     color: var(--text-muted);
+    line-height: var(--text-muted-leading);
 }
 
 .project-page .activity-table-cell a {
@@ -109,6 +110,7 @@
 .project-page .project-info-cell p {
     font-size: var(--text-base);
     color: var(--text-muted);
+    line-height: var(--text-muted-leading);
 }
 
 .project-page .project-description {
@@ -116,6 +118,7 @@
     color: var(--text-on-dark);
     background-color: black;
     padding-bottom: 24px;
+    line-height: var(--text-muted-leading);
 }
 
 .project-page .project-description h3 {

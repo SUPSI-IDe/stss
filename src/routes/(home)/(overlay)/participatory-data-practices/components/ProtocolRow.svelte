@@ -39,6 +39,7 @@
     .protocol-row-description {
         grid-column: 9 / -1;
         color: var(--text-muted);
+        line-height: var(--text-muted-leading);
     }
 
     .protocol-row-description :global(p) {
