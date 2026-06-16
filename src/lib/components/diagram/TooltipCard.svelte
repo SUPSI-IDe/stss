@@ -40,7 +40,6 @@
     });
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
     class="tooltip-card"
     class:open
@@ -49,8 +48,18 @@
     style:--tooltip-w="{TOOLTIP_W}px"
     ontransitionend={handleTransitionEnd}
 >
-    <div class="badge-number">{id}</div>
-    <button type="button" class="tooltip-close" onclick={requestClose}>CLOSE</button>
+    <button
+        type="button"
+        class="tooltip-toggle"
+        onclick={requestClose}
+        aria-label="Close tooltip {id}"
+    >
+        {#if closing}
+            {id}
+        {:else}
+            <span class="x-mark" aria-hidden="true"></span>
+        {/if}
+    </button>
     <div class="tooltip-body">{definition}</div>
 </div>
 
@@ -76,40 +85,54 @@
         clip-path: inset(0 0 0 0);
     }
 
-    .badge-number {
+    .tooltip-toggle {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 2px;
+        left: 2px;
         width: 14px;
         height: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: none;
+        border: none;
+        padding: 0;
         color: var(--bg);
         font-size: var(--text-base);
         text-transform: uppercase;
-        pointer-events: none;
-    }
-
-    .tooltip-card.flip-x .badge-number {
-        left: auto;
-        right: 0;
-    }
-
-    .tooltip-close {
-        position: absolute;
-        top: 8px;
-        right: 10px;
-        background: none;
-        border: none;
-        color: var(--bg);
-        font-size: var(--text-base);
         cursor: pointer;
     }
 
-    .tooltip-card.flip-x .tooltip-close {
-        right: auto;
-        left: 10px;
+    .tooltip-card.flip-x .tooltip-toggle {
+        left: auto;
+        right: 2px;
+    }
+
+    .x-mark {
+        position: relative;
+        width: 9px;
+        height: 9px;
+        display: block;
+    }
+
+    .x-mark::before,
+    .x-mark::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: currentColor;
+        transform-origin: center;
+    }
+
+    .x-mark::before {
+        transform: rotate(45deg);
+    }
+
+    .x-mark::after {
+        transform: rotate(-45deg);
     }
 
     .tooltip-body {
