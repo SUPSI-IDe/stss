@@ -1,0 +1,206 @@
+[
+    {
+        "image_file": "overlay_2025-07-16_11-18-05.png",
+        "timestamp": "2025-07-16_11-18-05",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 17.15625,
+                "max_temp": 32.84375,
+                "avg_temp": 23.097055435180664,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-16-44.png",
+        "timestamp": "2025-07-16_12-16-44",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 17.84375,
+                "max_temp": 33.75,
+                "avg_temp": 24.21137237548828,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-24-36.png",
+        "timestamp": "2025-07-16_12-24-36",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 13.046875,
+                "max_temp": 63.5625,
+                "avg_temp": 46.89130401611328,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-24-50.png",
+        "timestamp": "2025-07-16_12-24-50",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 14.3515625,
+                "max_temp": 66.375,
+                "avg_temp": 48.406982421875,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-24-57.png",
+        "timestamp": "2025-07-16_12-24-57",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 21.84375,
+                "max_temp": 62.25,
+                "avg_temp": 41.28715896606445,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-27-30.png",
+        "timestamp": "2025-07-16_12-27-30",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 21.84375,
+                "max_temp": 54.34375,
+                "avg_temp": 42.293907165527344,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-27-34.png",
+        "timestamp": "2025-07-16_12-27-34",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 25.34375,
+                "max_temp": 54.84375,
+                "avg_temp": 41.91521072387695,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-27-42.png",
+        "timestamp": "2025-07-16_12-27-42",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 19.84375,
+                "max_temp": 60.0625,
+                "avg_temp": 40.161705017089844,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-35-51.png",
+        "timestamp": "2025-07-16_12-35-51",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 16.046875,
+                "max_temp": 50.25,
+                "avg_temp": 32.687828063964844,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-35-56.png",
+        "timestamp": "2025-07-16_12-35-56",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 18.046875,
+                "max_temp": 49.15625,
+                "avg_temp": 30.093280792236328,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-35-58.png",
+        "timestamp": "2025-07-16_12-35-58",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 18.15625,
+                "max_temp": 47.5625,
+                "avg_temp": 29.66707992553711,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-44-52.png",
+        "timestamp": "2025-07-16_12-44-52",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 31.15625,
+                "max_temp": 63.84375,
+                "avg_temp": 50.32661819458008,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-45-00.png",
+        "timestamp": "2025-07-16_12-45-00",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 26.65625,
+                "max_temp": 60.9375,
+                "avg_temp": 48.17267990112305,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-45-01.png",
+        "timestamp": "2025-07-16_12-45-01",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 27.75,
+                "max_temp": 60.75,
+                "avg_temp": 46.42661666870117,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-45-06.png",
+        "timestamp": "2025-07-16_12-45-06",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 26.25,
+                "max_temp": 58.84375,
+                "avg_temp": 47.07499313354492,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-48-50.png",
+        "timestamp": "2025-07-16_12-48-50",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 28.453125,
+                "max_temp": 61.25,
+                "avg_temp": 47.672630310058594,
+                "thermal_frame_np": null
+            }
+        }
+    },
+    {
+        "image_file": "overlay_2025-07-16_12-48-52.png",
+        "timestamp": "2025-07-16_12-48-52",
+        "sensor_readings": {
+            "thermal": {
+                "min_temp": 25.453125,
+                "max_temp": 61.15625,
+                "avg_temp": 48.62377166748047,
+                "thermal_frame_np": null
+            }
+        }
+    }
+]

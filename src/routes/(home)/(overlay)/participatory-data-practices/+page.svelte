@@ -16,7 +16,9 @@
     import ProtocolSection from "./components/ProtocolSection.svelte";
 
     const practiceMedia = (folder: string, filename: string) =>
-        asset(`/images/pages/participatory-data-practices/${folder}/${filename}`);
+        asset(
+            `/images/pages/participatory-data-practices/${folder}/${filename}`,
+        );
 </script>
 
 <OverlayArticle
@@ -229,6 +231,10 @@
                     These combined representations foreground different
                     dimensions of the dataset, enabling comparison and
                     interpretation across multiple perspectives.
+                    <br />
+                    <a href={resolve("/data-plotting-interface")}
+                        >[See our interface for data exploration]</a
+                    >
                 </p>
             </ProtocolRow>
             <ProtocolRow title="Collective interpretation">
@@ -441,7 +447,10 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <img
-                src={practiceMedia("data_prototyping", "data-prototyping1.webp")}
+                src={practiceMedia(
+                    "data_prototyping",
+                    "data-prototyping1.webp",
+                )}
                 alt="Data prototyping workshop media 1"
             />
         </div>
