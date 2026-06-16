@@ -2,8 +2,6 @@
 
 ## Description
 
-## Description
-
 This folder contains the documentation, datasets, software, fabrication files, and technical resources produced within the **Small Data Practices for Urban Dialogue** research initiative.
 
 The research explores how citizens can actively participate in the production, interpretation, and discussion of urban knowledge through situated, everyday, and small-scale data practices. Rather than focusing on large-scale datasets and automated forms of analysis, the initiative investigates how data generated through lived experiences, observations, bodily interactions, and local knowledge can support reflection, dialogue, and civic engagement around urban issues.

@@ -1,8 +1,8 @@
-#Pixel-urbani
+# Pixel-urbani
 
 ## Description
 
-This folder contains the materials, datasets, and technical resources developed for **Pixel Urbani**, a participatory workshop held from **16–18 July 2025** at **Studio Foce**, Lugano, as part of the **LongLake Festival 2025**, promoted by the **City of Lugano**.
+This folder contains the materials, datasets, and technical resources developed for **Pixel Urbani**, a participatory workshop held from **16–17 July 2025** at **Studio Foce**, Lugano, as part of the **LongLake Festival 2025**, promoted by the **City of Lugano**.
 
 Pixel Urbani brought together citizens, researchers, designers, and actors involved in city governance to explore how urban waste collection is experienced in everyday life. Through a series of collaborative activities centred on observation, documentation, visualization, and discussion, participants reflected on waste-disposal habits, recycling practices, urban infrastructures, and the role of data in understanding the relationship between citizens and the city's waste-management system.
 

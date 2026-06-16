@@ -26,7 +26,7 @@ The images combine photographic information with thermal sensor readings, produc
 
 ### `Thermal-access_metadata.json`
 
-Metadata file containing structured information associated with each thermal observation.  [oai_citation:0‡Thermal-access_metadata.json](sediment://file_0000000075d071f4a59609d47444e3ae)
+Metadata file containing structured information associated with each thermal observation.
 
 The file includes:
 
@@ -45,7 +45,7 @@ Example fields:
 - `sensor_readings.thermal.max_temp`
 - `sensor_readings.thermal.avg_temp`
 
-The recorded observations contain thermal measurements ranging from approximately **13°C to 66°C**, depending on surface conditions, solar exposure, and time of collection.  [oai_citation:1‡Thermal-access_metadata.json](sediment://file_0000000075d071f4a59609d47444e3ae)
+The recorded observations contain thermal measurements ranging from approximately **13°C to 66°C**, depending on surface conditions, solar exposure, and time of collection.
 
 ## License
 

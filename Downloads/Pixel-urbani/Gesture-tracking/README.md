@@ -1,10 +1,10 @@
-#Gesture-Tracking
+# Gesture-Tracking
 
 ## Description
 
 This folder contains the materials developed for the **Gesture Tracking** activity conducted during **Pixel Urbani**, a public engagement program organized within the **LongLake Festival Lugano**, promoted by the **City of Lugano**, and held at **Studio Foce** on **16–17 July 2025**.
 
-The activity explored gesture tracking as a participatory method for documenting waste-disposal practices through bodily movement. Citizens were invited to select a waste category and a disposal facility type through a digital interface, then perform a simulated waste-disposal gesture using a physical probe representing their selection. Their movements were captured in real time through a motion-tracking installation and recorded as video sequences.Following the recording, participants annotated their gesture through the interface by providing additional contextual information. The resulting archive combines movement recordings and participant-generated descriptions, enabling reflection on how waste infrastructures are physically encountered and experienced. 
+The activity explored gesture tracking as a participatory method for documenting waste-disposal practices through bodily movement. Citizens were invited to select a waste category and a disposal facility type through a digital interface, then perform a simulated waste-disposal gesture using a physical probe representing their selection. Their movements were captured in real time through a motion-tracking installation and recorded as video sequences. Following the recording, participants annotated their gesture through the interface by providing additional contextual information. The resulting archive combines movement recordings and participant-generated descriptions, enabling reflection on how waste infrastructures are physically encountered and experienced. 
 
 ## Folder Contents
 

@@ -1,4 +1,4 @@
-#DIY-Urban-Scraping
+# DIY-Urban-Scraping
 
 ## Description
 
@@ -36,4 +36,4 @@ When using, reproducing, or referring to these materials, please cite:
 
 ## Acknowledgements
 
-DIY Urban Scraping was developed within the activities of the **Small Data Practices for Urban Governance** research initiative and involved students, researchers, and workshop participants in the collaborative design of experimental tools for urban observation and data collection.
+DIY Urban Scraping was developed within the activities of the **Small Data Practices for Urban Dialogue** research initiative and involved students, researchers, and workshop participants in the collaborative design of experimental tools for urban observation and data collection.

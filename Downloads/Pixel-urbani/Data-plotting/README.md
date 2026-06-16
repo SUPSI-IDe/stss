@@ -14,7 +14,7 @@ Through collective observation and discussion, citizens connected individual exp
 
 Main file used to launch the **Data Exploration Interface** locally in a web browser.
 
-The interface allows users to browse, visualize, and compare datasets generated through the DIY Urban Scraping activities using multiple visualization modes, including grid views, timelines, scatterplots, and maps.  [oai_citation:0‡script.js](sediment://file_00000000853871f49c228b89f2c5c4a5)
+The interface allows users to browse, visualize, and compare datasets generated through the DIY Urban Scraping activities using multiple visualization modes, including grid views, timelines, scatterplots, and maps.
 
 ### `assets/`
 
@@ -78,7 +78,7 @@ Contains:
 
 - Thermally processed images
 
-- `metadata.json` containing thermal measurements including minimum, maximum, and average recorded temperatures for each image.  [oai_citation:1‡metadata.json](sediment://file_00000000d2ac71f4b1acc7243a574957)
+- `metadata.json` containing thermal measurements including minimum, maximum, and average recorded temperatures for each image.
 
 ##### `_output_09`
 
