@@ -33,7 +33,16 @@
     <div class="media hero-media page-subgrid">
         <AutoplayVideo
             class="hero-video hero-video-wide"
-            src={asset("/images/heroes/urban-scraping.mov")}
+            sources={[
+                {
+                    src: asset("/images/alpha-assets/urban-pixels.webm"),
+                    type: "video/webm",
+                },
+                {
+                    src: asset("/images/heroes/urban-scraping.mov"),
+                    type: "video/quicktime",
+                },
+            ]}
             ariaLabel="Urban Scraping hero video"
         />
     </div>
@@ -168,7 +177,18 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <AutoplayVideo src={asset("/videos/urban-scraping-1.mp4")} />
+                <AutoplayVideo
+                    sources={[
+                        {
+                            src: asset("/images/alpha-assets/waste-overflow.webm"),
+                            type: "video/webm",
+                        },
+                        {
+                            src: asset("/videos/urban-scraping-1.mp4"),
+                            type: "video/mp4",
+                        },
+                    ]}
+                />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>
@@ -212,7 +232,18 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <AutoplayVideo src={asset("/videos/urban-scraping-2.mp4")} />
+                <AutoplayVideo
+                    sources={[
+                        {
+                            src: asset("/images/alpha-assets/entropy.webm"),
+                            type: "video/webm",
+                        },
+                        {
+                            src: asset("/videos/urban-scraping-2.mp4"),
+                            type: "video/mp4",
+                        },
+                    ]}
+                />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>
@@ -257,7 +288,18 @@
                 </div>
             </div>
             <div class="media page-subgrid">
-                <AutoplayVideo src={asset("/videos/urban-scraping-3.mp4")} />
+                <AutoplayVideo
+                    sources={[
+                        {
+                            src: asset("/images/alpha-assets/thermal-access.webm"),
+                            type: "video/webm",
+                        },
+                        {
+                            src: asset("/videos/urban-scraping-3.mp4"),
+                            type: "video/mp4",
+                        },
+                    ]}
+                />
             </div>
             <div class="project-description page-subgrid">
                 <h3>Description:</h3>

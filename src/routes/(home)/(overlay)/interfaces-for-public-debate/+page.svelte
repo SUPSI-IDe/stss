@@ -112,7 +112,16 @@
     <div class="media hero-media page-subgrid">
         <AutoplayVideo
             class="hero-video hero-video-tall"
-            src={asset("/images/heroes/interfaces-for-debate.mp4")}
+            sources={[
+                {
+                    src: asset("/images/alpha-assets/interfaces.webm"),
+                    type: "video/webm",
+                },
+                {
+                    src: asset("/images/heroes/interfaces-for-debate.mp4"),
+                    type: "video/mp4",
+                },
+            ]}
             ariaLabel="Interfaces for Public Debate hero video"
         />
     </div>
