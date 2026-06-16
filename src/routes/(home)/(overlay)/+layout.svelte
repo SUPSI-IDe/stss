@@ -3,12 +3,20 @@
     import { beforeNavigate } from "$app/navigation";
     import { base } from "$app/paths";
     import { page } from "$app/state";
-    import { OverlayHeader, SlideUpOverlay } from "$lib/components";
+    import { IntroOverlay, OverlayHeader, SlideUpOverlay } from "$lib/components";
+    import { PAGE_META } from "$lib/constants.js";
     import { overlayStack } from "$lib/overlayStack.svelte";
 
     let { children } = $props();
 
     let direction = $state<"forward" | "back">("forward");
+    let currentTitle = $derived(
+        (
+            (PAGE_META as Record<string, { title: string }>)[
+                page.url.pathname.slice(base.length)
+            ]?.title ?? ""
+        ).toUpperCase(),
+    );
 
     // The navigation that opens the *first* overlay comes from home, where this
     // layout isn't mounted yet — so its beforeNavigate never sees that hop. Seed
@@ -48,6 +56,11 @@
             </SlideUpOverlay>
         {/key}
     </div>
+    {#if currentTitle}
+        {#key page.url.pathname}
+            <IntroOverlay lines={[currentTitle]} replayOnIdle={false} />
+        {/key}
+    {/if}
 </div>
 
 <style>

@@ -1,7 +1,13 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
 
-    let { lines }: { lines: string[] } = $props();
+    let {
+        lines,
+        replayOnIdle = true,
+    }: {
+        lines: string[];
+        replayOnIdle?: boolean;
+    } = $props();
 
     let visible = $state(true);
     let done = $state(false);
@@ -39,6 +45,8 @@
 
     function resetIdle() {
         if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = null;
+        if (!replayOnIdle) return;
         idleTimer = setTimeout(animate, IDLE_REPLAY_MS);
     }
 
