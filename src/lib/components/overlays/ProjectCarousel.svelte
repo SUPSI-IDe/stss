@@ -11,16 +11,33 @@
         nextLabel?: string;
     } = $props();
 
+    let carousel: HTMLDivElement | undefined = $state();
     let scroller: HTMLDivElement | undefined = $state();
     let atStart = $state(true);
     let atEnd = $state(false);
+    let arrowTop = $state("50%");
 
     function updateArrows() {
         if (!scroller) return;
         const { scrollLeft, scrollWidth, clientWidth } = scroller;
         atStart = scrollLeft <= 1;
         atEnd = scrollLeft >= scrollWidth - clientWidth - 1;
+        updateArrowTop();
     }
+
+    /** Vertically center the arrows on the slide's media (image/video), not the whole carousel. */
+    function updateArrowTop() {
+        if (!scroller || !carousel) return;
+        const media = scroller.querySelector(".media");
+        if (!media) return;
+        const mediaRect = media.getBoundingClientRect();
+        const carouselRect = carousel.getBoundingClientRect();
+        arrowTop = `${mediaRect.top + mediaRect.height / 2 - carouselRect.top}px`;
+    }
+
+    $effect(() => {
+        updateArrowTop();
+    });
 
     function scrollByOne(direction: 1 | -1) {
         scroller?.scrollBy({
@@ -32,7 +49,7 @@
 
 <svelte:window onresize={updateArrows} />
 
-<div class="carousel">
+<div class="carousel" bind:this={carousel} style:--arrow-top={arrowTop}>
     {#if !atStart}
         <button
             type="button"
@@ -71,20 +88,20 @@
 
     .carousel-arrow {
         position: absolute;
-        top: 50%;
+        top: var(--arrow-top, 50%);
         transform: translateY(-50%);
         z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
         padding: 0;
         border: none;
         background-color: black;
         color: white;
         font-family: inherit;
-        font-size: var(--text-base);
+        font-size: var(--text-small);
         font-weight: 500;
         line-height: 1;
         cursor: pointer;

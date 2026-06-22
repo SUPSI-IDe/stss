@@ -438,7 +438,7 @@
         font-size: var(--text-small);
     }
 
-    .project-info-cell-website {
+    :global(.project-page) .project-info-cell-website {
         grid-column: 13 / -1;
         text-align: right;
     }

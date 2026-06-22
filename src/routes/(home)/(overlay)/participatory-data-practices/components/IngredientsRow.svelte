@@ -26,7 +26,7 @@
 
 <style>
     .ingredients-row {
-        border-bottom: 1px solid white;
+        border-bottom: 0.5px solid #646464;
         padding: 6px 0;
     }
 
