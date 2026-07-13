@@ -3,9 +3,10 @@
     import type { TooltipData } from '$lib/types';
     import { BADGE_SIZE } from '$lib/constants.js';
 
-    let { id, definition, x = 0, y = 0, onclose }: Omit<TooltipData, 'label'> & {
+    let { id, definition, x = 0, y = 0, mobile = false, onclose }: Omit<TooltipData, 'label'> & {
         x?: number;
         y?: number;
+        mobile?: boolean;
         onclose: () => void;
     } = $props();
 
@@ -25,43 +26,68 @@
     }
 
     function handleTransitionEnd(e: TransitionEvent) {
-        if (e.propertyName !== 'clip-path') return;
+        const prop = mobile ? 'transform' : 'clip-path';
+        if (e.propertyName !== prop) return;
         if (closing) onclose();
     }
 
     onMount(() => {
-        const overflowsRight = x + TOOLTIP_W > window.innerWidth - EDGE_MARGIN;
-        flipX = overflowsRight;
-        posX = overflowsRight ? x + BADGE_SIZE - TOOLTIP_W : x;
-        posY = y;
+        if (!mobile) {
+            const overflowsRight = x + TOOLTIP_W > window.innerWidth - EDGE_MARGIN;
+            flipX = overflowsRight;
+            posX = overflowsRight ? x + BADGE_SIZE - TOOLTIP_W : x;
+            posY = y;
+        }
         requestAnimationFrame(() => {
             open = true;
         });
     });
 </script>
 
-<div
-    class="tooltip-card"
-    class:open
-    class:flip-x={flipX}
-    style="left:{posX}px;top:{posY}px"
-    style:--tooltip-w="{TOOLTIP_W}px"
-    ontransitionend={handleTransitionEnd}
->
-    <button
-        type="button"
-        class="tooltip-toggle"
-        onclick={requestClose}
-        aria-label="Close tooltip {id}"
+{#if mobile}
+    <div class="tooltip-backdrop" class:open onclick={requestClose} role="presentation"></div>
+    <div
+        class="tooltip-sheet"
+        class:open
+        ontransitionend={handleTransitionEnd}
     >
-        {#if closing}
-            {id}
-        {:else}
-            <span class="x-mark" aria-hidden="true"></span>
-        {/if}
-    </button>
-    <div class="tooltip-body">{definition}</div>
-</div>
+        <div class="sheet-header">
+            <span class="sheet-id">{id}</span>
+            <button
+                type="button"
+                class="sheet-close"
+                onclick={requestClose}
+                aria-label="Close tooltip {id}"
+            >
+                <span class="x-mark" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="tooltip-body">{definition}</div>
+    </div>
+{:else}
+    <div
+        class="tooltip-card"
+        class:open
+        class:flip-x={flipX}
+        style="left:{posX}px;top:{posY}px"
+        style:--tooltip-w="{TOOLTIP_W}px"
+        ontransitionend={handleTransitionEnd}
+    >
+        <button
+            type="button"
+            class="tooltip-toggle"
+            onclick={requestClose}
+            aria-label="Close tooltip {id}"
+        >
+            {#if closing}
+                {id}
+            {:else}
+                <span class="x-mark" aria-hidden="true"></span>
+            {/if}
+        </button>
+        <div class="tooltip-body">{definition}</div>
+    </div>
+{/if}
 
 <style>
     .tooltip-card {
@@ -108,6 +134,58 @@
         right: 2px;
     }
 
+    /* Mobile bottom-sheet variant */
+    .tooltip-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: transparent;
+    }
+
+    .tooltip-sheet {
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background: var(--text-black);
+        color: var(--bg);
+        padding: 16px;
+        user-select: none;
+        transform: translateY(100%);
+        transition: transform 260ms cubic-bezier(0.2, 0, 0, 1);
+        will-change: transform;
+    }
+
+    .tooltip-sheet.open {
+        transform: translateY(0);
+    }
+
+    .sheet-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .sheet-id {
+        font-size: var(--text-base);
+        text-transform: uppercase;
+    }
+
+    .sheet-close {
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0;
+        color: var(--bg);
+        cursor: pointer;
+    }
+
     .x-mark {
         position: relative;
         width: 9px;
@@ -138,5 +216,6 @@
     .tooltip-body {
         font-size: var(--text-small);
         margin-top: 10px;
+        color: var(--text-secondary-on-dark);
     }
 </style>

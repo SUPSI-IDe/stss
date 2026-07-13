@@ -2,7 +2,7 @@
     import type { Attachment } from "svelte/attachments";
     import { Tween } from "svelte/motion";
     import { cubicOut } from "svelte/easing";
-    import { SvelteMap } from "svelte/reactivity";
+    import { MediaQuery, SvelteMap, SvelteSet } from "svelte/reactivity";
     import { goto } from "$app/navigation";
     import { resolve } from "$app/paths";
     import type { Pathname } from "$app/types";
@@ -19,12 +19,14 @@
         CORNER_R,
         CLUSTER_PAD_LEFT,
         STUB_LEN,
+        LAYOUT_SIDE_PADDING,
     } from "$lib/constants.js";
 
     import { setPendingScroll } from "$lib/overlayScroll";
     import { isClusterNode } from "$lib/clusterProcessing.js";
     import { measureNodes } from "$lib/nodeBuilder.js";
     import { computeLayout } from "$lib/layoutEngine.js";
+    import { createSegmenter } from "$lib/textUtils.js";
     import {
         createFlowPathGenerator,
         nearestLengthOnPolyline,
@@ -42,9 +44,24 @@
     const ROW_GUIDE_TOP_INSET = 26;
     const DIAGRAM_LEFT_OFFSET = 28;
     const ROW_ARROW_HEIGHT = 8;
+    // On mobile the arrow rides on the row-guide label's line, so the label is
+    // indented past it (arrow width + gap) and the arrow is nudged up onto the
+    // label's cap height.
+    const ROW_ARROW_WIDTH = 9;
+    const MOBILE_ROW_LABEL_INDENT = ROW_ARROW_WIDTH + 4;
+    const MOBILE_ROW_ARROW_RISE = 7;
     const PAGE_PLUS_DIAMETER = BADGE_SIZE;
     const PAGE_PLUS_RADIUS = PAGE_PLUS_DIAMETER / 2;
     const SVG_NS = "http://www.w3.org/2000/svg";
+    const MOBILE_NODE_GAP = 16;
+    const MOBILE_ROOT_ROW = 4;
+    const MOBILE_VISIBLE_NODE_LABELS = new Set([
+        "thinking",
+        "seeing",
+        "sharing",
+        "sensing",
+    ]);
+    const mobileViewport = new MediaQuery("max-width: 800px", false);
 
     let {
         allNodes,
@@ -53,6 +70,7 @@
         activeTooltipId = null,
         onOpenTooltip,
         onPageHoverChange = () => {},
+        onMobileSelectionChange = () => {},
     }: {
         allNodes: NodeData[];
         uniqueFlows: Flow[];
@@ -64,6 +82,7 @@
             anchorY: number,
         ) => void;
         onPageHoverChange?: (pageRoute: string | null) => void;
+        onMobileSelectionChange?: (hasSelection: boolean) => void;
     } = $props();
 
     const nodeKey = (row: number, label: string) => `${row} ${label}`;
@@ -71,15 +90,23 @@
         `${nodeKey(row, label)} ${lineIndex}`;
     const renderKey = (x: number, y: number, label: string | number) =>
         `${x} ${y} ${label}`;
+    const isMobileRootNode = (label: string) =>
+        MOBILE_VISIBLE_NODE_LABELS.has(label.toLowerCase().trim());
 
     // Measured node data (rect metrics + node-relative draw model), set once
     // after fonts load. x/y stay at 0 here — layout positions them below.
     let measured = $state<NodeData[]>([]);
+    let mobileMeasuredByRoot = $state.raw<SvelteMap<string, NodeData[]>>(
+        new SvelteMap(),
+    );
     // Container dimensions, kept in sync via bind:clientWidth/clientHeight.
     let cw = $state(0);
     let ch = $state(0);
+    let mobileLayoutAnchorY = $state(0);
 
     let hoveredNode = $state<NodeData | null>(null);
+    let mobileSelectedNodeKey = $state<string | null>(null);
+    let mobileHighlightActive = $state(false);
     // 0 → 1 progress for the flow grow-out animation; reset and re-run per hover.
     const progress = new Tween(0, {
         duration: FLOW_ANIMATION_MS,
@@ -149,31 +176,95 @@
         return { lineRects, tspans, badges };
     }
 
-    // Measure once the fonts are ready. Builds a temporary hidden SVG inside the
-    // container so measurement inherits the real CSS (uppercase, letter-spacing).
+    function wrapToWidth(
+        text: string,
+        maxWidth: number,
+        measureWidth: (str: string) => number,
+    ): string[] {
+        const words = text.trim().split(/\s+/).filter(Boolean);
+        if (!words.length) return [""];
+
+        const lines: string[] = [];
+        let current = "";
+
+        const pushWord = (word: string) => {
+            if (measureWidth(word) <= maxWidth) {
+                current = word;
+                return;
+            }
+
+            let part = "";
+            for (const character of word) {
+                if (part && measureWidth(part + character) > maxWidth) {
+                    lines.push(part);
+                    part = character;
+                } else {
+                    part += character;
+                }
+            }
+            current = part;
+        };
+
+        for (const word of words) {
+            if (!current) {
+                pushWord(word);
+                continue;
+            }
+            const candidate = `${current} ${word}`;
+            if (measureWidth(candidate) <= maxWidth) {
+                current = candidate;
+            } else {
+                lines.push(current);
+                current = "";
+                pushWord(word);
+            }
+        }
+        if (current) lines.push(current);
+        return lines;
+    }
+
+    const matchingFlowsForNode = (key: string) =>
+        uniqueFlows.filter((flow) =>
+            flow.path.some((label, row) => nodeKey(row, label) === key),
+        );
+
+    function mobileVisibleKeysForRoot(rootKey: string | null) {
+        const keys = new SvelteSet<string>();
+        allNodes.forEach((node) => {
+            if (isMobileRootNode(node.label)) {
+                keys.add(nodeKey(node.row, node.label));
+            }
+        });
+        if (!rootKey) return keys;
+
+        matchingFlowsForNode(rootKey).forEach((flow) => {
+            flow.path.forEach((label, row) => keys.add(nodeKey(row, label)));
+        });
+        return keys;
+    }
+
+    // Measure after fonts are ready. A hidden SVG inherits the rendered type
+    // styles; mobile variants are rebuilt only when the available width changes.
     const measure: Attachment<HTMLDivElement> = (containerEl) => {
         let cancelled = false;
+        let resizeObserver: ResizeObserver | null = null;
+        let svg: SVGSVGElement | null = null;
 
         document.fonts.ready.then(() => {
             if (cancelled) return;
 
-            const svg = document.createElementNS(SVG_NS, "svg");
-            svg.setAttribute("width", "0");
-            svg.setAttribute("height", "0");
-            svg.style.position = "absolute";
-            svg.style.visibility = "hidden";
-            containerEl.appendChild(svg);
-
-            const nodes: NodeData[] = allNodes.map((d) => ({
-                ...d,
-                bbox: { ...d.bbox },
-                lineData: d.lineData.map((l) => ({ ...l })),
-            }));
+            const measurementSvg = document.createElementNS(SVG_NS, "svg");
+            svg = measurementSvg;
+            measurementSvg.setAttribute("width", "0");
+            measurementSvg.setAttribute("height", "0");
+            measurementSvg.style.position = "absolute";
+            measurementSvg.style.visibility = "hidden";
+            containerEl.appendChild(measurementSvg);
 
             const measureEl = document.createElementNS(SVG_NS, "text");
             measureEl.setAttribute("font-size", "14");
             measureEl.setAttribute("opacity", "0");
-            svg.appendChild(measureEl);
+            measurementSvg.appendChild(measureEl);
             const measureWidth = (str: string) => {
                 measureEl.textContent = str;
                 return measureEl.getComputedTextLength();
@@ -191,10 +282,22 @@
                 }, 0) +
                 (isFirst && hasPage ? BADGE_PAD + PAGE_PLUS_DIAMETER : 0);
 
-            measureNodes(nodes, svg, LINE_H, PAD_Y);
+            const cloneNodes = () =>
+                allNodes.map((d) => ({
+                    ...d,
+                    bbox: { ...d.bbox },
+                    memberRanges: d.memberRanges
+                        ? new SvelteMap(d.memberRanges)
+                        : null,
+                    lineData: d.lineData.map((line) => ({
+                        ...line,
+                        segments: line.segments.map((segment) => ({ ...segment })),
+                    })),
+                }));
 
-            nodes.forEach((d) => {
-                if (d.lineData && d.lineData.length) {
+            const finalizeNodes = (nodes: NodeData[]) => {
+                measureNodes(nodes, measurementSvg, LINE_H, PAD_Y);
+                nodes.forEach((d) => {
                     d.lineData.forEach((line, i) => {
                         line.width = measureLineWidth(
                             line,
@@ -205,18 +308,192 @@
                     const maxW = Math.max(...d.lineData.map((l) => l.width));
                     d.bbox.width = maxW;
                     d.rectW = maxW;
-                }
-                d.render = buildNodeRenderModel(d, measureWidth);
-            });
+                    d.render = buildNodeRenderModel(d, measureWidth);
+                });
+            };
 
-            svg.remove();
+            const nodes = cloneNodes();
+            finalizeNodes(nodes);
+
+            const tooltipMap = new SvelteMap<string, TooltipData>();
+            allNodes.forEach((node) => {
+                node.lineData.forEach((line) => {
+                    line.segments.forEach((segment) => {
+                        if (segment.tooltip) {
+                            tooltipMap.set(
+                                segment.tooltip.label.toLowerCase().trim(),
+                                segment.tooltip,
+                            );
+                        }
+                    });
+                });
+            });
+            const segmentLine = createSegmenter(tooltipMap);
+            const updateMobileLayoutAnchor = () => {
+                const containerRect = containerEl.getBoundingClientRect();
+                const visualViewport = window.visualViewport;
+                const viewportCenterY = visualViewport
+                    ? visualViewport.offsetTop + visualViewport.height / 2
+                    : window.innerHeight / 2;
+                const layoutHeight = Math.max(
+                    0,
+                    containerRect.height - ROW_GUIDE_TOP_INSET,
+                );
+                mobileLayoutAnchorY = Math.max(
+                    0,
+                    Math.min(
+                        layoutHeight,
+                        viewportCenterY -
+                            containerRect.top -
+                            ROW_GUIDE_TOP_INSET,
+                    ),
+                );
+            };
+            updateMobileLayoutAnchor();
             measured = nodes;
+
+            let lastMobileWidth = -1;
+            const rebuildMobileMeasurements = (containerWidth: number) => {
+                const availableWidth = Math.max(
+                    0,
+                    containerWidth -
+                        MARGIN.left -
+                        MARGIN.right -
+                        LAYOUT_SIDE_PADDING * 2,
+                );
+                if (Math.abs(availableWidth - lastMobileWidth) < 0.5) return;
+                lastMobileWidth = availableWidth;
+
+                const variants = new SvelteMap<string, NodeData[]>();
+                allNodes
+                    .filter((node) => isMobileRootNode(node.label))
+                    .forEach((rootNode) => {
+                        const rootKey = nodeKey(rootNode.row, rootNode.label);
+                        const visibleKeys = mobileVisibleKeysForRoot(rootKey);
+                        const counts = Array.from(
+                            { length: COLS.length },
+                            (_, row) =>
+                                allNodes.filter(
+                                    (node) =>
+                                        node.row === row &&
+                                        visibleKeys.has(
+                                            nodeKey(node.row, node.label),
+                                        ),
+                                ).length,
+                        );
+                        const columnWidths = counts.map((count) =>
+                            count > 1
+                                ? Math.max(
+                                      1,
+                                      (availableWidth -
+                                          MOBILE_NODE_GAP * (count - 1)) /
+                                          count,
+                                  )
+                                : availableWidth,
+                        );
+                        const mobileNodes = cloneNodes();
+
+                        mobileNodes.forEach((node) => {
+                            const key = nodeKey(node.row, node.label);
+                            const count = counts[node.row] ?? 0;
+                            if (
+                                !visibleKeys.has(key) ||
+                                count <= 1 ||
+                                isMobileRootNode(node.label)
+                            ) {
+                                return;
+                            }
+
+                            const columnWidth = columnWidths[node.row];
+                            const pageControlWidth = node.hasPage
+                                ? BADGE_PAD + PAGE_PLUS_DIAMETER
+                                : 0;
+                            const maxTextWidth = Math.max(
+                                1,
+                                columnWidth - pageControlWidth,
+                            );
+                            const members = node.memberRanges
+                                ? [...node.memberRanges.keys()]
+                                : [node.label];
+                            const lines: string[] = [];
+                            const memberRanges = node.memberRanges
+                                ? new SvelteMap<
+                                      string,
+                                      { start: number; end: number }
+                                  >()
+                                : null;
+
+                            members.forEach((member) => {
+                                const start = lines.length;
+                                lines.push(
+                                    ...wrapToWidth(
+                                        member,
+                                        maxTextWidth,
+                                        measureWidth,
+                                    ),
+                                );
+                                memberRanges?.set(member, {
+                                    start,
+                                    end: lines.length - 1,
+                                });
+                            });
+
+                            node.lines = lines;
+                            node.memberRanges = memberRanges;
+                            node.lineData = lines.map((line) => ({
+                                segments: segmentLine(line),
+                                width: 0,
+                            }));
+                        });
+                        finalizeNodes(mobileNodes);
+
+                        mobileNodes.forEach((node) => {
+                            const count = counts[node.row] ?? 0;
+                            if (
+                                count > 1 &&
+                                !isMobileRootNode(node.label) &&
+                                visibleKeys.has(
+                                    nodeKey(node.row, node.label),
+                                )
+                            ) {
+                                node.bbox.width = columnWidths[node.row];
+                            }
+                        });
+                        variants.set(rootKey, mobileNodes);
+                    });
+
+                mobileMeasuredByRoot = variants;
+            };
+
+            rebuildMobileMeasurements(containerEl.clientWidth);
+            resizeObserver = new ResizeObserver(([entry]) => {
+                updateMobileLayoutAnchor();
+                rebuildMobileMeasurements(entry.contentRect.width);
+            });
+            resizeObserver.observe(containerEl);
         });
 
         return () => {
             cancelled = true;
+            resizeObserver?.disconnect();
+            svg?.remove();
         };
     };
+
+    const mobileMatchingFlows = $derived.by(() => {
+        if (!mobileSelectedNodeKey || !mobileHighlightActive) return [];
+        return matchingFlowsForNode(mobileSelectedNodeKey);
+    });
+
+    const mobileVisibleNodeKeys = $derived.by(() => {
+        return mobileVisibleKeysForRoot(mobileSelectedNodeKey);
+    });
+
+    // Report whether a root node is selected so the home view can slide its
+    // mobile intro out of the way while a flow is on screen.
+    $effect(() => {
+        onMobileSelectionChange(Boolean(mobileSelectedNodeKey));
+    });
 
     // Position the measured nodes for the current container size. Pure: clones so
     // computeLayout's x/y writes never touch the measured state.
@@ -224,23 +501,44 @@
         if (!measured.length || cw <= 0) return [];
         const width = cw - MARGIN.left - MARGIN.right;
         const height = ch;
-        const nodes = measured.map((d) => ({ ...d }));
+        const mobileMeasured = mobileSelectedNodeKey
+            ? mobileMeasuredByRoot.get(mobileSelectedNodeKey)
+            : null;
+        const sourceNodes =
+            mobileViewport.current && mobileMeasured
+                ? mobileMeasured
+                : measured;
+        const nodes = sourceNodes.map((d) => ({ ...d }));
+        const layoutNodes = mobileViewport.current
+            ? nodes.filter((node) =>
+                  mobileVisibleNodeKeys.has(nodeKey(node.row, node.label)),
+              )
+            : nodes;
         const layoutHeight = Math.max(0, height - ROW_GUIDE_TOP_INSET);
+        const leftOffset = mobileViewport.current ? 0 : DIAGRAM_LEFT_OFFSET;
+        const layoutWidth = Math.max(0, width - leftOffset);
         computeLayout(
-            nodes,
+            layoutNodes,
             COLS.length,
-            Math.max(0, width - DIAGRAM_LEFT_OFFSET),
+            layoutWidth,
             layoutHeight,
+            {
+                fitRowsByHeight: mobileViewport.current,
+                anchorRow: mobileViewport.current ? MOBILE_ROOT_ROW : undefined,
+                anchorY: mobileViewport.current
+                    ? mobileLayoutAnchorY
+                    : undefined,
+            },
         );
-        nodes.forEach((d) => {
+        layoutNodes.forEach((d) => {
             d.y += ROW_GUIDE_TOP_INSET;
-            d.x += DIAGRAM_LEFT_OFFSET;
+            d.x += leftOffset;
         });
-        return nodes;
+        return layoutNodes;
     });
 
     const rowGuideLabels = $derived.by(() => {
-        const out: { row: number; y: number; label: string }[] = [];
+        const out: { row: number; x: number; y: number; label: string }[] = [];
         for (let row = 0; row < COLS.length; row++) {
             if (ROW_GUIDE_LABELS[row] == null) continue;
             const rowNodes = positioned.filter((d) => d.row === row);
@@ -248,6 +546,7 @@
             const rowTopY = Math.min(...rowNodes.map((d) => d.y + d.rectY));
             out.push({
                 row,
+                x: mobileViewport.current ? MOBILE_ROW_LABEL_INDENT : 0,
                 y: rowTopY - ROW_GUIDE_LABEL_GAP,
                 label: ROW_GUIDE_LABELS[row] ?? "",
             });
@@ -260,13 +559,19 @@
         for (let row = 0; row < COLS.length; row++) {
             const rowNodes = positioned.filter((d) => d.row === row);
             if (!rowNodes.length) continue;
-            const firstTextLineY = Math.min(
-                ...rowNodes.map((d) => {
-                    const textBlockH = (d.lineData.length - 1) * LINE_H;
-                    return d.y - textBlockH / 2;
-                }),
-            );
-            out.push({ row, x: 0, y: firstTextLineY - ROW_ARROW_HEIGHT / 2 });
+            const rowTopY = Math.min(...rowNodes.map((d) => d.y + d.rectY));
+            // On mobile, sit the arrow on the row-guide label's line so it
+            // reads as a header prefix instead of overlapping the first node.
+            const y = mobileViewport.current
+                ? rowTopY - ROW_GUIDE_LABEL_GAP - MOBILE_ROW_ARROW_RISE
+                : Math.min(
+                      ...rowNodes.map((d) => {
+                          const textBlockH = (d.lineData.length - 1) * LINE_H;
+                          return d.y - textBlockH / 2;
+                      }),
+                  ) -
+                  ROW_ARROW_HEIGHT / 2;
+            out.push({ row, x: 0, y });
         }
         return out;
     });
@@ -293,8 +598,18 @@
         return map;
     });
 
+    const interactionNode = $derived(
+        mobileViewport.current &&
+            mobileSelectedNodeKey &&
+            mobileHighlightActive
+            ? (positionedByNode.get(mobileSelectedNodeKey) ?? null)
+            : hoveredNode,
+    );
+
     const matchingFlows = $derived(
-        hoveredNode
+        mobileViewport.current
+            ? mobileMatchingFlows
+            : hoveredNode
             ? (flowsByNode.get(nodeKey(hoveredNode.row, hoveredNode.label)) ??
                   [])
             : [],
@@ -324,7 +639,7 @@
     // targeted by the matching flows; regular nodes color every line.
     const lineFill = $derived.by(() => {
         const fill = new SvelteMap<string, string>();
-        if (!hoveredNode) return fill;
+        if (!interactionNode) return fill;
         const counts = new SvelteMap<string, Record<number, number>>();
 
         const addCount = (key: string, group: number) => {
@@ -376,7 +691,7 @@
     });
 
     function dasharrayFor(flow: Flow): string | undefined {
-        if (!flowGen || !hoveredNode) return undefined;
+        if (!flowGen || !interactionNode) return undefined;
         const polyline = flowGen.polyline(flow);
         if (!polyline) return undefined;
         const total = polyline.totalLength;
@@ -384,8 +699,8 @@
 
         const origin = nearestLengthOnPolyline(
             polyline,
-            hoveredNode.x,
-            hoveredNode.y,
+            interactionNode.x,
+            interactionNode.y,
         );
         const initialStart = Math.max(
             0,
@@ -404,19 +719,44 @@
         return `0 ${start} ${visible} ${rest}`;
     }
 
-    function enterNode(node: NodeData) {
-        hoveredNode = node;
-        onPageHoverChange(node.pageRoute ?? null);
+    function animateFlows() {
         progress.set(0, { duration: 0 });
         progress.set(1);
     }
 
+    function enterNode(node: NodeData) {
+        if (mobileViewport.current) return;
+        hoveredNode = node;
+        onPageHoverChange(node.pageRoute ?? null);
+        animateFlows();
+    }
+
     function leaveNode() {
+        if (mobileViewport.current) return;
         hoveredNode = null;
         onPageHoverChange(null);
     }
 
+    function clearFlowHighlight() {
+        hoveredNode = null;
+        mobileHighlightActive = false;
+        progress.set(0, { duration: 0 });
+        onPageHoverChange(null);
+    }
+
     function clickNode(event: MouseEvent, node: NodeData) {
+        if (mobileViewport.current && isMobileRootNode(node.label)) {
+            const key = nodeKey(node.row, node.label);
+            if (mobileSelectedNodeKey !== key) {
+                event.stopPropagation();
+                mobileSelectedNodeKey = key;
+                mobileHighlightActive = true;
+                onPageHoverChange(null);
+                animateFlows();
+                return;
+            }
+        }
+        if (mobileViewport.current) event.stopPropagation();
         if (!node.pageRoute) return;
         event.stopPropagation();
         // Stash any target section out-of-band and navigate to the BARE route —
@@ -428,7 +768,20 @@
         const path = (
             hashAt === -1 ? node.pageRoute : node.pageRoute.slice(0, hashAt)
         ) as Pathname;
+        clearFlowHighlight();
         void goto(resolve(path)).finally(() => onPageHoverChange(null));
+    }
+
+    function resetMobileView() {
+        if (!mobileViewport.current || !mobileSelectedNodeKey) return;
+        mobileSelectedNodeKey = null;
+        clearFlowHighlight();
+    }
+
+    function keydownDiagram(event: KeyboardEvent) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        resetMobileView();
     }
 
     function clickBadge(event: MouseEvent, tooltip: TooltipData) {
@@ -447,11 +800,21 @@
     {@attach measure}
 >
     {#if positioned.length}
-        <svg width={cw} height={ch}>
+        <svg
+            width={cw}
+            height={ch}
+            class:mobile-expanded={mobileViewport.current &&
+                Boolean(mobileSelectedNodeKey)}
+            role="button"
+            aria-label="Reset diagram to its initial nodes"
+            tabindex={mobileViewport.current && mobileSelectedNodeKey ? 0 : -1}
+            onclick={resetMobileView}
+            onkeydown={keydownDiagram}
+        >
             <g transform="translate({MARGIN.left},{MARGIN.top})">
                 <g class="row-guide-labels">
                     {#each rowGuideLabels as l (l.row)}
-                        <text class="row-guide-label" x="0" y={l.y}
+                        <text class="row-guide-label" x={l.x} y={l.y}
                             >{l.label}</text
                         >
                     {/each}
@@ -478,7 +841,7 @@
                     {#each uniqueFlows as flow, i (i)}
                         {@const match = matchSet.has(flow)}
                         <path
-                            d={flowGen ? flowGen.pathD(flow) : ""}
+                            d={flowGen && match ? flowGen.pathD(flow) : ""}
                             fill="none"
                             stroke={GROUP_COLORS[flow.group - 1]}
                             stroke-width={match ? 2 : 1}
@@ -493,6 +856,8 @@
                         <g
                             class="node"
                             class:has-page={node.pageRoute}
+                            data-node-row={node.row}
+                            data-node-label={node.label}
                             transform="translate({node.x},{node.y})"
                             role="presentation"
                             onmouseenter={() => enterNode(node)}
@@ -612,7 +977,7 @@
     }
 
     .sankey-container :global(svg .row-guide-label) {
-        fill: var(--text-on-dark);
+        fill: var(--text-tertiary-on-light);
         font-size: 11px;
         text-transform: lowercase;
     }
@@ -632,5 +997,21 @@
 
     .sankey-container :global(svg .has-page > text tspan:not(.page-plus)) {
         text-decoration: underline;
+    }
+
+    .sankey-container :global(svg:focus) {
+        outline: none;
+    }
+
+    @media (max-width: 800px) {
+        .sankey-container :global(svg .row-guide-labels),
+        .sankey-container :global(svg .row-arrows) {
+            display: none;
+        }
+
+        .sankey-container :global(svg.mobile-expanded .row-guide-labels),
+        .sankey-container :global(svg.mobile-expanded .row-arrows) {
+            display: inline;
+        }
     }
 </style>
