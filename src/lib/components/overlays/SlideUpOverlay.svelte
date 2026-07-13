@@ -72,7 +72,7 @@
         position: absolute;
         inset: 0;
         overflow: hidden;
-        background: rgba(244, 244, 244, 0.3);
+        background: rgba(244, 244, 244, 0.7);
         isolation: isolate;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
