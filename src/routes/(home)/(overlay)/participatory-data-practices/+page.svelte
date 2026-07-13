@@ -187,7 +187,7 @@
         >
             {#snippet description()}
                 The following protocol was developed during the <a
-                    href={resolve("/pixel-urbani")}>Pixel Urbani workshop</a
+                    href={resolve("/urban-pixels")}>Urban Pixels workshop</a
                 > and is provided as a replicable framework for conducting similar
                 data-plotting activities.
             {/snippet}
@@ -344,7 +344,7 @@
         <ProtocolSection title="From Exploratory Walks to Organised Data">
             {#snippet description()}
                 The following protocol was developed during the <a
-                    href={resolve("/pixel-urbani")}>Pixel Urbani workshop</a
+                    href={resolve("/urban-pixels")}>Urban Pixels workshop</a
                 > and is provided as a replicable framework for conducting similar
                 data-walking activities.
             {/snippet}
@@ -603,7 +603,7 @@
                     The assembled prototypes are prepared for use in subsequent
                     activities (e.g. <a href="#data-walking">Data Walking</a>
                     during the
-                    <a href={resolve("/pixel-urbani")}>Urban Pixel initiative</a
+                    <a href={resolve("/urban-pixels")}>Urban Pixels initiative</a
                     >), where they will be deployed to collect situated data.
                     This step connects prototyping to data collection, ensuring
                     continuity across the methodological process.
@@ -880,7 +880,7 @@
                 experiences, behaviours, and observations are encoded and
                 spatially arranged to support collective interpretation. The
                 traces considered for the mapping activities are those generated
-                during the Pixel Urbani workshop. In this context, participants
+                during the Urban Pixels workshop. In this context, participants
                 were invited to reconstruct their waste-disposal routines using
                 Google Maps by tracing their routes across the city. These
                 routes were then printed and annotated with materials such as
@@ -991,7 +991,7 @@
             title="Encoding Waste Practices through Physical Mapping"
         >
             {#snippet description()}
-                The following protocol was developed during the Pixel Urbani
+                The following protocol was developed during the Urban Pixels
                 workshop and is provided as a replicable framework for
                 conducting participatory data-mapping activities.
             {/snippet}
@@ -1092,7 +1092,7 @@
                 reflect on the physical and spatial dimensions of everyday
                 practices (Domestic Data Streamer, 2025). Within this research,
                 the activity was run during the <a
-                    href={resolve("/pixel-urbani")}>Urban Pixel initiative</a
+                    href={resolve("/urban-pixels")}>Urban Pixels initiative</a
                 > and focuses on recording waste-disposal gestures as they unfold
                 in situ, transforming routine actions into dynamic traces that can
                 be visualised and analysed.
@@ -1214,7 +1214,7 @@
             title="Capturing and reflecting on waste-disposal gestures"
         >
             {#snippet description()}
-                The following protocol was developed during the Urban Pixel
+                The following protocol was developed during the Urban Pixels
                 initiative and is provided as a replicable framework for
                 conducting gesture-tracking activities.
             {/snippet}

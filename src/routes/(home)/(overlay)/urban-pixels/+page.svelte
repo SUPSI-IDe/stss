@@ -212,40 +212,53 @@
             slides.length - 1,
             Math.max(0, Math.round(scrollLeft / slideWidth)),
         );
-        mapAtStart = scrollLeft <= 1;
         mapAtEnd = scrollLeft >= scrollWidth - clientWidth - 1;
     }
 
-    function scrollMapByOne(direction: 1 | -1) {
-        mapScroller?.scrollBy({
-            left: direction * mapScroller.clientWidth,
-            behavior: "smooth",
-        });
+    let mapPaused = $state(false);
+    const MAP_ADVANCE_MS = 3000;
+
+    function advanceMap() {
+        if (!mapScroller) return;
+        if (mapAtEnd) {
+            mapScroller.scrollTo({ left: 0, behavior: "smooth" }); // loop to first
+        } else {
+            mapScroller.scrollBy({
+                left: mapScroller.clientWidth,
+                behavior: "smooth",
+            });
+        }
     }
+
+    $effect(() => {
+        if (mapPaused) return; // hold-to-pause: no timer while pressed
+        const id = setInterval(advanceMap, MAP_ADVANCE_MS);
+        return () => clearInterval(id);
+    });
 </script>
 
 <svelte:window onresize={updateMapCarousel} />
 
 <OverlayArticle
     chapter={6}
-    title="Pixel Urbani"
-    pageClass="pixel-urbani project-page"
+    title="Urban Pixels"
+    pageClass="urban-pixels project-page"
 >
     <div class="info-table page-subgrid">
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-type">
             <p>type: workshop</p>
         </div>
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-timing">
             <p>duration: 3 days</p>
             <p>dates: 16-18 Jul, 2025</p>
         </div>
-        <div class="info-table-cell">
-            <p>title: Pixel Urbani</p>
+        <div class="info-table-cell info-table-title">
+            <p>title: Urban Pixels</p>
             <p>location: Studio Foce, Via Foce 1, Lugano</p>
             <p>part of: LongLake Festival 2025</p>
         </div>
     </div>
-    <div class="media page-subgrid">
+    <div class="media hero-media page-subgrid">
         <div class="composition">
             {#each objects as obj (obj.name)}
                 <AutoplayVideo
@@ -317,7 +330,7 @@
     </div>
     <IntroductoryParagraph>
         <p>
-            Pixel Urbani was a collaborative workshop held from 16 to 18 July
+            Urban Pixels was a collaborative workshop held from 16 to 18 July
             2025 at Studio Foce, Via Foce 1, Lugano, as part of the broader
             public programme of LongLake Festival 2025. Open to all citizens
             upon registration, the workshop brought together members of the
@@ -341,8 +354,10 @@
         </p>
     </IntroductoryParagraph>
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">6.1</span>
-        <h2>Analysis of Results</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">6.1</span>
+            <h2>Analysis of Results</h2>
+        </div>
         <p>
             The workshop produced a qualitative and spatial dataset built
             through data walking, data plotting, and data mapping. During the

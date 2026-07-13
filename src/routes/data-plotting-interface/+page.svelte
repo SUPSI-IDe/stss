@@ -4,7 +4,7 @@
 
 <iframe
   src={asset('/data-plotting/index.html')}
-  title="Pixel urbani — data plotting"
+  title="Urban Pixels — data plotting"
 ></iframe>
 
 <style>

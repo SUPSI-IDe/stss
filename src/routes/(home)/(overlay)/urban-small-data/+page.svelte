@@ -186,12 +186,12 @@
             />
         </div>
         <DescriptionBlock heading="Application">
-            During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano,
+            During the <a href={resolve("/diy-urban-scraping")}>DIY Urban Scraping workshop</a> in Lugano,
             multidisciplinary students prototyped DIY sensing devices using
             low-cost sensors and cameras, converting environmental data into
             real-time visualisations such as thermal mapping and algorithmic
             overlays. Citizens then used these toolkits during collective data
-            walks of the <a href={resolve("/pixel-urbani")}>Urban Pixel initiative</a>, documenting eco-points,
+            walks of the <a href={resolve("/urban-pixels")}>Urban Pixels initiative</a>, documenting eco-points,
             circulation routes, and overflow patterns across neighbourhoods. The
             collected data revealed micro-level dynamics, such as localised
             inefficiencies, temporal fluctuations, and spatial asymmetries, that
@@ -223,7 +223,7 @@
             />
         </div>
         <DescriptionBlock heading="Application">
-            During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano, participants actively
+            During the <a href={resolve("/diy-urban-scraping")}>DIY Urban Scraping workshop</a> in Lugano, participants actively
             reconstructed their waste-disposal routines using Google Maps. They then
             materialised these routes through printed maps, enriching them with coloured
             stickers, strings, pins, and handwritten annotations. These additions
@@ -258,7 +258,7 @@
             />
         </div>
         <DescriptionBlock heading="Application">
-            During the <a href={resolve("/urban-scraping")}>Urban Scraping workshop</a> in Lugano, data generated through
+            During the <a href={resolve("/diy-urban-scraping")}>DIY Urban Scraping workshop</a> in Lugano, data generated through
             collective walks were visualised and discussed in a dedicated activity.
             This process enabled participants to connect each representation with
             its mode of collection, recall the conditions under which the data were
@@ -293,7 +293,7 @@
                 >Gesture Tracker interactive experience</a
             >, organised during
             the
-            <a href={resolve("/pixel-urbani")}>Urban Pixel initiative</a>, captured participants' waste-disposal
+            <a href={resolve("/urban-pixels")}>Urban Pixels initiative</a>, captured participants' waste-disposal
             movements as they unfolded in situ, translating them into real-time
             visualisations that foregrounded the bodily, spatial, and temporal
             negotiation of an everyday practice. By rendering gestures as

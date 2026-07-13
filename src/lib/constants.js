@@ -61,8 +61,8 @@ export const PAGE_META = {
   "/urban-small-data": { chapter: 2, title: "Urban Small Data" },
   "/source-of-small-data": { chapter: 3, title: "Sources of Small Data" },
   "/participatory-data-practices": { chapter: 4, title: "Participatory Data Practices" },
-  "/urban-scraping": { chapter: 5, title: "Urban Scraping" },
-  "/pixel-urbani": { chapter: 6, title: "Pixel Urbani" },
+  "/diy-urban-scraping": { chapter: 5, title: "DIY Urban Scraping" },
+  "/urban-pixels": { chapter: 6, title: "Urban Pixels" },
   "/interfaces-for-public-debate": { chapter: 7, title: "Interfaces for Public Debate" },
 };
 
@@ -79,8 +79,8 @@ export const PAGE_ROUTES = new Map([
   ["data scraping", "/participatory-data-practices#data-scraping"],
   ["data mapping", "/participatory-data-practices#data-mapping"],
   ["gesture tracking", "/participatory-data-practices#gesture-tracking"],
-  ["urban scraping", "/urban-scraping"],
-  ["pixel urbani", "/pixel-urbani"],
+  ["diy urban scraping", "/diy-urban-scraping"],
+  ["urban pixels", "/urban-pixels"],
   ["urban context", "/source-of-small-data"],
   ["personal experience", "/source-of-small-data"],
   ["online platform", "/source-of-small-data"],

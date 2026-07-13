@@ -11,23 +11,23 @@
 
 <OverlayArticle
     chapter={5}
-    title="Urban Scraping"
+    title="DIY Urban Scraping"
     pageClass="urban-scraping project-page"
 >
     <div class="info-table page-subgrid">
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-type">
             <p>type: workshop</p>
+            <p>participants: 9 students</p>
         </div>
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-timing">
             <p>duration: 1 week</p>
             <p>dates: 07-11 Jul, 2025</p>
         </div>
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-title">
             <p>
-                title: Urban Scraping - DIY Kits for Uncovering the City's
+                title: DIY Urban Scraping - DIY Kits for Uncovering the City's
                 Hidden Data
             </p>
-            <p>participants: 9 students</p>
         </div>
     </div>
     <div class="media hero-media page-subgrid">
@@ -47,7 +47,7 @@
                     type: "video/quicktime",
                 },
             ]}
-            ariaLabel="Urban Scraping hero video"
+            ariaLabel="DIY Urban Scraping hero video"
         />
     </div>
     <div class="activity-table page-subgrid">
@@ -89,7 +89,7 @@
     </div>
     <IntroductoryParagraph>
         <p>
-            Urban Scraping: DIY Kits for Uncovering the City’s Hidden Data was a
+            DIY Urban Scraping: DIY Kits for Uncovering the City’s Hidden Data was a
             one-week workshop held from 7 to 11 July 2025, taking place between
             the SUPSI DACD campus FabLab in Mendrisio and Lugano’s LongLake
             Festival, where the developed outcomes were tested and situated
