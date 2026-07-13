@@ -102,7 +102,7 @@
     .source-def {
         grid-column: 4 / -1;
         font-size: var(--text-lead);
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
     }
 </style>

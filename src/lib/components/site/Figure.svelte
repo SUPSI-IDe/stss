@@ -30,7 +30,7 @@
         font-size: var(--text-base);
         font-weight: 500;
         margin-bottom: 8px;
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
     }
 

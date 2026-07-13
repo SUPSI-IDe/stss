@@ -63,8 +63,8 @@
         min-height: 108px;
         margin-top: 64px;
         padding: 38px 8px 18px;
-        background: #fff;
-        color: var(--text-gray);
+        background: none;
+        color: var(--text-tertiary-on-light);
         font-size: var(--text-base);
         line-height: var(--text-muted-leading);
     }

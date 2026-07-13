@@ -19,6 +19,12 @@
     .introductory-paragraph :global(p) {
         font-size: var(--text-display);
         line-height: 105%;
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
+    }
+
+    @media (max-width: 800px) {
+        .introductory-paragraph :global(p) {
+            font-size: 1.5em; /* 20.07px against the 13.38px base */
+        }
     }
 </style>

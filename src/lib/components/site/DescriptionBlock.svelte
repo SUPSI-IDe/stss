@@ -21,7 +21,7 @@
     .description-header {
         font-weight: 500;
         font-size: var(--text-base);
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
         grid-column: 6/9;
         text-box-trim: trim-both;
@@ -37,7 +37,20 @@
     }
 
     .lead {
-        grid-row: 1;
+        grid-row: var(--description-grid-row, 1);
         align-self: start;
+        margin-top: var(--description-top-spacing, 0);
+    }
+
+    @media (max-width: 800px) {
+        .description-header {
+            grid-column: 1 / 3;
+        }
+
+        .description {
+            grid-column: 3 / -1;
+            font-size: var(--text-base);
+            margin-bottom: 20px;
+        }
     }
 </style>

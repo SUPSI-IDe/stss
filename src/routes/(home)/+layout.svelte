@@ -15,6 +15,8 @@
 <style>
     .site-shell {
         position: relative;
-        min-height: 100vh;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
     }
 </style>

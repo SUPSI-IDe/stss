@@ -24,9 +24,11 @@
         position: sticky;
         top: 0;
         z-index: 1;
-        background-color: white;
-        mix-blend-mode: difference;
-        color: black;
+        background-color: var(--method-header-background, white);
+        mix-blend-mode: var(--method-header-blend-mode, difference);
+        backdrop-filter: var(--method-header-backdrop-filter, none);
+        -webkit-backdrop-filter: var(--method-header-backdrop-filter, none);
+        color: var(--method-header-color, black);
         text-box-trim: trim-both;
         grid-column: 1 / -1;
         grid-row: 1;
@@ -47,7 +49,7 @@
 
     @media (max-width: 800px) {
         h2 {
-            grid-column: 1 / 4;
+            grid-column: 1 / -1;
         }
     }
 </style>

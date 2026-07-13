@@ -35,6 +35,7 @@ export const GROUP_COLORS = [
 ];
 export const MAX_LINE = 30;
 export const MARGIN = { top: 0, right: 8, bottom: 0, left: 8 };
+export const LAYOUT_SIDE_PADDING = 8;
 export const BADGE_SIZE = 14;
 export const BADGE_PAD = 4;
 export const LINE_H = 13.5;
@@ -43,6 +44,9 @@ export const CLUSTER_PAD_LEFT = 8;
 export const STUB_LEN = 14;
 export const PAD_Y = 1;
 export const SITE_TITLE = "Small Data Practices for Urban Dialogue";
+export const EXPLORE_INTRO_TITLE = "Explore the repository data flows:";
+export const EXPLORE_INTRO_BODY =
+  "The diagram represents the methods this research contributes to understanding citizen-generated perspectives on waste flows. Its pathways show how small data is collected, interpreted, and activated through situated and embodied practices. By hovering over each node, you can trace how urban phenomena, purposes, modalities, data types, sources, participatory practices, and workshops define and inform one another. Numbered labels provide definitions when hovered over, while underlined terms link to dedicated pages and materials.";
 export const LICENSE_TEXT =
   "©2026. This contribution is part of the BLUECITY project, Innosuisse Flagship 2022-26. Unless otherwise stated, the repository contents are licensed under CC BY-SA 4.0";
 export const PROJECT_CITATION =

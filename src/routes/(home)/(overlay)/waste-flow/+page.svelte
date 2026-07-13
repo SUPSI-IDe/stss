@@ -165,7 +165,7 @@
 
     .intro :global(p) {
         font-size: var(--text-lead);
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
     }
 
@@ -190,9 +190,9 @@
         grid-template-columns: 18px 1fr;
         column-gap: 4px;
         padding: 12px 0;
-        border-top: 1px solid var(--text-muted);
+        border-top: 1px solid var(--text-secondary-on-light);
         font-size: var(--text-base);
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
     }
 

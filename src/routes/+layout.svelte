@@ -64,7 +64,7 @@
     :global(a:hover),
     :global(a:focus),
     :global(a:active) {
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         text-decoration: underline;
         overflow-wrap: anywhere;
         word-break: break-word;
@@ -102,11 +102,14 @@
     :global(:root) {
         /* Colour */
         --text-black: #040404;
-        --text-muted: #646464; /* links + secondary text */
-        --text-gray: #818181; /* footnotes, captions */
-        --text-on-dark: #adadad; /* secondary text on black surfaces */
+        --text-secondary-on-light: #646464; /* links + secondary copy on light surfaces */
+        --text-tertiary-on-light: #818181; /* footnotes + captions on light surfaces */
+        --text-secondary-on-dark: #adadad; /* secondary copy on black surfaces */
         --bg: #f4f4f4;
         --placeholder: #d9d9d9; /* image placeholder fill */
+
+        /* Layout */
+        --page-margin: 8px;
 
         /* Type scale */
         --text-display: 26.76px; /* large headings, intro */
