@@ -9,12 +9,14 @@
         onClose,
         onSelect,
         clickable = false,
+        showMobileClose = true,
     }: {
         chapter: number;
         title: string;
         onClose: () => void;
         onSelect?: () => void;
         clickable?: boolean;
+        showMobileClose?: boolean;
     } = $props();
 </script>
 
@@ -26,7 +28,12 @@
     {:else}
         <h1 class="title">{chapter}. {title}</h1>
     {/if}
-    <button type="button" class="close" onclick={onClose}>Close</button>
+    <button
+        type="button"
+        class="close"
+        class:mobile-hidden={!showMobileClose}
+        onclick={onClose}>Close</button
+    >
 </div>
 
 <style>
@@ -68,11 +75,15 @@
 
     @media (max-width: 800px) {
         .title {
-            grid-column: 1 / 4;
+            grid-column: 1 / 8;
         }
 
         .close {
-            grid-column: 4 / 7;
+            grid-column: 8 / 10;
+        }
+
+        .close.mobile-hidden {
+            display: none;
         }
     }
 </style>

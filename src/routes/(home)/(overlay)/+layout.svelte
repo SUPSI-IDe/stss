@@ -45,6 +45,7 @@
             chapter={ancestor.chapter}
             title={ancestor.title}
             clickable
+            showMobileClose={false}
             onSelect={() => overlayStack.selectAt(i)}
             onClose={() => overlayStack.closeAt(i)}
         />
