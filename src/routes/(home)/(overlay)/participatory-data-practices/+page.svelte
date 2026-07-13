@@ -1285,6 +1285,12 @@
 <style>
     :global(.participatory-data-practices) {
         --description-block-margin-bottom: 76px;
+        --method-header-background: transparent;
+        --method-header-blend-mode: normal;
+        --method-header-backdrop-filter: invert(1);
+        --method-header-color: white;
+        --description-grid-row: 2;
+        --description-top-spacing: 12px;
     }
 
     .practice-media {
@@ -1312,6 +1318,11 @@
     }
 
     @media (max-width: 800px) {
+        .practice-media {
+            aspect-ratio: auto;
+            margin-bottom: 6px;
+        }
+
         .practice-media-left,
         .practice-media-right {
             grid-column: 1 / -1;
@@ -1319,7 +1330,8 @@
 
         .practice-media img,
         .practice-media :global(video) {
-            max-width: 100%;
+            width: 100%;
+            height: auto;
         }
     }
 </style>

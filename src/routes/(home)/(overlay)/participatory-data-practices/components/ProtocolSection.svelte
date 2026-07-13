@@ -35,7 +35,7 @@
     .protocol-header {
         grid-column: 1 / 3;
         padding-left: 8px;
-        color: var(--text-muted);
+        color: var(--text-secondary-on-light);
         line-height: var(--text-muted-leading);
     }
 
@@ -47,5 +47,21 @@
     .protocol-table {
         margin: 24px 8px 76px;
         padding: 0 8px;
+    }
+
+    @media (max-width: 800px) {
+        .protocol-title {
+            margin-bottom: 16px;
+        }
+
+        .protocol-description {
+            grid-column: 3 / -1;
+            font-size: var(--text-base);
+        }
+
+        /* 20px below the description block, before the table of rows. */
+        .protocol-table {
+            margin-top: 20px;
+        }
     }
 </style>
