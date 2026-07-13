@@ -1,5 +1,5 @@
 /*
- * Shared layout for project-showcase overlay pages (pixel-urbani, urban-scraping,
+ * Shared layout for project-showcase overlay pages (urban-pixels, urban-scraping,
  * …). Scoped under `.project-page` — add that class to the page's `pageClass` so
  * these generic selectors (.media, .sub-section, …) never leak to other overlays.
  * The carousel mechanics live in ProjectCarousel.svelte; page-specific bits
@@ -56,6 +56,12 @@
 .project-page .sub-section,
 .project-page .project-description {
     margin-bottom: 45px;
+}
+
+/* Transparent on desktop so num/h2 stay direct grid items of .sub-section;
+   becomes a real 2-column block on mobile (see media query below). */
+.project-page .sub-section-head {
+    display: contents;
 }
 
 .project-page .sub-section-num {

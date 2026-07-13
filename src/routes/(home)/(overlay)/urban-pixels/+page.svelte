@@ -199,7 +199,6 @@
 
     let mapScroller: HTMLDivElement | undefined = $state();
     let activeSlideIndex = $state(0);
-    let mapAtStart = $state(true);
     let mapAtEnd = $state(false);
     let activeSlide = $derived(slides[activeSlideIndex] ?? slides[0]);
 
@@ -394,15 +393,16 @@
             local routines and observations into shared, interpretable evidence.
         </p>
     </div>
-    <div class="pixel-map-carousel">
-        {#if !mapAtStart}
-            <button
-                type="button"
-                class="map-carousel-arrow map-carousel-arrow-left"
-                aria-label="Previous map"
-                onclick={() => scrollMapByOne(-1)}>&lt;</button
-            >
-        {/if}
+    <div
+        class="pixel-map-carousel"
+        role="group"
+        aria-label="Participant maps"
+        aria-roledescription="carousel"
+        onpointerdown={() => (mapPaused = true)}
+        onpointerup={() => (mapPaused = false)}
+        onpointercancel={() => (mapPaused = false)}
+        onpointerleave={() => (mapPaused = false)}
+    >
         <div class="project-info-table page-subgrid">
             <div class="project-info-cell">
                 <h3>District:</h3>
@@ -439,18 +439,12 @@
             <h3>Related activities:</h3>
             <p>{activeSlide.activity}</p>
         </div>
-        {#if !mapAtEnd}
-            <button
-                type="button"
-                class="map-carousel-arrow map-carousel-arrow-right"
-                aria-label="Next map"
-                onclick={() => scrollMapByOne(1)}>&gt;</button
-            >
-        {/if}
     </div>
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">6.2</span>
-        <h2>Discussion on the method</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">6.2</span>
+            <h2>Discussion on the method</h2>
+        </div>
         <p>
             The workshop method was structured as a sequence in which data
             walking, data plotting, and data mapping progressively transformed
@@ -549,35 +543,6 @@
         object-fit: contain;
     }
 
-    .map-carousel-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 28px;
-        height: 28px;
-        padding: 0;
-        border: none;
-        background-color: black;
-        color: white;
-        font-family: inherit;
-        font-size: var(--text-base);
-        font-weight: 500;
-        line-height: 1;
-        cursor: pointer;
-    }
-
-    .map-carousel-arrow-left {
-        left: 8px;
-    }
-
-    .map-carousel-arrow-right {
-        right: 8px;
-    }
-
     /* Page-specific: heading and body sit side by side. */
     .project-description h3 {
         grid-column: 1 / 7;
@@ -585,5 +550,15 @@
 
     .project-description p {
         grid-column: 7 / -1;
+    }
+
+    @media (max-width: 800px) {
+        .hero-media {
+            aspect-ratio: 1;
+        }
+
+        .pixel-map-carousel .project-info-table {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
 </style>

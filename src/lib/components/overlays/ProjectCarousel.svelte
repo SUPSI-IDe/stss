@@ -35,8 +35,35 @@
         arrowTop = `${mediaRect.top + mediaRect.height / 2 - carouselRect.top}px`;
     }
 
+    /**
+     * Give every bottom description panel the height of the tallest one, so the
+     * black bars line up across slides. Reset to natural height first, measure
+     * the max, then apply it. Recomputed on resize (and after fonts load).
+     */
+    function equalizeDescriptions() {
+        if (!scroller) return;
+        const panels = scroller.querySelectorAll<HTMLElement>(".project-description");
+        if (!panels.length) return;
+        panels.forEach((panel) => (panel.style.height = "auto"));
+        let maxHeight = 0;
+        panels.forEach((panel) => {
+            maxHeight = Math.max(maxHeight, panel.offsetHeight);
+        });
+        panels.forEach((panel) => (panel.style.height = `${maxHeight}px`));
+    }
+
+    function onResize() {
+        equalizeDescriptions();
+        updateArrows();
+    }
+
     $effect(() => {
+        equalizeDescriptions();
         updateArrowTop();
+        document.fonts?.ready.then(() => {
+            equalizeDescriptions();
+            updateArrowTop();
+        });
     });
 
     function scrollByOne(direction: 1 | -1) {
@@ -47,7 +74,7 @@
     }
 </script>
 
-<svelte:window onresize={updateArrows} />
+<svelte:window onresize={onResize} />
 
 <div class="carousel" bind:this={carousel} style:--arrow-top={arrowTop}>
     {#if !atStart}

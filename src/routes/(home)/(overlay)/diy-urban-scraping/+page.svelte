@@ -142,8 +142,10 @@
         </p>
     </IntroductoryParagraph>
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">5.1</span>
-        <h2>Analysis of Results</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">5.1</span>
+            <h2>Analysis of Results</h2>
+        </div>
         <p>
             The workshop generated a set of DIY sensing kits that turned a
             shared methodological framework into distinct and situated urban
@@ -342,8 +344,10 @@
         </div>
     </ProjectCarousel>
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">5.2</span>
-        <h2>Discussion on the method</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">5.2</span>
+            <h2>Discussion on the method</h2>
+        </div>
         <p>
             The method combined principles of conditional design (REF) with a
             situated approach to citizen-driven urban sensing. By working with a
@@ -392,5 +396,20 @@
     }
     .project-description p {
         grid-column: 1 / -1;
+    }
+
+    @media (max-width: 800px) {
+        .project-info-table {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project-info-table .project-info-cell {
+            grid-column: auto;
+            min-width: 0;
+        }
+
+        .project-info-table .project-info-cell:last-child {
+            grid-column: 1 / -1;
+        }
     }
 </style>

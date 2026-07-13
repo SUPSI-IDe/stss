@@ -97,16 +97,16 @@
     pageClass="public-debate project-page"
 >
     <div class="info-table page-subgrid">
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-type">
             <p>type: course</p>
+            <p>participants: 8 students</p>
         </div>
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-timing">
             <p>duration: 2 days</p>
             <p>dates: 10-11 Jul, 2025</p>
         </div>
-        <div class="info-table-cell">
+        <div class="info-table-cell info-table-title">
             <p>title: Interfaces for Public Debate</p>
-            <p>participants: 8 students</p>
         </div>
     </div>
     <div class="media hero-media page-subgrid">
@@ -240,8 +240,10 @@
     </IntroductoryParagraph>
 
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">7.1</span>
-        <h2>Analysis of Results</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">7.1</span>
+            <h2>Analysis of Results</h2>
+        </div>
         <p>
             The course generated six interactive interfaces that transform data
             collected through scraping across different platforms into entry
@@ -292,7 +294,7 @@
         {#each projects as project (project.title)}
             <div class="project-slide">
                 <div class="project-info-table page-subgrid">
-                    <div class="project-info-cell">
+                    <div class="project-info-cell project-info-cell-title">
                         <h3>Title:</h3>
                         <p>{project.title}</p>
                         <p class="tagline">{project.tagline}</p>
@@ -322,8 +324,10 @@
     </ProjectCarousel>
 
     <div class="sub-section page-subgrid">
-        <span class="sub-section-num">7.2</span>
-        <h2>Discussion on the method</h2>
+        <div class="sub-section-head">
+            <span class="sub-section-num">7.2</span>
+            <h2>Discussion on the method</h2>
+        </div>
         <p>
             A first key aspect of the method concerns the effort to avoid overly
             simplified or polarised framings of debate. At the initial stage,
@@ -443,6 +447,21 @@
         text-align: right;
     }
 
+    @media (max-width: 800px) {
+        .hero-media :global(.hero-video-tall) {
+            width: 100%;
+            height: auto;
+        }
+
+        :global(.project-page) .project-info-cell-title {
+            grid-column: 1 / 6;
+        }
+
+        :global(.project-page) .project-info-cell-website {
+            grid-column: 6 / 10;
+        }
+    }
+
     .project-info-cell-website :global(a) {
         color: white;
     }
@@ -466,7 +485,7 @@
     figcaption {
         margin-top: 6px;
         font-size: var(--text-small);
-        color: var(--text-gray);
+        color: var(--text-tertiary-on-light);
         line-height: var(--text-muted-leading);
     }
 </style>
