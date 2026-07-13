@@ -92,6 +92,19 @@
     </IntroductoryParagraph>
     <CitationList>
         <Citation>
+            Autuori, A., Terenghi, G., Mioni, A., Draisci, L., Profeta, G.,
+            &amp; Botta, M. (2026). Seeing, Thinking, Sharing, Sensing Small
+            Data. A Participatory Framework to Connect Citizens&rsquo;
+            Experiences with Urban Governance. In Proceedings of the 19th
+            Participatory Design Conference 2026, Vol. 2: Exploratory Papers
+            and Doctoral Colloquium (PDC &rsquo;26) (pp. 131–140). Association
+            for Computing Machinery.
+            <ExternalLink href="https://doi.org/10.1145/3789492.3796412">
+                https://doi.org/10.1145/3789492.3796412
+            </ExternalLink>
+        </Citation>
+
+        <Citation>
             Bowker, G. C., &amp; Star, S. L. (2008). Sorting things out:
             Classification and its consequences (1. paperback ed., 8. print).
             MIT Press.
