@@ -35,16 +35,16 @@
             class="hero-video hero-video-wide"
             sources={[
                 {
-                    src: asset("/images/alpha-assets/urban-pixels-safari.mov"),
+                    src: asset("/media/diy-urban-scraping/hero-safari.mov"),
                     type: "video/quicktime",
                 },
                 {
-                    src: asset("/images/alpha-assets/urban-pixels.webm"),
+                    src: asset("/media/diy-urban-scraping/hero.webm"),
                     type: "video/webm",
                 },
                 {
-                    src: asset("/images/heroes/urban-scraping.mov"),
-                    type: "video/quicktime",
+                    src: asset("/media/diy-urban-scraping/hero.mp4"),
+                    type: "video/mp4",
                 },
             ]}
             ariaLabel="DIY Urban Scraping hero video"
@@ -186,15 +186,15 @@
                 <AutoplayVideo
                     sources={[
                         {
-                            src: asset("/images/alpha-assets/waste-overflow-safari.mov"),
+                            src: asset("/media/diy-urban-scraping/waste-overflow-safari.mov"),
                             type: "video/quicktime",
                         },
                         {
-                            src: asset("/images/alpha-assets/waste-overflow.webm"),
+                            src: asset("/media/diy-urban-scraping/waste-overflow.webm"),
                             type: "video/webm",
                         },
                         {
-                            src: asset("/videos/urban-scraping-1.mp4"),
+                            src: asset("/media/diy-urban-scraping/waste-overflow.mp4"),
                             type: "video/mp4",
                         },
                     ]}
@@ -245,15 +245,15 @@
                 <AutoplayVideo
                     sources={[
                         {
-                            src: asset("/images/alpha-assets/entropy-safari.mov"),
+                            src: asset("/media/diy-urban-scraping/entropy-safari.mov"),
                             type: "video/quicktime",
                         },
                         {
-                            src: asset("/images/alpha-assets/entropy.webm"),
+                            src: asset("/media/diy-urban-scraping/entropy.webm"),
                             type: "video/webm",
                         },
                         {
-                            src: asset("/videos/urban-scraping-2.mp4"),
+                            src: asset("/media/diy-urban-scraping/entropy.mp4"),
                             type: "video/mp4",
                         },
                     ]}
@@ -305,15 +305,15 @@
                 <AutoplayVideo
                     sources={[
                         {
-                            src: asset("/images/alpha-assets/thermal-access-safari.mov"),
+                            src: asset("/media/diy-urban-scraping/thermal-access-safari.mov"),
                             type: "video/quicktime",
                         },
                         {
-                            src: asset("/images/alpha-assets/thermal-access.webm"),
+                            src: asset("/media/diy-urban-scraping/thermal-access.webm"),
                             type: "video/webm",
                         },
                         {
-                            src: asset("/videos/urban-scraping-3.mp4"),
+                            src: asset("/media/diy-urban-scraping/thermal-access.mp4"),
                             type: "video/mp4",
                         },
                     ]}
