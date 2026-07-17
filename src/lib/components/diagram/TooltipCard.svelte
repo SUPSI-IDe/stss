@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { onDestroy, onMount } from 'svelte';
     import type { TooltipData } from '$lib/types';
     import { BADGE_SIZE } from '$lib/constants.js';
 
@@ -18,6 +18,11 @@
     let flipX = $state<boolean>(false);
     let open = $state<boolean>(false);
     let closing = $state<boolean>(false);
+    let closeButton = $state<HTMLButtonElement>();
+    let returnFocusTo: HTMLElement | SVGElement | null = null;
+    let openFrame: number | null = null;
+
+    let bodyId = $derived(`tooltip-definition-${id}`);
 
     function requestClose() {
         if (closing) return;
@@ -31,24 +36,61 @@
         if (closing) onclose();
     }
 
+    function handleWindowKeydown(event: KeyboardEvent) {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            requestClose();
+            return;
+        }
+        if (mobile && event.key === 'Tab') {
+            event.preventDefault();
+            closeButton?.focus();
+        }
+    }
+
     onMount(() => {
+        returnFocusTo =
+            document.activeElement instanceof HTMLElement ||
+            document.activeElement instanceof SVGElement
+                ? document.activeElement
+                : null;
         if (!mobile) {
             const overflowsRight = x + TOOLTIP_W > window.innerWidth - EDGE_MARGIN;
             flipX = overflowsRight;
             posX = overflowsRight ? x + BADGE_SIZE - TOOLTIP_W : x;
             posY = y;
         }
-        requestAnimationFrame(() => {
+        openFrame = requestAnimationFrame(() => {
             open = true;
+            closeButton?.focus();
         });
+
+        return () => {
+            if (openFrame !== null) cancelAnimationFrame(openFrame);
+        };
+    });
+
+    onDestroy(() => {
+        returnFocusTo?.focus();
     });
 </script>
 
+<svelte:window onkeydown={handleWindowKeydown} />
+
 {#if mobile}
-    <div class="tooltip-backdrop" class:open onclick={requestClose} role="presentation"></div>
+    <div
+        class="tooltip-backdrop"
+        class:open
+        onclick={requestClose}
+        aria-hidden="true"
+    ></div>
     <div
         class="tooltip-sheet"
         class:open
+        role="dialog"
+        aria-modal="true"
+        aria-label="Definition {id}"
+        aria-describedby={bodyId}
         ontransitionend={handleTransitionEnd}
     >
         <div class="sheet-header">
@@ -56,13 +98,14 @@
             <button
                 type="button"
                 class="sheet-close"
+                bind:this={closeButton}
                 onclick={requestClose}
                 aria-label="Close tooltip {id}"
             >
                 <span class="x-mark" aria-hidden="true"></span>
             </button>
         </div>
-        <div class="tooltip-body">{definition}</div>
+        <div class="tooltip-body" id={bodyId}>{definition}</div>
     </div>
 {:else}
     <div
@@ -71,11 +114,15 @@
         class:flip-x={flipX}
         style="left:{posX}px;top:{posY}px"
         style:--tooltip-w="{TOOLTIP_W}px"
+        role="dialog"
+        aria-label="Definition {id}"
+        aria-describedby={bodyId}
         ontransitionend={handleTransitionEnd}
     >
         <button
             type="button"
             class="tooltip-toggle"
+            bind:this={closeButton}
             onclick={requestClose}
             aria-label="Close tooltip {id}"
         >
@@ -85,7 +132,7 @@
                 <span class="x-mark" aria-hidden="true"></span>
             {/if}
         </button>
-        <div class="tooltip-body">{definition}</div>
+        <div class="tooltip-body" id={bodyId}>{definition}</div>
     </div>
 {/if}
 
