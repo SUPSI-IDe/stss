@@ -12,7 +12,7 @@
     } from "$lib/components";
 
     const smallDataVideo = (name: string) =>
-        asset(`/images/pages/small data/small-data-${name}.mp4`);
+        asset(`/media/urban-small-data/${name}.mp4`);
 </script>
 
 <OverlayArticle
