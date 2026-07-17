@@ -172,6 +172,7 @@
     .content {
         grid-column: 9 / -1;
         grid-row: 1;
+        padding-top: 24px;
         padding-right: 8px;
     }
 
