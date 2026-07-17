@@ -1,13 +1,21 @@
 <script lang="ts">
     import { base } from "$app/paths";
+    import AutoplayVideo from "./AutoplayVideo.svelte";
+
+    type Source = {
+        src: string;
+        type?: string;
+    };
 
     let {
         src,
+        sources = [],
         alt,
         caption,
         marker = "+"
     }: {
-        src: string;
+        src?: string;
+        sources?: Source[];
         alt: string;
         caption: string;
         marker?: string;
@@ -17,7 +25,11 @@
 <figure class="figure">
     <figcaption><span class="figure-marker">{marker}</span> {caption}</figcaption>
     <div class="figure-frame">
-        <img src="{base}/{src}" {alt} />
+        {#if sources.length > 0}
+            <AutoplayVideo {sources} ariaLabel={alt} />
+        {:else if src}
+            <img src="{base}/{src}" {alt} />
+        {/if}
     </div>
 </figure>
 
@@ -47,7 +59,8 @@
         padding: 16px;
     }
 
-    .figure-frame img {
+    .figure-frame img,
+    .figure-frame :global(video) {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;

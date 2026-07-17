@@ -1,6 +1,17 @@
 <script lang="ts">
-    import { resolve } from "$app/paths";
+    import { asset, resolve } from "$app/paths";
     import { Figure, OverlayArticle } from "$lib/components";
+
+    const alphaVideo = (name: string) => [
+        {
+            src: asset(`/media/waste-flow/${name}-safari.mov`),
+            type: "video/quicktime",
+        },
+        {
+            src: asset(`/media/waste-flow/${name}.webm`),
+            type: "video/webm",
+        },
+    ];
 </script>
 
 <OverlayArticle chapter={1} title="Waste Flow" pageClass="waste-flow">
@@ -62,12 +73,12 @@
 
         <div class="figures">
             <Figure
-                src="images/Ecopunto.gif"
+                sources={alphaVideo("ecopoint")}
                 alt="Ecopoints"
                 caption="Ecopoints"
             />
             <Figure
-                src="images/EcoCentro.gif"
+                sources={alphaVideo("ecocenter")}
                 alt="Ecocenters"
                 caption="Ecocenters"
             />
@@ -145,7 +156,7 @@
 
         <div class="figures figures-single">
             <Figure
-                src="images/saccorosso.gif"
+                sources={alphaVideo("red-bag")}
                 alt="Red bag (RSU)"
                 caption="Red bag (RSU)"
             />
@@ -217,6 +228,10 @@
         column-gap: var(--grid-gap);
         padding: 12px 0;
         border-top: 1px solid rgba(4, 4, 4, 0.18);
+    }
+
+    .figures :global(.figure-frame) {
+        background: transparent;
     }
 
     .figures-single :global(.figure) {
