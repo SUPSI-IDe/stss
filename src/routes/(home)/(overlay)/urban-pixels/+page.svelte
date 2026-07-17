@@ -24,19 +24,19 @@
     type ObjectClip = { name: string; x: number; y: number; w: number };
 
     const objects: ObjectClip[] = [
-        { name: "uova", x: 56, y: 12, w: 15 }, // top-centre
-        { name: "sacco", x: 84, y: 10, w: 16 }, // top-right
+        { name: "eggs", x: 56, y: 12, w: 15 }, // top-centre
+        { name: "bag", x: 84, y: 10, w: 16 }, // top-right
         { name: "banana", x: 5, y: 28, w: 17 }, // mid-left
-        { name: "bottiglia", x: 33, y: 50, w: 12 }, // centre
-        { name: "tappi", x: 3, y: 60, w: 16 }, // bottom-left
-        { name: "mela", x: 86, y: 58, w: 15 }, // bottom-right
+        { name: "bottle", x: 33, y: 50, w: 12 }, // centre
+        { name: "caps", x: 3, y: 60, w: 16 }, // bottom-left
+        { name: "apple", x: 86, y: 58, w: 15 }, // bottom-right
         { name: "pizza", x: 57, y: 64, w: 15 }, // bottom-centre
-        { name: "pila", x: 61, y: 40, w: 11 }, // centre
+        { name: "battery", x: 61, y: 40, w: 11 }, // centre
     ];
 
     const slides: [Slide, ...Slide[]] = [
         {
-            image: "mappa1.webp",
+            image: "map-01.webp",
             district: "Besso",
             transport: "Walking",
             time: "06:00 AM",
@@ -44,7 +44,7 @@
             activity: "I listen to music and put my phone away",
         },
         {
-            image: "mappa2.webp",
+            image: "map-02.webp",
             district: "Pregassona",
             transport: "Walking",
             time: "06:00 PM",
@@ -53,7 +53,7 @@
                 "Every now and then, after taking out the trash, I stop by Aldi to buy whatever I’m missing at home",
         },
         {
-            image: "mappa3.webp",
+            image: "map-03.webp",
             district: "Lugano Centro",
             transport: "Walking",
             time: "10:00 AM",
@@ -61,7 +61,7 @@
             activity: "Travelling",
         },
         {
-            image: "mappa4.webp",
+            image: "map-04.webp",
             district: "Lugano Centro",
             transport: "Walking",
             time: "00:00 AM",
@@ -70,7 +70,7 @@
                 "I also take the opportunity to pick up the mail or move my car if I left it in a public parking spot on Saturday night",
         },
         {
-            image: "mappa5.webp",
+            image: "map-05.webp",
             district: "Breganzona",
             transport: "Walking",
             time: "10:00 AM",
@@ -79,7 +79,7 @@
                 "When I already have to leave the house for groceries, work, etc., I don’t really have a fixed routine",
         },
         {
-            image: "mappa6.webp",
+            image: "map-06.webp",
             district: "Loreto",
             transport: "Car",
             time: "12:00 PM; 04:00 PM",
@@ -87,7 +87,7 @@
             activity: "To go grocery shopping",
         },
         {
-            image: "mappa7.webp",
+            image: "map-07.webp",
             district: "Loreto",
             transport: "Walking",
             time: "08:00 AM",
@@ -95,7 +95,7 @@
             activity: "",
         },
         {
-            image: "mappa8.webp",
+            image: "map-08.webp",
             district: "Pregassona",
             transport: "Walking",
             time: "08:00 AM",
@@ -103,7 +103,7 @@
             activity: "I’m usually with my two dogs.",
         },
         {
-            image: "mappa9.webp",
+            image: "map-09.webp",
             district: "Lugano Centro",
             transport: "Public Transport",
             time: "08:00 AM",
@@ -112,7 +112,7 @@
                 "In the morning while I’m at work or at Migros Lugano Centro (while I’m doing grocery shopping)",
         },
         {
-            image: "mappa10.webp",
+            image: "map-10.webp",
             district: "Paradiso",
             transport: "Walking",
             time: "10:00 AM",
@@ -120,7 +120,7 @@
             activity: "Grocery shopping – Weekend – Going out for dinner",
         },
         {
-            image: "mappa11.webp",
+            image: "map-11.webp",
             district: "Viganello",
             transport: "Walking",
             time: "08:00 AM",
@@ -129,7 +129,7 @@
                 "On my way to work, I leave the paper bags in the basement so I can reuse them later",
         },
         {
-            image: "mappa12.webp",
+            image: "map-12.webp",
             district: "Riva San Vitale",
             transport: "Walking",
             time: "08:00 PM",
@@ -137,7 +137,7 @@
             activity: "Going for a walk",
         },
         {
-            image: "mappa13.webp",
+            image: "map-13.webp",
             district: "Sementina",
             transport: "Walking",
             time: "06:00 PM",
@@ -146,7 +146,7 @@
                 "I dispose of it before going to the gym since it’s on the way",
         },
         {
-            image: "mappa14.webp",
+            image: "map-14.webp",
             district: "Ecocentro Breganzona",
             transport: "Car",
             time: "08:00 AM",
@@ -155,7 +155,7 @@
                 "I usually go around 12:00–12:30 because it’s not crowded. I avoid Saturdays because everyone goes then",
         },
         {
-            image: "mappa15.webp",
+            image: "map-15.webp",
             district: "Pazzallo",
             transport: "Walking",
             time: "06:00 PM",
@@ -163,7 +163,7 @@
             activity: "I stay informed through social media",
         },
         {
-            image: "mappa16.webp",
+            image: "map-16.webp",
             district: "Lugano Centro",
             transport: "Walking",
             time: "00:00 AM",
@@ -171,7 +171,7 @@
             activity: "",
         },
         {
-            image: "mappa17.webp",
+            image: "map-17.webp",
             district: "Breganzona",
             transport: "Walking",
             time: "02:00 PM; 04:00 PM",
@@ -180,7 +180,7 @@
                 "I take advantage of the walk from home to the bus stop to take out the RSU waste bag",
         },
         {
-            image: "mappa18.webp",
+            image: "map-18.webp",
             district: "Morbio",
             transport: "Walking",
             time: "04:00 PM",
@@ -188,7 +188,7 @@
             activity: "Going out in the evening, taking the dog out",
         },
         {
-            image: "mappa19.webp",
+            image: "map-19.webp",
             district: "Cadro",
             transport: "Bicycle",
             time: "08:00 AM",
@@ -265,11 +265,11 @@
                     style="left: {obj.x}%; top: {obj.y}%; width: {obj.w}%;"
                     sources={[
                         {
-                            src: `${base}/videos/${obj.name}.webm`,
+                            src: `${base}/media/urban-pixels/objects/${obj.name}.webm`,
                             type: "video/webm",
                         },
                         {
-                            src: `${base}/videos/${obj.name}.mp4`,
+                            src: `${base}/media/urban-pixels/objects/${obj.name}.mp4`,
                             type: "video/mp4",
                         },
                     ]}
@@ -429,7 +429,7 @@
             {#each slides as slide (slide.image)}
                 <div class="pixel-map-slide">
                     <img
-                        src="{base}/images/web_optimized/{slide.image}"
+                        src="{base}/media/urban-pixels/maps/{slide.image}"
                         alt="Map by a {slide.district} participant"
                     />
                 </div>
