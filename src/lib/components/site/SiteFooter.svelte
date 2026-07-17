@@ -34,14 +34,10 @@
     <div class="license-block footer-contacts">
         <span class="license-label">Contacts</span>
         <span class="license-text">
-            <ExternalLink href="https://www.instagram.com/maindmastersupsi/"
-                >Instagram</ExternalLink
-            > -
-            <ExternalLink
-                href="https://www.linkedin.com/school/master-maind-supsi/"
-                >LinkedIn</ExternalLink
-            > -
-            <a href="mailto:info@bluecity.store">Mail</a>
+            <a href="mailto:antonella.autuori@supsi.ch">Mail</a> -
+            <ExternalLink href="https://www.supsi.ch/ide-interaction-design"
+                >Site</ExternalLink
+            >
         </span>
     </div>
 
