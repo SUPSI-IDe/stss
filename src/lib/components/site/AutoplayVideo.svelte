@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import type { Attachment } from "svelte/attachments";
 
     type Source = {
         src: string;
@@ -13,7 +13,7 @@
         ariaLabel,
         class: className = "",
         style,
-        preload = "auto",
+        preload = "metadata",
     }: {
         src?: string;
         sources?: Source[];
@@ -24,54 +24,67 @@
         preload?: "none" | "metadata" | "auto";
     } = $props();
 
-    let video = $state<HTMLVideoElement>();
+    const managePlayback: Attachment<HTMLVideoElement> = (video) => {
+        let isInViewport = !("IntersectionObserver" in window);
 
-    async function start() {
-        if (!video) return;
+        async function syncPlayback() {
+            const shouldPlay =
+                isInViewport && document.visibilityState === "visible";
+
+            if (!shouldPlay) {
+                video.pause();
+                return;
+            }
+
+            try {
+                await video.play();
+
+                // The video may have left the viewport while play() was pending.
+                if (
+                    !isInViewport ||
+                    document.visibilityState !== "visible"
+                ) {
+                    video.pause();
+                }
+            } catch {
+                // Browsers may still defer muted autoplay under power policies.
+            }
+        }
 
         video.muted = true;
         video.defaultMuted = true;
 
-        try {
-            await video.play();
-        } catch {
-            // Muted autoplay can still be deferred by browser power policies;
-            // readiness and intersection events will retry without surfacing noise.
-        }
-    }
+        const observer =
+            "IntersectionObserver" in window
+                ? new IntersectionObserver(([entry]) => {
+                      isInViewport = entry.isIntersecting;
+                      void syncPlayback();
+                  })
+                : undefined;
 
-    onMount(() => {
-        start();
+        observer?.observe(video);
+        document.addEventListener("visibilitychange", syncPlayback);
+        void syncPlayback();
 
-        if (!video || !("IntersectionObserver" in window)) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries.some((entry) => entry.isIntersecting)) start();
-            },
-            { rootMargin: "200px" },
-        );
-
-        observer.observe(video);
-
-        return () => observer.disconnect();
-    });
+        return () => {
+            observer?.disconnect();
+            document.removeEventListener("visibilitychange", syncPlayback);
+            video.pause();
+        };
+    };
 </script>
 
 <video
-    bind:this={video}
+    {@attach managePlayback}
     class={className}
     {style}
     {src}
     aria-label={ariaLabel}
-    autoplay
     loop
     muted
     playsinline
     {preload}
     {poster}
-    oncanplay={start}
-    onloadeddata={start}
 >
     {#each sources as source (source.src)}
         <source src={source.src} type={source.type} />
