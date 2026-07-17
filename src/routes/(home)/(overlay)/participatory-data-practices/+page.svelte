@@ -17,7 +17,7 @@
 
     const practiceMedia = (folder: string, filename: string) =>
         asset(
-            `/images/pages/participatory-data-practices/${folder}/${filename}`,
+            `/media/participatory-data-practices/${folder}/${filename}`,
         );
 </script>
 
@@ -116,13 +116,13 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <AutoplayVideo
-                src={practiceMedia("data_plotting", "data-plotting1.mp4")}
+                src={practiceMedia("data-plotting", "data-plotting-1.mp4")}
                 ariaLabel="Data plotting workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <AutoplayVideo
-                src={practiceMedia("data_plotting", "data-plotting2.mp4")}
+                src={practiceMedia("data-plotting", "data-plotting-2.mp4")}
                 ariaLabel="Data plotting workshop media 2"
             />
         </div>
@@ -286,13 +286,13 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <AutoplayVideo
-                src={practiceMedia("data_walking", "data-walking1.mp4")}
+                src={practiceMedia("data-walking", "data-walking-1.mp4")}
                 ariaLabel="Data walking workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <img
-                src={practiceMedia("data_walking", "data-walking2.webp")}
+                src={practiceMedia("data-walking", "data-walking-2.webp")}
                 alt="Data walking workshop media 2"
             />
         </div>
@@ -448,15 +448,15 @@
         <div class="practice-media practice-media-left">
             <img
                 src={practiceMedia(
-                    "data_prototyping",
-                    "data-prototyping1.webp",
+                    "data-prototyping",
+                    "data-prototyping-1.webp",
                 )}
                 alt="Data prototyping workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <AutoplayVideo
-                src={practiceMedia("data_prototyping", "data-prototyping2.mp4")}
+                src={practiceMedia("data-prototyping", "data-prototyping-2.mp4")}
                 ariaLabel="Data prototyping workshop media 2"
             />
         </div>
@@ -648,13 +648,13 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <img
-                src={practiceMedia("data_scraping", "data-scraping.webp")}
+                src={practiceMedia("data-scraping", "data-scraping-1.webp")}
                 alt="Data scraping workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <AutoplayVideo
-                src={practiceMedia("data_scraping", "data-scraping2.mp4")}
+                src={practiceMedia("data-scraping", "data-scraping-2.mp4")}
                 ariaLabel="Data scraping workshop media 2"
             />
         </div>
@@ -904,13 +904,13 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <AutoplayVideo
-                src={practiceMedia("data_mapping", "data-mapping1.mp4")}
+                src={practiceMedia("data-mapping", "data-mapping-1.mp4")}
                 ariaLabel="Data mapping workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <AutoplayVideo
-                src={practiceMedia("data_mapping", "data-mapping2.mp4")}
+                src={practiceMedia("data-mapping", "data-mapping-2.mp4")}
                 ariaLabel="Data mapping workshop media 2"
             />
         </div>
@@ -1128,13 +1128,13 @@
         </DescriptionBlock>
         <div class="practice-media practice-media-left">
             <img
-                src={practiceMedia("gesture_tracking", "DSC07481-Edit.webp")}
+                src={practiceMedia("gesture-tracking", "gesture-tracking-1.webp")}
                 alt="Gesture tracking workshop media 1"
             />
         </div>
         <div class="practice-media practice-media-right">
             <AutoplayVideo
-                src={practiceMedia("gesture_tracking", "wasted_gestures.mp4")}
+                src={practiceMedia("gesture-tracking", "gesture-tracking-2.mp4")}
                 ariaLabel="Gesture tracking workshop media 2"
             />
         </div>
