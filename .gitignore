@@ -12,6 +12,9 @@ node_modules
 .DS_Store
 Thumbs.db
 
+# Local media masters (ProRes sources, not for deployment)
+source files/
+
 # Env
 .env
 .env.*
