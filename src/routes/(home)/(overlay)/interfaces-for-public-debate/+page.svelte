@@ -18,12 +18,12 @@
             href: `${projectBaseUrl}/arboreal-metrics-paradox/pollinator-info.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/Arboreal Metrics/Arboreal-Metrics-1.mp4",
-                    poster: "/images/projects-web-optimized/Arboreal Metrics/Arboreal-Metric.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/arboreal-metrics/arboreal-metrics-1.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/arboreal-metrics/arboreal-metrics.webp",
                 },
                 {
-                    src: "/images/projects-web-optimized/Arboreal Metrics/Arboreal-Metrics-2.mp4",
-                    poster: "/images/projects-web-optimized/Arboreal Metrics/Arboreal-Metric.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/arboreal-metrics/arboreal-metrics-2.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/arboreal-metrics/arboreal-metrics.webp",
                 },
             ],
             body: `Arboreal Metrics explores how urban green spaces are designed and valued through the case of Parco Ciani in Lugano, focusing on the tension between environmental efficiency, biodiversity, and public perception. The project combines heterogeneous data sources into a single dataset: environmental and botanical data such as CO₂ absorption, cooling capacity, species origin, and classification are retrieved from institutional platforms including Infoflora and Lugano VerdeVale; these are integrated with citizen-generated data, in particular images extracted from user reviews on Google Maps, where the most photographed tree species act as an indicator of public attention and preference. These combined dimensions are translated into a 2D and 3D interactive visualisation: the 2D layer supports a more analytical comparison of species based on performance, biodiversity, and popularity, while the 3D layer enables a more experiential exploration, integrating data sonification and open navigation through the dataset. A participatory feature invites users to design their own version of Parco Ciani by selecting and balancing tree species, turning the interface into a process of collective literacy-building through making and comparing choices about the park's composition.`,
@@ -34,8 +34,8 @@
             href: `${projectBaseUrl}/yelpification-of-nature/MAInD_SEM02_Making_Use_of_Data/yelpification/index.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/The Yelpification of Nature/The Yelpification of Nature.mp4",
-                    poster: "/images/projects-web-optimized/The Yelpification of Nature/The Yelpification of Nature.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/the-yelpification-of-nature/the-yelpification-of-nature.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/the-yelpification-of-nature/the-yelpification-of-nature.webp",
                 },
             ],
             body: `The Yelpification of Nature examines how urban green spaces in Ticino, including parks around Lugano, are perceived and evaluated through online reviews. The project reveals a shift in how nature is experienced, showing how citizens increasingly apply the logic of consumer services to parks, expecting cleanliness, comfort, and performance rather than ecological variability. The dataset is built from more than 2,500 reviews collected from Google Maps using a scraper via Apify. These reviews, gathered across 34 green spaces in the Canton of Ticino, include textual content, ratings, and metadata such as location and time. The data is then categorised into recurring themes, including maintenance and cleanliness, safety, access and infrastructure, nature and landscape, wellbeing, and governance. This process shifts the focus from overall ratings to the criteria people use when describing parks, making visible the expectations embedded in everyday language. The interface visualises these themes through a circular layout, where each segment represents a dimension of park experience and each review appears as a point within it. Overlaps between categories reveal how different expectations intersect, while the density of points highlights which aspects are most discussed. By mapping mentions rather than sentiment, the interface exposes how nature is framed and evaluated, rather than whether it is simply liked or disliked. A participatory layer allows users to contribute their own reviews directly within the interface, positioning their experience alongside the existing dataset. This transforms the system into an evolving map of public perception, where gaps and concentrations invite further input. Through this process, the project makes visible how expectations shape the management of urban nature, while prompting users to reflect on how they themselves observe, describe, and evaluate green spaces in urban context.`,
@@ -46,8 +46,8 @@
             href: `${projectBaseUrl}/aura-of-words/MAInD-Making_Use_of_Data-2026-Lugano_Parks/index.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/An Aura of Words/An-Autra-of-words.mp4",
-                    poster: "/images/projects-web-optimized/An Aura of Words/An-Aura-of-words-1.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/an-aura-of-words/an-aura-of-words.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/an-aura-of-words/an-aura-of-words-1.webp",
                 },
             ],
             body: `An Aura of Words explores how urban green spaces are experienced and described through language, using five parks in Lugano as a case study. Instead of relying on institutional descriptions, the project focuses on citizen-generated text, treating reviews as a way to access how people perceive, feel, and make sense of these spaces. The dataset consists of Google Reviews collected from Google Maps using a custom scraping script, including over 3,400 word occurrences across five parks. Reviews are multilingual and unstructured, capturing everyday expressions rather than formal feedback. The text is processed through a semantic categorisation framework with six dimensions: experiential-emotional, sensory-environmental, action, relational context, tension or complaint, and infrastructure or amenities. Each word is tagged, counted, and contextualised, allowing the dataset to retain both frequency and meaning. The interface translates this corpus into a scrollytelling experience that progressively builds a visual "aura" for each park. These auras are colour-weighted compositions that reflect the distribution of semantic categories, creating a readable portrait of how each space is collectively described. The process is made visible through animated annotation, showing how individual words contribute to the final form. The participatory layer invites users to contribute by describing their ideal park. As they write, their words are categorised in real time using the same framework, making the interpretation process transparent. This interaction turns participation into a moment of reflection, where users see how their language aligns with or diverges from the collective portrait, contributing to an evolving understanding of how urban green spaces are perceived and valued.`,
@@ -58,8 +58,8 @@
             href: `${projectBaseUrl}/overexposed/index.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/Overexposed/Overexposed.mp4",
-                    poster: "/images/projects-web-optimized/Overexposed/Overexposed-1.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/overexposed/overexposed.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/overexposed/overexposed-1.webp",
                 },
             ],
             body: `Overexposed examines how social media tourism shapes the image of Lugano by concentrating attention on a limited number of highly photographed places. The project explores the gap between the physical city and its digital representation, questioning how platforms, tourists, influencers, and promotional narratives contribute to defining what becomes visible, desirable, and repeatedly circulated. The dataset combines visual and geolocated data extracted from Instagram and TikTok-related content, starting from "places to visit in Lugano" searches to identify the most represented locations. Instagram is then used as the main source for scraping, focusing on place-based content and collecting 6,253 images across five locations. The data include geographic coordinates and images, which are processed through Python-based tools and clustered according to visual similarity, making it possible to identify recurring viewpoints, subjects, and stereotyped framings. The interface first presents a heatmap showing the density of posted images across Lugano, making visible the concentration of digital attention around a small set of places. It then moves into a 3D and 360° exploration, where the interface enables a dual reading of the same location: on one side, users navigate the space through a 360° view of the actual environment; on the other, they encounter clusters of Instagram images capturing the same recurring viewpoints. This juxtaposition highlights how specific framings are repeatedly produced and circulated, reinforcing their visibility and shaping a dominant, and often reductive, image of the city. The participatory layer invites users to explore the 360° view, select their own viewpoint, and capture an image. These contributions form an evolving archive of alternative perspectives, expanding the representation of the city beyond the most circulated social media views.`,
@@ -70,8 +70,8 @@
             href: `${projectBaseUrl}/waste-narrative-lugano/FINAL.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/Waste Narrative/Waste-Narrative.mp4",
-                    poster: "/images/projects-web-optimized/Waste Narrative/Waste-Narrative.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/waste-narrative/waste-narrative.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/waste-narrative/waste-narrative.webp",
                 },
             ],
             body: `Waste Narratives explores the social and urban tensions generated by the introduction of the "Sacco Rosso" (red bag) policy in Lugano, focusing on the gap between institutional narratives and everyday practices. The project investigates how a top-down environmental measure is interpreted, negotiated, and sometimes resisted by citizens, revealing informal behaviours and workarounds that emerge in response to economic and practical constraints. The dataset combines multiple sources to capture different perspectives in the debate. Institutional data are collected from official municipal websites, including policy descriptions and regulatory frameworks. These are complemented by media articles from outlets such as RSI, Corriere del Ticino, and Ticinonews, which provide a public narrative of the policy and its impacts. Citizen-generated data are primarily gathered from Reddit using Apify, capturing informal discussions, complaints, and everyday strategies. These textual data are organised into categories reflecting recurring behaviours, sentiments, and topics, alongside metadata such as time, platform, and level of engagement. The interface visualises this dataset as a network of comments, where colour encodes different types of behaviours and connections link related arguments or shared keywords. This structure allows users to navigate the debate not as isolated opinions, but as a connected system of positions, highlighting how institutional narratives, media framing, and citizen experiences intersect and diverge. The participatory layer enables users to react to existing content and contribute their own perspectives through text and visual input. These contributions are integrated into the interface, allowing the dataset to evolve over time and making visible how the debate continues to develop. Through this approach, the project shifts attention from policy outcomes alone to the lived experience of waste management, exposing the frictions, adaptations, and informal practices that remain invisible in official accounts.`,
@@ -82,8 +82,8 @@
             href: `${projectBaseUrl}/rating-the-rating-system/MAInD-Making-Use-of-Data/index.html`,
             videos: [
                 {
-                    src: "/images/projects-web-optimized/Rating the Rating System/Rating-the-rating-system.mp4",
-                    poster: "/images/projects-web-optimized/Rating the Rating System/Rating-the-rating-system.jpg",
+                    src: "/media/interfaces-for-public-debate/projects/rating-the-rating-system/rating-the-rating-system.mp4",
+                    poster: "/media/interfaces-for-public-debate/projects/rating-the-rating-system/rating-the-rating-system.webp",
                 },
             ],
             body: `Rating the Rating System investigates how patient experiences in Lugano's healthcare institutions are reduced to single numerical ratings, obscuring the complexity of care and the systemic issues behind individual reviews. The project reframes reviews not as final judgments, but as starting points for interpretation, comparison, and public discussion. The dataset consists of patient reviews collected from Google Maps using Apify, focusing on hospitals and clinics listed by the City of Lugano. Each review combines a numerical rating (1–5 stars) with written descriptions of experience. The textual data is analysed through a thematic classification process in which categories such as staff, empathy, administration, waiting time, and infrastructure emerge inductively from the data. Reviews are then further broken down into key phrases that capture specific aspects of care, allowing a single experience to be distributed across multiple dimensions rather than reduced to a single score. The interface organises these layers through a radial structure inspired by a parliament chart, explicitly referencing a space of debate rather than evaluation. Categories are arranged as sectors, while the distance from the centre encodes the numerical rating. Each point represents a key phrase extracted from a review, enabling qualitative fragments to be explored across categories. At the same time, an analytical framework reorders and reframes these categories through dimensions such as controllability, responsibility, visibility, and the distinction between systemic and individual causes, allowing the same data to be interpreted from multiple perspectives. A participatory layer allows users to respond directly to reviews, introducing a threaded discussion feature that is not available in platforms such as Google Maps, where reviews remain isolated. This transforms each review into a discussion node, where visibility is driven by engagement and comments that generate more responses become more prominent. By combining quantitative ratings, qualitative narratives, and analytical reinterpretation within the same interface, the project shifts the focus from static evaluation to an exploratory process, supporting a more nuanced and collective understanding of healthcare experiences.`,
@@ -114,15 +114,15 @@
             class="hero-video hero-video-tall"
             sources={[
                 {
-                    src: asset("/images/alpha-assets/interfaces-safari.mov"),
+                    src: asset("/media/interfaces-for-public-debate/hero-safari.mov"),
                     type: "video/quicktime",
                 },
                 {
-                    src: asset("/images/alpha-assets/interfaces.webm"),
+                    src: asset("/media/interfaces-for-public-debate/hero.webm"),
                     type: "video/webm",
                 },
                 {
-                    src: asset("/images/heroes/interfaces-for-debate.mp4"),
+                    src: asset("/media/interfaces-for-public-debate/hero.mp4"),
                     type: "video/mp4",
                 },
             ]}
@@ -339,7 +339,7 @@
         <figure class="bleed">
             <img
                 class="debate-diagram"
-                src={asset("/images/brainstorming-wheel.png")}
+                src={asset("/media/interfaces-for-public-debate/brainstorming-wheel.png")}
                 alt="Brainstorming wheel diagram showing a topic branching into four positions, sources, and platforms."
             />
             <figcaption>
