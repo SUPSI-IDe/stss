@@ -349,7 +349,7 @@
             <h2>Discussion on the method</h2>
         </div>
         <p>
-            The method combined principles of conditional design (REF) with a
+            The method combined principles of conditional design with a
             situated approach to citizen-driven urban sensing. By working with a
             predefined kit and configuring its components in response to a
             project question, students engaged in a design process centred on
